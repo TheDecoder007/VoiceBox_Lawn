@@ -7,7 +7,7 @@ import { AnnouncerShort, ChoasCocaine, DeadIntro, Detective, DoYouDare, GodVoice
 
 import { getUserData } from "@decentraland/Identity"
 
-
+const billboard = new Billboard(false, true, false)
 //VOICE BOX VOICE BOX VOICE BOX
 
 let myBlackButton = new GLTFShape('2e1c4446-c99a-4698-9e13-819d232ca849/models/Black_Fantasy_Button.glb')
@@ -26,6 +26,8 @@ _scene.addComponentOrReplace(transform)
 const murpheusnickeditd2345678 = new Entity('murpheusnickeditd2345678')
 engine.addEntity(murpheusnickeditd2345678)
 murpheusnickeditd2345678.setParent(_scene)
+if (!murpheusnickeditd2345678.hasComponent(Billboard)) murpheusnickeditd2345678.addComponent(billboard)
+
 const transform2 = new Transform({
   position: new Vector3(8, 3.5, 4),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
@@ -37,6 +39,9 @@ gltfShape.withCollisions = true
 gltfShape.isPointerBlocker = true
 gltfShape.visible = true
 murpheusnickeditd2345678.addComponentOrReplace(gltfShape)
+
+engine.addEntity(murpheusnickeditd2345678)
+
 
 const blackbutton23456789 = new Entity('blackbutton23456789')
 engine.addEntity(blackbutton23456789)
@@ -139,6 +144,10 @@ gltfShape2.withCollisions = true
 gltfShape2.isPointerBlocker = true
 gltfShape2.visible = true
 murpheusnickeditd2345.addComponentOrReplace(gltfShape2)
+
+if (!murpheusnickeditd2345.hasComponent(Billboard)) murpheusnickeditd2345.addComponent(billboard)
+engine.addEntity(murpheusnickeditd2345)
+
 
 const murpheustext = new Entity('murpheustext')
 engine.addEntity(murpheustext)
@@ -429,6 +438,10 @@ gltfShape7.isPointerBlocker = true
 gltfShape7.visible = true
 murpheusnickeditd23.addComponentOrReplace(gltfShape7)
 
+if (!murpheusnickeditd23.hasComponent(Billboard)) murpheusnickeditd23.addComponent(billboard)
+engine.addEntity(murpheusnickeditd23)
+
+
 const murpheusnickeditd = new Entity('murpheusnickeditd')
 engine.addEntity(murpheusnickeditd)
 murpheusnickeditd.setParent(_scene)
@@ -443,6 +456,9 @@ gltfShape8.withCollisions = true
 gltfShape8.isPointerBlocker = true
 gltfShape8.visible = true
 murpheusnickeditd.addComponentOrReplace(gltfShape8)
+
+if (!murpheusnickeditd.hasComponent(Billboard)) murpheusnickeditd.addComponent(billboard)
+engine.addEntity(murpheusnickeditd)
 
 const glossyaethereatiles = new Entity('glossyaethereatiles')
 engine.addEntity(glossyaethereatiles)
@@ -573,6 +589,10 @@ gltfShape14.withCollisions = true
 gltfShape14.isPointerBlocker = true
 gltfShape14.visible = true
 murpheusnickeditd23456789.addComponentOrReplace(gltfShape14)
+
+if (!murpheusnickeditd23456789.hasComponent(Billboard)) murpheusnickeditd23456789.addComponent(billboard)
+engine.addEntity(murpheusnickeditd23456789)
+
 
 const murpheusnickeditd2345678910 = new Entity('murpheusnickeditd2345678910')
 engine.addEntity(murpheusnickeditd2345678910)
