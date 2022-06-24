@@ -637,14 +637,6 @@ export const getEntityByName = (name: string) =>
 
 //FRONT LAWN FRONT LAWN FRONT LAWN
 
-// const _scene = new Entity('_scene')
-// engine.addEntity(_scene)
-// const transform = new Transform({
-//   position: new Vector3(0, 0, 0),
-//   rotation: new Quaternion(0, 0, 0, 1),
-//   scale: new Vector3(1, 1, 1)
-// })
-// _scene.addComponentOrReplace(transform)
 
 const entity = new Entity('entity')
 engine.addEntity(entity)
@@ -655,7 +647,7 @@ gltfShape16.isPointerBlocker = true
 gltfShape16.visible = true
 entity.addComponentOrReplace(gltfShape16)
 const transform34 = new Transform({
-  position: new Vector3(8, 0, 8),
+  position: new Vector3(8, 0, -8),
   rotation: new Quaternion(0, 0, 0, 1),
   scale: new Vector3(1, 1, 1)
 })
@@ -665,7 +657,7 @@ const lastSlicePizzaBox = new Entity('lastSlicePizzaBox')
 engine.addEntity(lastSlicePizzaBox)
 lastSlicePizzaBox.setParent(_scene)
 const transform35 = new Transform({
-  position: new Vector3(8.4, 0.03, 5.9),
+  position: new Vector3(8.4, 0.03, -9.9),
   rotation: new Quaternion(0.2, 0.20526227355003357, 0.6766590476036072, 0.6766590476036072),
   scale: new Vector3(0.415, 0.25, 0.27)
 })
@@ -683,9 +675,9 @@ const neatDRotating = new Entity('neatDRotating')
 engine.addEntity(neatDRotating)
 neatDRotating.setParent(_scene)
 const transform36 = new Transform({
-  position: new Vector3(13, 2.65, 3),
+  position: new Vector3(14.4, 2.65, -14.2),
   rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1.2499998807907104, 1.25, 1.500000238418579)
+  scale: new Vector3(1, 1.25, 1)
 })
 neatDRotating.addComponentOrReplace(transform36)
 hud.attachToEntity(neatDRotating)
@@ -699,9 +691,9 @@ const neatDRotating2 = new Entity('neatDRotating2')
 engine.addEntity(neatDRotating2)
 neatDRotating2.setParent(_scene)
 const transform37 = new Transform({
-  position: new Vector3(3, 2.65, 3),
+  position: new Vector3(1.6, 2.65, -14.2),
   rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1.2499998807907104, 1.25, 1.500000238418579)
+  scale: new Vector3(1, 1.25, 1)
 })
 neatDRotating2.addComponentOrReplace(transform37)
 hud.attachToEntity(neatDRotating2)
@@ -715,7 +707,7 @@ const fantasyChest = new Entity('fantasyChest')
 engine.addEntity(fantasyChest)
 fantasyChest.setParent(_scene)
 const transform38 = new Transform({
-  position: new Vector3(8, 0, 8),
+  position: new Vector3(8, 0, -7),
   rotation: new Quaternion(0,180,NaN),
   scale: new Vector3(1.000000238418579, 1, 1.000000238418579)
 })
@@ -759,7 +751,7 @@ avatarShape.skinColor = new Color4(0.94921875, 0.76171875, 0.6484375, 1);
 avatarShape.eyeColor = new Color4(0.23046875, 0.625, 0.3125, 1);
 avatarShape.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
 avatar.addComponent(avatarShape);
-avatar.addComponent(new Transform({ position: new Vector3(2.3, -1.16, 13.3),
+avatar.addComponent(new Transform({ position: new Vector3(1.3, -1.16, -2.3),
   rotation: new Quaternion(0,180,0),
   scale: new Vector3(2.5, 2.5, 2.5) }));
 engine.addEntity(avatar);
@@ -806,7 +798,7 @@ avatarShape2.skinColor = new Color4(0.94921875, 0.76171875, 0.6484375, 1);
 avatarShape2.eyeColor = new Color4(0.23046875, 0.625, 0.3125, 1);
 avatarShape2.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
 avatar2.addComponent(avatarShape2);
-avatar2.addComponent(new Transform({ position: new Vector3(13.5, -1.16, 12.8),
+avatar2.addComponent(new Transform({ position: new Vector3(14.3, -1.16, -2.3),
   rotation: new Quaternion(0,180,0),
   scale: new Vector3(2.5, 2.5, 2.5) }));
 engine.addEntity(avatar2);

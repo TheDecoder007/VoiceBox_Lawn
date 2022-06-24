@@ -7,7 +7,7 @@ import { hud } from 'dcl-builder-hud'
 export const danceAreas: any = [
   {
     transform: {
-      position: new Vector3(8, 0, 8),
+      position: new Vector3(8, 0, -8),
       scale: new Vector3(15, 3, 15)
     },
     type: 'all'
