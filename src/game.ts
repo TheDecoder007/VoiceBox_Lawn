@@ -133,6 +133,7 @@ blackbutton2345678991.addComponent(
 const murpheusnickeditd2345 = new Entity('murpheusnickeditd2345')
 engine.addEntity(murpheusnickeditd2345)
 murpheusnickeditd2345.setParent(_scene)
+if (!murpheusnickeditd2345.hasComponent(Billboard)) murpheusnickeditd2345.addComponent(billboard)
 const transform4 = new Transform({
   position: new Vector3(8, 2, 0.5),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
@@ -145,8 +146,6 @@ gltfShape2.isPointerBlocker = true
 gltfShape2.visible = true
 murpheusnickeditd2345.addComponentOrReplace(gltfShape2)
 
-if (!murpheusnickeditd2345.hasComponent(Billboard)) murpheusnickeditd2345.addComponent(billboard)
-engine.addEntity(murpheusnickeditd2345)
 
 
 const murpheustext = new Entity('murpheustext')
@@ -426,6 +425,7 @@ blackbutton23456789101112.addComponentOrReplace(transform18)
 const murpheusnickeditd23 = new Entity('murpheusnickeditd23')
 engine.addEntity(murpheusnickeditd23)
 murpheusnickeditd23.setParent(_scene)
+if (!murpheusnickeditd23.hasComponent(Billboard)) murpheusnickeditd23.addComponent(billboard)
 const transform19 = new Transform({
   position: new Vector3(8, 2.5, 1.5),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
@@ -438,13 +438,12 @@ gltfShape7.isPointerBlocker = true
 gltfShape7.visible = true
 murpheusnickeditd23.addComponentOrReplace(gltfShape7)
 
-if (!murpheusnickeditd23.hasComponent(Billboard)) murpheusnickeditd23.addComponent(billboard)
-engine.addEntity(murpheusnickeditd23)
 
 
 const murpheusnickeditd = new Entity('murpheusnickeditd')
 engine.addEntity(murpheusnickeditd)
 murpheusnickeditd.setParent(_scene)
+if (!murpheusnickeditd.hasComponent(Billboard)) murpheusnickeditd.addComponent(billboard)
 const transform20 = new Transform({
   position: new Vector3(8, 5, 6.5),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
@@ -457,8 +456,6 @@ gltfShape8.isPointerBlocker = true
 gltfShape8.visible = true
 murpheusnickeditd.addComponentOrReplace(gltfShape8)
 
-if (!murpheusnickeditd.hasComponent(Billboard)) murpheusnickeditd.addComponent(billboard)
-engine.addEntity(murpheusnickeditd)
 
 const glossyaethereatiles = new Entity('glossyaethereatiles')
 engine.addEntity(glossyaethereatiles)
@@ -578,6 +575,7 @@ murpheusnickeditd234567.addComponentOrReplace(gltfShape13)
 const murpheusnickeditd23456789 = new Entity('murpheusnickeditd23456789')
 engine.addEntity(murpheusnickeditd23456789)
 murpheusnickeditd23456789.setParent(_scene)
+if (!murpheusnickeditd23456789.hasComponent(Billboard)) murpheusnickeditd23456789.addComponent(billboard)
 const transform30 = new Transform({
   position: new Vector3(8, 7, 10),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
@@ -590,8 +588,6 @@ gltfShape14.isPointerBlocker = true
 gltfShape14.visible = true
 murpheusnickeditd23456789.addComponentOrReplace(gltfShape14)
 
-if (!murpheusnickeditd23456789.hasComponent(Billboard)) murpheusnickeditd23456789.addComponent(billboard)
-engine.addEntity(murpheusnickeditd23456789)
 
 
 const murpheusnickeditd2345678910 = new Entity('murpheusnickeditd2345678910')
