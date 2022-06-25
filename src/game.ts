@@ -153,9 +153,9 @@ const murpheustext = new Entity('murpheustext')
 engine.addEntity(murpheustext)
 murpheustext.setParent(_scene)
 const transform5 = new Transform({
-  position: new Vector3(8, 16.5, 15),
+  position: new Vector3(7.8, 16.4, 15.3),
   rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(22.5, 21.5, 1.00000072)
+  scale: new Vector3(24.9, 23.5, 1)
 })
 murpheustext.addComponentOrReplace(transform5)
 const gltfShape3 = new GLTFShape("c935e005-716e-47fe-9df0-b7fe8eaffb7f/Murpheus text.glb")
@@ -170,7 +170,7 @@ const murpheusnickeditd4 = new Entity('murpheusnickeditd4')
 engine.addEntity(murpheusnickeditd4)
 murpheusnickeditd4.setParent(_scene)
 const transform6 = new Transform({
-  position: new Vector3(1, 8.071875, 8.5),
+  position: new Vector3(0.3, 8.07, 8.8),
   rotation: new Quaternion(1.74724919e-15, -0.707106, 8.429359e-8, 0.7071076),
   scale: new Vector3(11.690567, 12.3055487, 1.00000024)
 })
@@ -378,9 +378,9 @@ const murpheusnickeditd5 = new Entity('murpheusnickeditd5')
 engine.addEntity(murpheusnickeditd5)
 murpheusnickeditd5.setParent(_scene)
 const transform14 = new Transform({
-  position: new Vector3(14.9023438, 8.071875, 8.574951),
+  position: new Vector3(15.59, 8.07, 8.77),
   rotation: new Quaternion(3.55271368e-15, 0.707106, -8.429359e-8, 0.707107544),
-  scale: new Vector3(11.6905394, 12.3055487, 0.9999988)
+  scale: new Vector3(11.6905394, 12.31, 1)
 })
 murpheusnickeditd5.addComponentOrReplace(transform14)
 const gltfShape6 = new GLTFShape("2d8fafc8-3b0c-4f5e-8e25-ab17d0ac26dc/Murpheus nickedit3D.glb")
@@ -391,16 +391,16 @@ murpheusnickeditd5.addComponentOrReplace(gltfShape6)
 hud.attachToEntity(murpheusnickeditd5)
 
 
-const blackbutton23456789101112131415 = new Entity('blackbutton23456789101112131415')
-engine.addEntity(blackbutton23456789101112131415)
-blackbutton23456789101112131415.setParent(_scene)
-const transform15 = new Transform({
-  position: new Vector3(2.34301758, 0, 12.77417),
-  rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(2, 3, 2)
-})
-blackbutton23456789101112131415.addComponentOrReplace(transform15)
-hud.attachToEntity(blackbutton23456789101112131415)
+// const blackbutton23456789101112131415 = new Entity('blackbutton23456789101112131415')
+// engine.addEntity(blackbutton23456789101112131415)
+// blackbutton23456789101112131415.setParent(_scene)
+// const transform15 = new Transform({
+//   position: new Vector3(2.34301758, 0, 12.77417),
+//   rotation: new Quaternion(0, 0, 0, 1),
+//   scale: new Vector3(2, 3, 2)
+// })
+// blackbutton23456789101112131415.addComponentOrReplace(transform15)
+// hud.attachToEntity(blackbutton23456789101112131415)
 
 
 // const blackbutton2 = new Entity('blackbutton2')
@@ -497,9 +497,9 @@ const murpheusnickeditd2 = new Entity('murpheusnickeditd2')
 engine.addEntity(murpheusnickeditd2)
 murpheusnickeditd2.setParent(_scene)
 const transform22 = new Transform({
-  position: new Vector3(7.91552734, 8.071875, 15.5174561),
+  position: new Vector3(7.93, 8, 15.8),
   rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(11.690567, 12.3055487, 1.00000012)
+  scale: new Vector3(12.96, 12.3, 1)
 })
 murpheusnickeditd2.addComponentOrReplace(transform22)
 const gltfShape10 = new GLTFShape("2d8fafc8-3b0c-4f5e-8e25-ab17d0ac26dc/Murpheus nickedit3D.glb")
@@ -514,9 +514,9 @@ const murpheustext2 = new Entity('murpheustext2')
 engine.addEntity(murpheustext2)
 murpheustext2.setParent(_scene)
 const transform23 = new Transform({
-  position: new Vector3(8, 16.5, 15.5),
+  position: new Vector3(8.3, 16.5, 15.7),
   rotation: new Quaternion(-1.78957835e-14, -1, 1.19209261e-7, 0.00000235438347),
-  scale: new Vector3(22.5, 21.5, 1.00000072)
+  scale: new Vector3(24.1, 21.5, 1)
 })
 murpheustext2.addComponentOrReplace(transform23)
 const gltfShape11 = new GLTFShape("c935e005-716e-47fe-9df0-b7fe8eaffb7f/Murpheus text.glb")
@@ -531,7 +531,7 @@ const murpheusnickeditd7 = new Entity('murpheusnickeditd7')
 engine.addEntity(murpheusnickeditd7)
 murpheusnickeditd7.setParent(_scene)
 const transform24 = new Transform({
-  position: new Vector3(1.5, 8, 9),
+  position: new Vector3(0.42, 8, 9),
   rotation: new Quaternion(-2.49791846e-14, 0.7071124, -8.429433e-8, 0.7071013),
   scale: new Vector3(9.999991, 11.5, 0.5000007)
 })
@@ -596,9 +596,9 @@ const murpheusnickeditd8 = new Entity('murpheusnickeditd8')
 engine.addEntity(murpheusnickeditd8)
 murpheusnickeditd8.setParent(_scene)
 const transform29 = new Transform({
-  position: new Vector3(8, 10, 15),
+  position: new Vector3(8, 9.8, 15.4),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
-  scale: new Vector3(8.5, 10, 1.00000024)
+  scale: new Vector3(9.2, 10.7, 1)
 })
 murpheusnickeditd8.addComponentOrReplace(transform29)
 const gltfShape13 = new GLTFShape("2d8fafc8-3b0c-4f5e-8e25-ab17d0ac26dc/Murpheus nickedit3D.glb")
@@ -631,7 +631,7 @@ const murpheusnickeditd10 = new Entity('murpheusnickeditd10')
 engine.addEntity(murpheusnickeditd10)
 murpheusnickeditd10.setParent(_scene)
 const transform31 = new Transform({
-  position: new Vector3(14.6782227, 8, 8),
+  position: new Vector3(15.5, 8, 8),
   rotation: new Quaternion(7.10542736e-15, 0.7071029, -8.429319e-8, -0.707110643),
   scale: new Vector3(9.999971, 11.5, 0.499999285)
 })
@@ -668,7 +668,7 @@ hud.attachToEntity(trigger)
 let email= new Entity('emails')
 email.addComponent(new GLTFShape('models/voice_email.glb'))
 email.addComponent(new Transform({
-  position: new Vector3(8, -2.0, 15.5),
+  position: new Vector3(8, -2.20, 15.5),
   rotation: new Quaternion(NaN, 180, 0, 1),
   scale: new Vector3(21, 21, 2)
 }))
