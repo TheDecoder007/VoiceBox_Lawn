@@ -25,8 +25,6 @@ _scene.addComponentOrReplace(transform)
 
 const murpheusnickeditd2345678 = new Entity('murpheusnickeditd2345678')
 engine.addEntity(murpheusnickeditd2345678)
-hud.attachToEntity(murpheusnickeditd2345678)
-
 murpheusnickeditd2345678.setParent(_scene)
 if (!murpheusnickeditd2345678.hasComponent(Billboard)) murpheusnickeditd2345678.addComponent(billboard)
 
@@ -41,8 +39,7 @@ gltfShape.withCollisions = true
 gltfShape.isPointerBlocker = true
 gltfShape.visible = true
 murpheusnickeditd2345678.addComponentOrReplace(gltfShape)
-
-engine.addEntity(murpheusnickeditd2345678)
+hud.attachToEntity(murpheusnickeditd2345678)
 
 
 const blackbutton23456789 = new Entity('blackbutton23456789')
@@ -134,8 +131,6 @@ blackbutton2345678991.addComponent(
 
 const murpheusnickeditd2345 = new Entity('murpheusnickeditd2345')
 engine.addEntity(murpheusnickeditd2345)
-hud.attachToEntity(murpheusnickeditd2345)
-
 murpheusnickeditd2345.setParent(_scene)
 if (!murpheusnickeditd2345.hasComponent(Billboard)) murpheusnickeditd2345.addComponent(billboard)
 const transform4 = new Transform({
@@ -149,13 +144,13 @@ gltfShape2.withCollisions = true
 gltfShape2.isPointerBlocker = true
 gltfShape2.visible = true
 murpheusnickeditd2345.addComponentOrReplace(gltfShape2)
+hud.attachToEntity(murpheusnickeditd2345)
+
 
 
 
 const murpheustext = new Entity('murpheustext')
 engine.addEntity(murpheustext)
-hud.attachToEntity(murpheustext)
-
 murpheustext.setParent(_scene)
 const transform5 = new Transform({
   position: new Vector3(8, 16.5, 15),
@@ -168,11 +163,11 @@ gltfShape3.withCollisions = true
 gltfShape3.isPointerBlocker = true
 gltfShape3.visible = true
 murpheustext.addComponentOrReplace(gltfShape3)
+hud.attachToEntity(murpheustext)
+
 
 const murpheusnickeditd234567891011 = new Entity('murpheusnickeditd234567891011')
 engine.addEntity(murpheusnickeditd234567891011)
-hud.attachToEntity(murpheusnickeditd234567891011)
-
 murpheusnickeditd234567891011.setParent(_scene)
 const transform6 = new Transform({
   position: new Vector3(1, 8.071875, 8.5),
@@ -185,6 +180,8 @@ gltfShape4.withCollisions = true
 gltfShape4.isPointerBlocker = true
 gltfShape4.visible = true
 murpheusnickeditd234567891011.addComponentOrReplace(gltfShape4)
+hud.attachToEntity(murpheusnickeditd234567891011)
+
 
 const blackbutton23456 = new Entity('blackbutton23456')
 engine.addEntity(blackbutton23456)
@@ -362,8 +359,6 @@ blackbutton234567891011121314.addComponent(
 
 const irishglowjpegspikes = new Entity('irishglowjpegspikes')
 engine.addEntity(irishglowjpegspikes)
-hud.attachToEntity(irishglowjpegspikes)
-
 irishglowjpegspikes.setParent(_scene)
 const transform13 = new Transform({
   position: new Vector3(8, 0, 8),
@@ -376,11 +371,11 @@ gltfShape5.withCollisions = true
 gltfShape5.isPointerBlocker = true
 gltfShape5.visible = true
 irishglowjpegspikes.addComponentOrReplace(gltfShape5)
+hud.attachToEntity(irishglowjpegspikes)
+
 
 const murpheusnickeditd234 = new Entity('murpheusnickeditd234')
 engine.addEntity(murpheusnickeditd234)
-hud.attachToEntity(murpheusnickeditd234)
-
 murpheusnickeditd234.setParent(_scene)
 const transform14 = new Transform({
   position: new Vector3(14.9023438, 8.071875, 8.574951),
@@ -393,11 +388,11 @@ gltfShape6.withCollisions = true
 gltfShape6.isPointerBlocker = true
 gltfShape6.visible = true
 murpheusnickeditd234.addComponentOrReplace(gltfShape6)
+hud.attachToEntity(murpheusnickeditd234)
+
 
 const blackbutton23456789101112131415 = new Entity('blackbutton23456789101112131415')
 engine.addEntity(blackbutton23456789101112131415)
-hud.attachToEntity(blackbutton23456789101112131415)
-
 blackbutton23456789101112131415.setParent(_scene)
 const transform15 = new Transform({
   position: new Vector3(2.34301758, 0, 12.77417),
@@ -405,11 +400,11 @@ const transform15 = new Transform({
   scale: new Vector3(2, 3, 2)
 })
 blackbutton23456789101112131415.addComponentOrReplace(transform15)
+hud.attachToEntity(blackbutton23456789101112131415)
+
 
 const blackbutton2 = new Entity('blackbutton2')
 engine.addEntity(blackbutton2)
-hud.attachToEntity(blackbutton2)
-
 blackbutton2.setParent(_scene)
 const transform16 = new Transform({
   position: new Vector3(9, 0, 13.06543),
@@ -417,11 +412,11 @@ const transform16 = new Transform({
   scale: new Vector3(2, 3, 2)
 })
 blackbutton2.addComponentOrReplace(transform16)
+hud.attachToEntity(blackbutton2)
+
 
 const blackbutton2345 = new Entity('blackbutton2345')
 engine.addEntity(blackbutton2345)
-hud.attachToEntity(blackbutton2345)
-
 blackbutton2345.setParent(_scene)
 const transform17 = new Transform({
   position: new Vector3(2.41772461, 0.0380592346, 2.57189941),
@@ -429,11 +424,11 @@ const transform17 = new Transform({
   scale: new Vector3(2, 3, 2)
 })
 blackbutton2345.addComponentOrReplace(transform17)
+hud.attachToEntity(blackbutton2345)
+
 
 const blackbutton23456789101112 = new Entity('blackbutton23456789101112')
 engine.addEntity(blackbutton23456789101112)
-hud.attachToEntity(blackbutton23456789101112)
-
 blackbutton23456789101112.setParent(_scene)
 const transform18 = new Transform({
   position: new Vector3(13.5510254, 0, 1.94067383),
@@ -441,11 +436,11 @@ const transform18 = new Transform({
   scale: new Vector3(2, 3, 2)
 })
 blackbutton23456789101112.addComponentOrReplace(transform18)
+hud.attachToEntity(blackbutton23456789101112)
+
 
 const murpheusnickeditd23 = new Entity('murpheusnickeditd23')
 engine.addEntity(murpheusnickeditd23)
-hud.attachToEntity(murpheusnickeditd23)
-
 murpheusnickeditd23.setParent(_scene)
 if (!murpheusnickeditd23.hasComponent(Billboard)) murpheusnickeditd23.addComponent(billboard)
 const transform19 = new Transform({
@@ -459,13 +454,11 @@ gltfShape7.withCollisions = true
 gltfShape7.isPointerBlocker = true
 gltfShape7.visible = true
 murpheusnickeditd23.addComponentOrReplace(gltfShape7)
-
+hud.attachToEntity(murpheusnickeditd23)
 
 
 const murpheusnickeditd = new Entity('murpheusnickeditd')
 engine.addEntity(murpheusnickeditd)
-hud.attachToEntity(murpheusnickeditd)
-
 murpheusnickeditd.setParent(_scene)
 if (!murpheusnickeditd.hasComponent(Billboard)) murpheusnickeditd.addComponent(billboard)
 const transform20 = new Transform({
@@ -479,12 +472,12 @@ gltfShape8.withCollisions = true
 gltfShape8.isPointerBlocker = true
 gltfShape8.visible = true
 murpheusnickeditd.addComponentOrReplace(gltfShape8)
+hud.attachToEntity(murpheusnickeditd)
+
 
 
 const glossyaethereatiles = new Entity('glossyaethereatiles')
 engine.addEntity(glossyaethereatiles)
-hud.attachToEntity(glossyaethereatiles)
-
 glossyaethereatiles.setParent(_scene)
 const transform21 = new Transform({
   position: new Vector3(8, 0, 8),
@@ -497,11 +490,11 @@ gltfShape9.withCollisions = true
 gltfShape9.isPointerBlocker = true
 gltfShape9.visible = true
 glossyaethereatiles.addComponentOrReplace(gltfShape9)
+hud.attachToEntity(glossyaethereatiles)
+
 
 const murpheusnickeditd2 = new Entity('murpheusnickeditd2')
 engine.addEntity(murpheusnickeditd2)
-hud.attachToEntity(murpheusnickeditd2)
-
 murpheusnickeditd2.setParent(_scene)
 const transform22 = new Transform({
   position: new Vector3(7.91552734, 8.071875, 15.5174561),
@@ -514,11 +507,11 @@ gltfShape10.withCollisions = true
 gltfShape10.isPointerBlocker = true
 gltfShape10.visible = true
 murpheusnickeditd2.addComponentOrReplace(gltfShape10)
+hud.attachToEntity(murpheusnickeditd2)
+
 
 const murpheustext2 = new Entity('murpheustext2')
 engine.addEntity(murpheustext2)
-hud.attachToEntity(murpheustext2)
-
 murpheustext2.setParent(_scene)
 const transform23 = new Transform({
   position: new Vector3(8, 16.5, 15.5),
@@ -531,11 +524,11 @@ gltfShape11.withCollisions = true
 gltfShape11.isPointerBlocker = true
 gltfShape11.visible = true
 murpheustext2.addComponentOrReplace(gltfShape11)
+hud.attachToEntity(murpheustext2)
+
 
 const murpheusnickeditd23456 = new Entity('murpheusnickeditd23456')
 engine.addEntity(murpheusnickeditd23456)
-hud.attachToEntity(murpheusnickeditd23456)
-
 murpheusnickeditd23456.setParent(_scene)
 const transform24 = new Transform({
   position: new Vector3(1.5, 8, 9),
@@ -548,11 +541,11 @@ gltfShape12.withCollisions = true
 gltfShape12.isPointerBlocker = true
 gltfShape12.visible = true
 murpheusnickeditd23456.addComponentOrReplace(gltfShape12)
+hud.attachToEntity(murpheusnickeditd23456)
+
 
 const blackbutton = new Entity('blackbutton')
 engine.addEntity(blackbutton)
-hud.attachToEntity(blackbutton)
-
 blackbutton.setParent(_scene)
 const transform25 = new Transform({
   position: new Vector3(2.336914, 0, 7.220337),
@@ -560,11 +553,11 @@ const transform25 = new Transform({
   scale: new Vector3(2, 3, 2)
 })
 blackbutton.addComponentOrReplace(transform25)
+hud.attachToEntity(blackbutton)
+
 
 const blackbutton23 = new Entity('blackbutton23')
 engine.addEntity(blackbutton23)
-hud.attachToEntity(blackbutton23)
-
 blackbutton23.setParent(_scene)
 const transform26 = new Transform({
   position: new Vector3(13.2243652, 0, 13.2862549),
@@ -572,11 +565,11 @@ const transform26 = new Transform({
   scale: new Vector3(2, 3, 2)
 })
 blackbutton23.addComponentOrReplace(transform26)
+hud.attachToEntity(blackbutton23)
+
 
 const blackbutton2345678 = new Entity('blackbutton2345678')
 engine.addEntity(blackbutton2345678)
-hud.attachToEntity(blackbutton2345678)
-
 blackbutton2345678.setParent(_scene)
 const transform27 = new Transform({
   position: new Vector3(4.287842, 0, 12.77417),
@@ -584,6 +577,8 @@ const transform27 = new Transform({
   scale: new Vector3(2, 3, 2)
 })
 blackbutton2345678.addComponentOrReplace(transform27)
+hud.attachToEntity(blackbutton2345678)
+
 
 const blackbutton2345678910 = new Entity('blackbutton2345678910')
 engine.addEntity(blackbutton2345678910)
@@ -594,11 +589,11 @@ const transform28 = new Transform({
   scale: new Vector3(2, 3, 2)
 })
 blackbutton2345678910.addComponentOrReplace(transform28)
+hud.attachToEntity(blackbutton2345678910)
+
 
 const murpheusnickeditd234567 = new Entity('murpheusnickeditd234567')
 engine.addEntity(murpheusnickeditd234567)
-hud.attachToEntity(murpheusnickeditd234567)
-
 murpheusnickeditd234567.setParent(_scene)
 const transform29 = new Transform({
   position: new Vector3(8, 10, 15),
@@ -611,11 +606,11 @@ gltfShape13.withCollisions = true
 gltfShape13.isPointerBlocker = true
 gltfShape13.visible = true
 murpheusnickeditd234567.addComponentOrReplace(gltfShape13)
+hud.attachToEntity(murpheusnickeditd234567)
+
 
 const murpheusnickeditd23456789 = new Entity('murpheusnickeditd23456789')
 engine.addEntity(murpheusnickeditd23456789)
-hud.attachToEntity(murpheusnickeditd23456789)
-
 murpheusnickeditd23456789.setParent(_scene)
 if (!murpheusnickeditd23456789.hasComponent(Billboard)) murpheusnickeditd23456789.addComponent(billboard)
 const transform30 = new Transform({
@@ -629,13 +624,13 @@ gltfShape14.withCollisions = true
 gltfShape14.isPointerBlocker = true
 gltfShape14.visible = true
 murpheusnickeditd23456789.addComponentOrReplace(gltfShape14)
+hud.attachToEntity(murpheusnickeditd23456789)
+
 
 
 
 const murpheusnickeditd2345678910 = new Entity('murpheusnickeditd2345678910')
 engine.addEntity(murpheusnickeditd2345678910)
-hud.attachToEntity(murpheusnickeditd2345678910)
-
 murpheusnickeditd2345678910.setParent(_scene)
 const transform31 = new Transform({
   position: new Vector3(14.6782227, 8, 8),
@@ -648,6 +643,8 @@ gltfShape15.withCollisions = true
 gltfShape15.isPointerBlocker = true
 gltfShape15.visible = true
 murpheusnickeditd2345678910.addComponentOrReplace(gltfShape15)
+hud.attachToEntity(murpheusnickeditd2345678910)
+
 
 
 

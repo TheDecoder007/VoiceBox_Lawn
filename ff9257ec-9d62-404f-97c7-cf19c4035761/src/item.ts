@@ -66,7 +66,7 @@ engine.addEntity(door)
         },        
         {
           button: ActionButton.POINTER,
-          hoverText: 'Gold "Bars"',
+          hoverText: "You've Been Warned",
           distance: 6
         }
       )
