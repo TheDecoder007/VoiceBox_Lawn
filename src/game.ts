@@ -650,15 +650,19 @@ hud.attachToEntity(murpheusnickeditd10)
 // script1.spawn(blackbutton, {}, createChannel(channelId, blackbutton, channelBus))
 
 let trigger = new Entity("trigger area")
-trigger.addComponent(new Transform({position: new Vector3(8,0,8), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
-trigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(15, 15, 15),new Vector3(0, 0, 0)),
+trigger.addComponent(new Transform({position: new Vector3(8,0,0), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+trigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(15, 15, 31),new Vector3(0, 0, 0)),
 {
 
   enableDebug:false,
   onCameraEnter:()=>{
     GodVoice.playOnce()
+  
   }
 }))
+
+
+
 trigger.setParent(_scene)
 
 //attatches builder tool to entity(trigger, button, etc)
