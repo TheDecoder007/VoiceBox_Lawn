@@ -25,6 +25,8 @@ _scene.addComponentOrReplace(transform)
 
 const murpheusnickeditd2345678 = new Entity('murpheusnickeditd2345678')
 engine.addEntity(murpheusnickeditd2345678)
+hud.attachToEntity(murpheusnickeditd2345678)
+
 murpheusnickeditd2345678.setParent(_scene)
 if (!murpheusnickeditd2345678.hasComponent(Billboard)) murpheusnickeditd2345678.addComponent(billboard)
 
@@ -59,7 +61,7 @@ blackbutton23456789.addComponent(new Animator())
 blackbutton23456789.getComponent(Animator).addClip(new AnimationState('trigger', { looping: false }))
 blackbutton23456789.addComponent(
   new OnPointerDown(
-    () => {
+    () => { 
       
     messageBus.emit('click', {entity: 'blackbutton23456789'})
       Detective.playOnce()
@@ -132,6 +134,8 @@ blackbutton2345678991.addComponent(
 
 const murpheusnickeditd2345 = new Entity('murpheusnickeditd2345')
 engine.addEntity(murpheusnickeditd2345)
+hud.attachToEntity(murpheusnickeditd2345)
+
 murpheusnickeditd2345.setParent(_scene)
 if (!murpheusnickeditd2345.hasComponent(Billboard)) murpheusnickeditd2345.addComponent(billboard)
 const transform4 = new Transform({
@@ -150,6 +154,8 @@ murpheusnickeditd2345.addComponentOrReplace(gltfShape2)
 
 const murpheustext = new Entity('murpheustext')
 engine.addEntity(murpheustext)
+hud.attachToEntity(murpheustext)
+
 murpheustext.setParent(_scene)
 const transform5 = new Transform({
   position: new Vector3(8, 16.5, 15),
@@ -165,6 +171,8 @@ murpheustext.addComponentOrReplace(gltfShape3)
 
 const murpheusnickeditd234567891011 = new Entity('murpheusnickeditd234567891011')
 engine.addEntity(murpheusnickeditd234567891011)
+hud.attachToEntity(murpheusnickeditd234567891011)
+
 murpheusnickeditd234567891011.setParent(_scene)
 const transform6 = new Transform({
   position: new Vector3(1, 8.071875, 8.5),
@@ -354,6 +362,8 @@ blackbutton234567891011121314.addComponent(
 
 const irishglowjpegspikes = new Entity('irishglowjpegspikes')
 engine.addEntity(irishglowjpegspikes)
+hud.attachToEntity(irishglowjpegspikes)
+
 irishglowjpegspikes.setParent(_scene)
 const transform13 = new Transform({
   position: new Vector3(8, 0, 8),
@@ -369,6 +379,8 @@ irishglowjpegspikes.addComponentOrReplace(gltfShape5)
 
 const murpheusnickeditd234 = new Entity('murpheusnickeditd234')
 engine.addEntity(murpheusnickeditd234)
+hud.attachToEntity(murpheusnickeditd234)
+
 murpheusnickeditd234.setParent(_scene)
 const transform14 = new Transform({
   position: new Vector3(14.9023438, 8.071875, 8.574951),
@@ -384,6 +396,8 @@ murpheusnickeditd234.addComponentOrReplace(gltfShape6)
 
 const blackbutton23456789101112131415 = new Entity('blackbutton23456789101112131415')
 engine.addEntity(blackbutton23456789101112131415)
+hud.attachToEntity(blackbutton23456789101112131415)
+
 blackbutton23456789101112131415.setParent(_scene)
 const transform15 = new Transform({
   position: new Vector3(2.34301758, 0, 12.77417),
@@ -394,6 +408,8 @@ blackbutton23456789101112131415.addComponentOrReplace(transform15)
 
 const blackbutton2 = new Entity('blackbutton2')
 engine.addEntity(blackbutton2)
+hud.attachToEntity(blackbutton2)
+
 blackbutton2.setParent(_scene)
 const transform16 = new Transform({
   position: new Vector3(9, 0, 13.06543),
@@ -404,6 +420,8 @@ blackbutton2.addComponentOrReplace(transform16)
 
 const blackbutton2345 = new Entity('blackbutton2345')
 engine.addEntity(blackbutton2345)
+hud.attachToEntity(blackbutton2345)
+
 blackbutton2345.setParent(_scene)
 const transform17 = new Transform({
   position: new Vector3(2.41772461, 0.0380592346, 2.57189941),
@@ -414,6 +432,8 @@ blackbutton2345.addComponentOrReplace(transform17)
 
 const blackbutton23456789101112 = new Entity('blackbutton23456789101112')
 engine.addEntity(blackbutton23456789101112)
+hud.attachToEntity(blackbutton23456789101112)
+
 blackbutton23456789101112.setParent(_scene)
 const transform18 = new Transform({
   position: new Vector3(13.5510254, 0, 1.94067383),
@@ -424,6 +444,8 @@ blackbutton23456789101112.addComponentOrReplace(transform18)
 
 const murpheusnickeditd23 = new Entity('murpheusnickeditd23')
 engine.addEntity(murpheusnickeditd23)
+hud.attachToEntity(murpheusnickeditd23)
+
 murpheusnickeditd23.setParent(_scene)
 if (!murpheusnickeditd23.hasComponent(Billboard)) murpheusnickeditd23.addComponent(billboard)
 const transform19 = new Transform({
@@ -442,6 +464,8 @@ murpheusnickeditd23.addComponentOrReplace(gltfShape7)
 
 const murpheusnickeditd = new Entity('murpheusnickeditd')
 engine.addEntity(murpheusnickeditd)
+hud.attachToEntity(murpheusnickeditd)
+
 murpheusnickeditd.setParent(_scene)
 if (!murpheusnickeditd.hasComponent(Billboard)) murpheusnickeditd.addComponent(billboard)
 const transform20 = new Transform({
@@ -459,6 +483,8 @@ murpheusnickeditd.addComponentOrReplace(gltfShape8)
 
 const glossyaethereatiles = new Entity('glossyaethereatiles')
 engine.addEntity(glossyaethereatiles)
+hud.attachToEntity(glossyaethereatiles)
+
 glossyaethereatiles.setParent(_scene)
 const transform21 = new Transform({
   position: new Vector3(8, 0, 8),
@@ -474,6 +500,8 @@ glossyaethereatiles.addComponentOrReplace(gltfShape9)
 
 const murpheusnickeditd2 = new Entity('murpheusnickeditd2')
 engine.addEntity(murpheusnickeditd2)
+hud.attachToEntity(murpheusnickeditd2)
+
 murpheusnickeditd2.setParent(_scene)
 const transform22 = new Transform({
   position: new Vector3(7.91552734, 8.071875, 15.5174561),
@@ -489,6 +517,8 @@ murpheusnickeditd2.addComponentOrReplace(gltfShape10)
 
 const murpheustext2 = new Entity('murpheustext2')
 engine.addEntity(murpheustext2)
+hud.attachToEntity(murpheustext2)
+
 murpheustext2.setParent(_scene)
 const transform23 = new Transform({
   position: new Vector3(8, 16.5, 15.5),
@@ -504,6 +534,8 @@ murpheustext2.addComponentOrReplace(gltfShape11)
 
 const murpheusnickeditd23456 = new Entity('murpheusnickeditd23456')
 engine.addEntity(murpheusnickeditd23456)
+hud.attachToEntity(murpheusnickeditd23456)
+
 murpheusnickeditd23456.setParent(_scene)
 const transform24 = new Transform({
   position: new Vector3(1.5, 8, 9),
@@ -519,6 +551,8 @@ murpheusnickeditd23456.addComponentOrReplace(gltfShape12)
 
 const blackbutton = new Entity('blackbutton')
 engine.addEntity(blackbutton)
+hud.attachToEntity(blackbutton)
+
 blackbutton.setParent(_scene)
 const transform25 = new Transform({
   position: new Vector3(2.336914, 0, 7.220337),
@@ -529,6 +563,8 @@ blackbutton.addComponentOrReplace(transform25)
 
 const blackbutton23 = new Entity('blackbutton23')
 engine.addEntity(blackbutton23)
+hud.attachToEntity(blackbutton23)
+
 blackbutton23.setParent(_scene)
 const transform26 = new Transform({
   position: new Vector3(13.2243652, 0, 13.2862549),
@@ -539,6 +575,8 @@ blackbutton23.addComponentOrReplace(transform26)
 
 const blackbutton2345678 = new Entity('blackbutton2345678')
 engine.addEntity(blackbutton2345678)
+hud.attachToEntity(blackbutton2345678)
+
 blackbutton2345678.setParent(_scene)
 const transform27 = new Transform({
   position: new Vector3(4.287842, 0, 12.77417),
@@ -559,6 +597,8 @@ blackbutton2345678910.addComponentOrReplace(transform28)
 
 const murpheusnickeditd234567 = new Entity('murpheusnickeditd234567')
 engine.addEntity(murpheusnickeditd234567)
+hud.attachToEntity(murpheusnickeditd234567)
+
 murpheusnickeditd234567.setParent(_scene)
 const transform29 = new Transform({
   position: new Vector3(8, 10, 15),
@@ -574,6 +614,8 @@ murpheusnickeditd234567.addComponentOrReplace(gltfShape13)
 
 const murpheusnickeditd23456789 = new Entity('murpheusnickeditd23456789')
 engine.addEntity(murpheusnickeditd23456789)
+hud.attachToEntity(murpheusnickeditd23456789)
+
 murpheusnickeditd23456789.setParent(_scene)
 if (!murpheusnickeditd23456789.hasComponent(Billboard)) murpheusnickeditd23456789.addComponent(billboard)
 const transform30 = new Transform({
@@ -592,6 +634,8 @@ murpheusnickeditd23456789.addComponentOrReplace(gltfShape14)
 
 const murpheusnickeditd2345678910 = new Entity('murpheusnickeditd2345678910')
 engine.addEntity(murpheusnickeditd2345678910)
+hud.attachToEntity(murpheusnickeditd2345678910)
+
 murpheusnickeditd2345678910.setParent(_scene)
 const transform31 = new Transform({
   position: new Vector3(14.6782227, 8, 8),
