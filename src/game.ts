@@ -4,7 +4,7 @@ import Script1 from "../ff9257ec-9d62-404f-97c7-cf19c4035761/src/item"
 import * as utils from '@dcl/ecs-scene-utils'
 import { hud } from 'dcl-builder-hud'
 import { AnnouncerShort, ChoasCocaine, DeadIntro, Detective, DoYouDare, GodVoice, HeavenMade, Octopus, PaperHands, RobotQuest, StormComing, YouAreDiamond } from './data'
-
+import { Sound } from './sound'
 import { getUserData } from "@decentraland/Identity"
 
 const billboard = new Billboard(false, true, false)
@@ -886,3 +886,52 @@ void getUserData().then(async a => {
 // engine.addSystem(new ThrowSmoke())
 // engine.addSystem(new SmokeSystem())
 
+
+//ENEMY SPAWNER ENEMY SPAWNER
+// Base
+// const base = new Entity()
+// base.addComponent(new GLTFShape('models/baseLight.glb'))
+// base.addComponent(
+//   new Transform({
+//     scale: new Vector3(2, 1, 2)
+//   })
+// )
+// engine.addEntity(base)
+
+// // Portals
+// const POSITION_Z = 30
+// const redPortal = new Entity()
+// redPortal.addComponent(new GLTFShape('models/redPortal.glb'))
+// redPortal.addComponent(
+//   new Transform({
+//     position: new Vector3(6, 6, POSITION_Z)
+//   })
+// )
+// engine.addEntity(redPortal)
+
+// const greenPortal = new Entity()
+// greenPortal.addComponent(new GLTFShape('models/greenPortal.glb'))
+// greenPortal.addComponent(
+//   new Transform({
+//     position: new Vector3(16, 6, POSITION_Z)
+//   })
+// )
+// engine.addEntity(greenPortal)
+
+// const bluePortal = new Entity()
+// bluePortal.addComponent(new GLTFShape('models/bluePortal.glb'))
+// bluePortal.addComponent(
+//   new Transform({
+//     position: new Vector3(27, 6, POSITION_Z)
+//   })
+// )
+// engine.addEntity(bluePortal)
+
+// // Controls
+// const blasterSound = new Sound(new AudioClip('sounds/blaster.mp3'), false)
+
+// Input.instance.subscribe('BUTTON_DOWN', ActionButton.POINTER, false, () => {
+//   blasterSound.getComponent(AudioSource).playOnce()
+// })
+
+//END ENEMY SPAWNER END ENEMY SPAWNER

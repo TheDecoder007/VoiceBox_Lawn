@@ -1,3 +1,7 @@
 node_modules    
-
+package-lock.json
+bin
+*.swp
+*.*~
+export
 .DS_store

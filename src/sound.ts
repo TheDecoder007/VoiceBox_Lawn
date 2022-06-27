@@ -12,5 +12,8 @@ export class Sound extends Entity {
       this.getComponent(AudioSource).volume = 1
       this.getComponent(AudioSource).playOnce()
     }
+    playAudio() {
+      this.getComponent(AudioSource).playOnce()
+    }
   }
   
