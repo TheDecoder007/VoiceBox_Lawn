@@ -872,7 +872,9 @@ void getUserData().then(async a => {
   avatarShape2.skinColor = new Color4(av.skin.color.r, av.skin.color.g, av.skin.color.b, 1);
   avatarShape2.eyeColor = new Color4(av.eyes.color.r, av.eyes.color.g, av.eyes.color.b, 1);
   avatarShape2.hairColor = new Color4(av.hair.color.r, av.hair.color.g, av.hair.color.b, 1);
-  avatarShape2.wearables = av.wearables
+  avatarShape2.wearables = av.wearables;
+  avatarShape2.id = av.id;
+  avatarShape2.name = av.name;
 })
 
 
