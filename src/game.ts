@@ -815,8 +815,7 @@ avatar.addComponent(new Transform({ position: new Vector3(1.3, -1.16, -2.3),
   scale: new Vector3(2.5, 2.5, 2.5) }));
 engine.addEntity(avatar);
 hud.attachToEntity(avatar)
-
-
+ 
 
 void getUserData().then(async a => {
   const res = await fetch(`https://peer.decentraland.org/lambdas/profiles/${a?.publicKey}`)
@@ -837,10 +836,10 @@ void getUserData().then(async a => {
 //   rotation: new Quaternion(0,180,0),
 //   scale: new Vector3(0.8, 0.1, 0.9) }));
 // engine.addEntity(stand);
+// hud.attachToEntity(stand)
 
 const avatar2 = new Entity();
 const avatarShape2 = new AvatarShape();
-// hud.attachToEntity(stand)
 
 
 avatarShape2.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseFemale";
