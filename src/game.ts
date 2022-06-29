@@ -888,25 +888,33 @@ void getUserData().then(async a => {
 
 
 //ENEMY SPAWNER ENEMY SPAWNER
+
+//comment IN spawners.ts, enemy.ts, and code below
+
 // Base
 // const base = new Entity()
 // base.addComponent(new GLTFShape('models/baseLight.glb'))
 // base.addComponent(
 //   new Transform({
-//     scale: new Vector3(2, 1, 2)
+//     scale: new Vector3(2, 1, 2),
+    
 //   })
-// )
-// engine.addEntity(base)
+//   )
+//   hud.attachToEntity(base)
+//   engine.addEntity(base)
 
-// // Portals
+// // // Portals
 // const POSITION_Z = 30
 // const redPortal = new Entity()
 // redPortal.addComponent(new GLTFShape('models/redPortal.glb'))
 // redPortal.addComponent(
 //   new Transform({
-//     position: new Vector3(6, 6, POSITION_Z)
+//     position: new Vector3(8.1, 10.8, 15.7),
+//     rotation: new Quaternion(345,0,0),
+//   scale: new Vector3(0.2, 0.2, 0.2)
 //   })
 // )
+// hud.attachToEntity(redPortal)
 // engine.addEntity(redPortal)
 
 // const greenPortal = new Entity()
@@ -927,7 +935,7 @@ void getUserData().then(async a => {
 // )
 // engine.addEntity(bluePortal)
 
-// // Controls
+// // Controls/Blaster
 // const blasterSound = new Sound(new AudioClip('sounds/blaster.mp3'), false)
 
 // Input.instance.subscribe('BUTTON_DOWN', ActionButton.POINTER, false, () => {
