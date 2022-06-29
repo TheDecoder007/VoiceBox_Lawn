@@ -17,7 +17,7 @@ function spawnEnemy(index: string, x: number, y: number, z: number): void {
   const enemy = new Enemy(
     spaceships[index],
     new Transform({ position: new Vector3(x, y, 15.7),
-        
+      rotation: new Quaternion(0,0,0),       
         scale: new Vector3(0.5, 0.5, 0.5) })
   )
 }

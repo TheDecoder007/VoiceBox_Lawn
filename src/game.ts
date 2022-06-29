@@ -891,7 +891,7 @@ void getUserData().then(async a => {
 
 //comment IN spawners.ts, enemy.ts, and code below
 
-// Base
+// // Base
 // const base = new Entity()
 // base.addComponent(new GLTFShape('models/baseLight.glb'))
 // base.addComponent(
