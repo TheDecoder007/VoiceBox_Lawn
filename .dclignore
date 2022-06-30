@@ -11,4 +11,8 @@ node_modules
 *.tsx
 Dockerfile
 dist
+*.blend
+*.fbx
+*.zip
+*.rar
 screenshots

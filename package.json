@@ -13,6 +13,11 @@
   "devDependencies": {
     "decentraland-ecs": "latest"
   },
+  "engines": {
+		"node": ">=14.0.0",
+		"npm": ">=6.0.0",
+		"yarn": "please use npm"
+	},
   "dependencies": {
     "@dcl/ecs-scene-utils": "^1.7.5",
     "dcl-builder-hud": "^1.1.6",

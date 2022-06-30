@@ -6,6 +6,10 @@ import { hud } from 'dcl-builder-hud'
 import { AnnouncerShort, ChoasCocaine, DeadIntro, Detective, DoYouDare, GodVoice, HeavenMade, Octopus, PaperHands, RobotQuest, StormComing, YouAreDiamond } from './data'
 import { Sound } from './sound'
 import { getUserData } from "@decentraland/Identity"
+//for bird fly
+import { birdIdleShape, birdFlyShape, sandShape } from './modules/models'
+import { realDistance } from './modules/utilities'
+
 
 const billboard = new Billboard(false, true, false)
 //VOICE BOX VOICE BOX VOICE BOX
@@ -766,7 +770,7 @@ const fantasyChest = new Entity('fantasyChest')
 engine.addEntity(fantasyChest)
 fantasyChest.setParent(_scene)
 const transform38 = new Transform({
-  position: new Vector3(8, 0, -7),
+  position: new Vector3(8, 0.1, -7),
   rotation: new Quaternion(0,180,NaN),
   scale: new Vector3(1.000000238418579, 1, 1.000000238418579)
 })
@@ -814,6 +818,7 @@ avatar.addComponent(new Transform({ position: new Vector3(1.3, -1.16, -2.3),
   rotation: new Quaternion(0,180,0),
   scale: new Vector3(2.5, 2.5, 2.5) }));
 engine.addEntity(avatar);
+if (!avatar.hasComponent(Billboard)) avatar.addComponent(billboard)
 hud.attachToEntity(avatar)
  
 
@@ -860,6 +865,7 @@ avatar2.addComponent(new Transform({ position: new Vector3(14.3, -1.16, -2.3),
   rotation: new Quaternion(0,180,0),
   scale: new Vector3(2.5, 2.5, 2.5) }));
 engine.addEntity(avatar2);
+if (!avatar2.hasComponent(Billboard)) avatar2.addComponent(billboard)
 hud.attachToEntity(avatar2)
 
 
@@ -872,10 +878,216 @@ void getUserData().then(async a => {
   avatarShape2.skinColor = new Color4(av.skin.color.r, av.skin.color.g, av.skin.color.b, 1);
   avatarShape2.eyeColor = new Color4(av.eyes.color.r, av.eyes.color.g, av.eyes.color.b, 1);
   avatarShape2.hairColor = new Color4(av.hair.color.r, av.hair.color.g, av.hair.color.b, 1);
-  avatarShape2.wearables = av.wearables;
-  avatarShape2.id = av.id;
-  avatarShape2.name = av.name;
+  avatarShape2.wearables = av.wearables
+
 })
+
+// BIRD FLY BIRD FLY
+// used for raycasting later on to generate bird positions along the terrain collider surface
+let physicsCast = PhysicsCast.instance
+
+// used to get player position, player distance to birds etc.
+let player = Camera.instance
+
+// a component to store each bird's default idle positions, animation state, and a timer with a random delay
+@Component("DistanceBird")
+export class DistanceBird {  
+  originalPos:Vector3    
+  flying:boolean = false
+  elapsed:number = Math.random()
+
+  constructor(pos:Vector3){
+    this.originalPos = new Vector3(pos.x, pos.y, pos.z)           
+  }
+}
+
+// System that checks distances to each bird
+class ProximitySystem {
+  radius:number = 4 // how close you can get to a bird before it reacts
+  amplitude:number = 1    
+  group = engine.getComponentGroup(Transform, DistanceBird)
+
+  update(dt: number) {
+
+    // iterate through all the birds that have the DistanceBird component
+    for (let bird of this.group.entities){
+
+      const transform = bird.getComponent(Transform)
+      const birdInfo = bird.getComponent(DistanceBird)      
+
+      // calculate the distance between the player and the birds original position
+      let dist = realDistance(birdInfo.originalPos, player.position)
+
+      
+      // if the player is within a certain distance from the birds original perching position
+      if( dist < this.radius ){     
+
+        // calculate a ratio (0-1) based on how close the player is to the bird and multiply it with a constant to amplify the effect
+        let multiplier = ( 1 - dist / this.radius) * this.amplitude
+
+        // calculate the direction pointing from the player to the bird's default position
+        let playerDir = birdInfo.originalPos.subtract(player.position)
+
+        // if the bird was idle, change it to flying and replace the GLTF model with the flying one
+        if(!birdInfo.flying){
+          birdInfo.flying = true
+          bird.addComponentOrReplace(birdFlyShape)
+        }
+        
+        // move the bird away from the player on the X and Z axis based on the closeness multiplier
+        transform.position = birdInfo.originalPos.add(playerDir.multiplyByFloats(multiplier, 0, multiplier))
+
+        // always move the bird upwards on the Y axis (never downwards) regardless of player direction
+        transform.position.y = birdInfo.originalPos.y + 6*multiplier
+
+        // increment the timer stored for each bird and use the sine of this time to wiggle the bird around the actual position calculated above
+        birdInfo.elapsed +=dt
+        transform.position.x += Math.sin( birdInfo.elapsed * 10) * multiplier
+        transform.position.y += Math.sin( birdInfo.elapsed * 8 ) * multiplier
+        transform.position.z += Math.sin( birdInfo.elapsed * 11) * multiplier
+
+        // make the flying bird always face the player
+        transform.lookAt(player.position)
+      }
+      // in case the player is farther from the bird than the given radius
+      else{
+
+        // make the flying bird change GLTF shape to the idle one
+        if(birdInfo.flying){
+          birdInfo.flying = false
+          bird.addComponentOrReplace(birdIdleShape)
+        }
+
+        //make the bird land on its original position
+        transform.position.copyFrom(birdInfo.originalPos)
+        
+      }
+    }
+  }
+}
+engine.addSystem(new ProximitySystem())
+
+// class that generates bird starting positions and spawns the birds themselves
+class BirdController{
+  
+  center:Vector3
+  sideLength:number = 8 // size of the area to spawn birds in
+  rows:number = 4
+  cols:number = 4
+  spacing:number = this.sideLength/this.rows
+  base:Vector3 = new Vector3(8,0,-7) 
+
+  constructor(){      
+
+    //set the center of the bird scattering area to the center of the scene
+    this.center = new Vector3(8,0,7)    
+    
+    //set the starting positions of the bird spawn grid to the south-west corner of the spawn area
+    this.base = new Vector3(this.center.x - this.sideLength/2, this.center.y, this.center.z - this.sideLength/2) 
+  }
+
+  spawnBirds(){
+
+    // for(let i=0; i< this.rows; i++){
+    //   for(let j=0; j< this.cols; j++){     
+
+    //     //generate positions iterating through all rows and columns  and add large random offsets along X an Z (Y will adapt to the terrain later)
+    //     let newPos = new Vector3(
+    //       this.base.x + i* this.spacing + Math.random()*8-4, 
+    //       this.base.y , 
+    //       this.base.z  + j * this.spacing + Math.random()*8-4
+    //       ) 
+
+    //       // create a ray at the X,Z coord of the generated position which starts high up and has a downward direction
+    //       let rayDown: Ray = {
+    //         origin: new Vector3(newPos.x, 15, newPos.z),
+    //         direction: Vector3.Down(),
+    //         distance: 17,
+    //       }
+
+    //       // cast the ray downward and try to intersect it with the terrain's collider
+    //       physicsCast.hitFirst(
+    //         rayDown,
+    //         (e) => {
+    //           if(e.didHit){          
+                
+    //             //if we hit the collider set the generated bird position's Y coord to the hitpoint's height
+    //             newPos.y = e.hitPoint.y 
+                
+                //spawn a bird at the generated and terrain adapted position
+                const bird = new Entity()      
+                bird.addComponent(new Transform({ 
+                  position: new Vector3(6.5, 0.1, -8.5),
+                  scale: new Vector3(.5, .5, .5),
+                  rotation: Quaternion.Euler(0, Math.random()*360,0) 
+                }))       
+                // position: newPos,
+                
+                // save the bird's original position to the DistanceBird component
+                bird.addComponent(new DistanceBird( new Vector3(6.5,0.1,-8.5) ))          
+                bird.addComponent(birdIdleShape)             
+                engine.addEntity(bird)    
+                hud.attachToEntity(bird)
+
+                const bird2 = new Entity()      
+                bird2.addComponent(new Transform({ 
+                  position: new Vector3(9.3, 0.57, -8),
+                  scale: new Vector3(.5, .5, .5),
+                  rotation: Quaternion.Euler(0, Math.random()*360,0) 
+                }))       
+                // position: newPos,
+                
+                // save the bird2's original position to the Distancebird2 component
+                bird2.addComponent(new DistanceBird( new Vector3(9.3,.57,-8) ))          
+                bird2.addComponent(birdIdleShape)             
+                engine.addEntity(bird2)    
+                hud.attachToEntity(bird2)
+
+                
+                const bird3 = new Entity()      
+                bird3.addComponent(new Transform({ 
+                  position: new Vector3(7, 0.5, -7),
+                  scale: new Vector3(.5, .5, .5),
+                  rotation: Quaternion.Euler(0, Math.random()*360,0) 
+                }))       
+                // position: newPos,
+                
+                // save the bird3's original position to the Distancebird3 component
+                bird3.addComponent(new DistanceBird( new Vector3(7,.5,-7) ))          
+                bird3.addComponent(birdIdleShape)             
+                engine.addEntity(bird3)    
+                hud.attachToEntity(bird3)
+
+                
+                const bird4 = new Entity()      
+                bird4.addComponent(new Transform({ 
+                  position: new Vector3(9, 0.2, -9.5),
+                  scale: new Vector3(.5, .5, .5),
+                  rotation: Quaternion.Euler(0, Math.random()*360,0) 
+                }))       
+                // position: newPos,
+                
+                // save the bird4's original position to the Distancebird4 component
+                bird4.addComponent(new DistanceBird( new Vector3(9,.2,-9.5) ))          
+                bird4.addComponent(birdIdleShape)             
+                engine.addEntity(bird4)    
+                hud.attachToEntity(bird4)
+              }        
+            }            
+//           )
+//       }
+//     }
+//   }  
+// }
+
+let birdControl = new BirdController()
+
+// delay bird spawning to only start casting rays on the terrain it's collider is fully loaded
+onSceneReadyObservable.add(()=>{
+  birdControl.spawnBirds()  
+})
+
+//END BIRD FLY END BIRD FLY
 
 
 //SMOKE
@@ -944,3 +1156,4 @@ void getUserData().then(async a => {
 // })
 
 //END ENEMY SPAWNER END ENEMY SPAWNER
+
