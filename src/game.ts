@@ -3,12 +3,13 @@ import { createInventory } from '../node_modules/decentraland-builder-scripts/in
 import Script1 from "../ff9257ec-9d62-404f-97c7-cf19c4035761/src/item"
 import * as utils from '@dcl/ecs-scene-utils'
 import { hud } from 'dcl-builder-hud'
-import { AnnouncerShort, ChoasCocaine, DeadIntro, Detective, DoYouDare, GodVoice, HeavenMade, Octopus, PaperHands, RobotQuest, StormComing, YouAreDiamond } from './data'
+import { explosionSound, ChoasCocaine, DeadIntro, Detective, DoYouDare, GodVoice, HeavenMade, Octopus, PaperHands, RobotQuest, StormComing, YouAreDiamond } from './data'
 import { Sound } from './sound'
 import { getUserData } from "@decentraland/Identity"
 //for bird fly
-import { birdIdleShape, birdFlyShape, sandShape } from './modules/models'
+import { birdIdleShape, birdFlyShape, glowingBird, sandShape, } from './modules/models'
 import { realDistance } from './modules/utilities'
+
 
 
 const billboard = new Billboard(false, true, false)
@@ -883,6 +884,13 @@ void getUserData().then(async a => {
 })
 
 // BIRD FLY BIRD FLY
+//pre loading glowing bird
+const glowingBird = new Entity()
+engine.addEntity(glowingBird)
+glowingBird.addComponent(new GLTFShape('models/birdSplat.glb'))
+glowingBird.addComponent(new Transform())
+glowingBird.getComponent(Transform).scale.setAll(0)
+
 // used for raycasting later on to generate bird positions along the terrain collider surface
 let physicsCast = PhysicsCast.instance
 
@@ -1021,6 +1029,7 @@ class BirdController{
                   scale: new Vector3(.5, .5, .5),
                   rotation: Quaternion.Euler(0, Math.random()*360,0) 
                 }))       
+                
                 // position: newPos,
                 
                 // save the bird's original position to the DistanceBird component
@@ -1029,11 +1038,38 @@ class BirdController{
                 engine.addEntity(bird)    
                 hud.attachToEntity(bird)
 
+          //Shoot the birds
+                bird.addComponent(
+                  new OnPointerDown(
+                    () => {
+                      bird.removeComponent(utils.MoveTransformComponent) // Stop the spaceship
+                      glowingBird.getComponent(Transform).scale.setAll(1)
+                      glowingBird.getComponent(Transform).position =
+                        bird.getComponent(Transform).position
+            
+                      // Glow for 1/4 of a second before disappearing
+                      glowingBird.addComponent(
+                        new utils.Delay(250, () => {
+                          glowingBird.getComponent(Transform).scale.setAll(0) // Reset glowing spaceship scale
+                          engine.removeEntity(bird)
+                        })
+                      )
+                      explosionSound.getComponent(AudioSource).playOnce()
+                    },
+                    {
+                      button: ActionButton.POINTER,
+                      showFeedback: false,
+                      distance: 50
+                    }
+                  )
+                )
+
                 const bird2 = new Entity()      
                 bird2.addComponent(new Transform({ 
                   position: new Vector3(9.3, 0.57, -8),
                   scale: new Vector3(.5, .5, .5),
                   rotation: Quaternion.Euler(0, Math.random()*360,0) 
+
                 }))       
                 // position: newPos,
                 
@@ -1042,6 +1078,32 @@ class BirdController{
                 bird2.addComponent(birdIdleShape)             
                 engine.addEntity(bird2)    
                 hud.attachToEntity(bird2)
+                
+                //Shoot the birds
+                bird2.addComponent(
+                  new OnPointerDown(
+                    () => {
+                      bird2.removeComponent(utils.MoveTransformComponent) // Stop the spaceship
+                      glowingBird.getComponent(Transform).scale.setAll(1)
+                      glowingBird.getComponent(Transform).position =
+                        bird2.getComponent(Transform).position
+            
+                      // Glow for 1/4 of a second before disappearing
+                      glowingBird.addComponent(
+                        new utils.Delay(250, () => {
+                          glowingBird.getComponent(Transform).scale.setAll(0) // Reset glowing spaceship scale
+                          engine.removeEntity(bird2)
+                        })
+                      )
+                      explosionSound.getComponent(AudioSource).playOnce()
+                    },
+                    {
+                      button: ActionButton.POINTER,
+                      showFeedback: false,
+                      distance: 50
+                    }
+                  )
+                )
 
                 
                 const bird3 = new Entity()      
@@ -1057,6 +1119,31 @@ class BirdController{
                 bird3.addComponent(birdIdleShape)             
                 engine.addEntity(bird3)    
                 hud.attachToEntity(bird3)
+                //Shoot the birds
+                bird3.addComponent(
+                  new OnPointerDown(
+                    () => {
+                      bird3.removeComponent(utils.MoveTransformComponent) // Stop the spaceship
+                      glowingBird.getComponent(Transform).scale.setAll(1)
+                      glowingBird.getComponent(Transform).position =
+                        bird3.getComponent(Transform).position
+            
+                      // Glow for 1/4 of a second before disappearing
+                      glowingBird.addComponent(
+                        new utils.Delay(250, () => {
+                          glowingBird.getComponent(Transform).scale.setAll(0) // Reset glowing spaceship scale
+                          engine.removeEntity(bird3)
+                        })
+                      )
+                      explosionSound.getComponent(AudioSource).playOnce()
+                    },
+                    {
+                      button: ActionButton.POINTER,
+                      showFeedback: false,
+                      distance: 50
+                    }
+                  )
+                )
 
                 
                 const bird4 = new Entity()      
@@ -1072,6 +1159,31 @@ class BirdController{
                 bird4.addComponent(birdIdleShape)             
                 engine.addEntity(bird4)    
                 hud.attachToEntity(bird4)
+                //Shoot the birds
+                bird4.addComponent(
+                  new OnPointerDown(
+                    () => {
+                      bird4.removeComponent(utils.MoveTransformComponent) // Stop the spaceship
+                      glowingBird.getComponent(Transform).scale.setAll(1)
+                      glowingBird.getComponent(Transform).position =
+                        bird4.getComponent(Transform).position
+            
+                      // Glow for 1/4 of a second before disappearing
+                      glowingBird.addComponent(
+                        new utils.Delay(250, () => {
+                          glowingBird.getComponent(Transform).scale.setAll(0) // Reset glowing spaceship scale
+                          engine.removeEntity(bird4)
+                        })
+                      )
+                      explosionSound.getComponent(AudioSource).playOnce()
+                    },
+                    {
+                      button: ActionButton.POINTER,
+                      showFeedback: false,
+                      distance: 50
+                    }
+                  )
+                )
               }        
             }            
 //           )
