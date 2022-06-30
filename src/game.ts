@@ -7,7 +7,7 @@ import { explosionSound, ChoasCocaine, DeadIntro, Detective, DoYouDare, GodVoice
 import { Sound } from './sound'
 import { getUserData } from "@decentraland/Identity"
 //for bird fly
-import { birdIdleShape, birdFlyShape, glowingBird, sandShape, } from './modules/models'
+import { birdIdleShape, birdFlyShape, sandShape, } from './modules/models'
 import { realDistance } from './modules/utilities'
 
 

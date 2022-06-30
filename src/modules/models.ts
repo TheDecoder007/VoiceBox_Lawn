@@ -34,7 +34,7 @@ glowingBirdDummy.addComponent(new Transform({
           rotation: Quaternion.Euler(0,0,0),
           scale: new Vector3(1,1,1)
         }))        
-        glowingBirdDummy.addComponent(glowingBird )               
+        glowingBirdDummy.addComponent(glowingBird)               
 engine.addEntity(glowingBirdDummy)
 hud.attachToEntity(glowingBirdDummy)
 
