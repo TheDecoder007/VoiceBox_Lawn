@@ -778,6 +778,16 @@ const transform38 = new Transform({
 fantasyChest.addComponentOrReplace(transform38)
 hud.attachToEntity(fantasyChest)
 
+let whiteSplat= new Entity('whiteSplat')
+whiteSplat.addComponent(new GLTFShape('models/birdSplat2.glb'))
+whiteSplat.addComponent(new Transform({
+  position: new Vector3(8, 1, -4),
+  rotation: new Quaternion( 0, 0, 0),
+  scale: new Vector3(1, 1, 1)
+}))
+whiteSplat.setParent(_scene)
+hud.attachToEntity(whiteSplat)
+
 const channelId = Math.random().toString(16).slice(2)
 const channelBus = new MessageBus()
 const inventory = createInventory(UICanvas, UIContainerStack, UIImage)
@@ -887,7 +897,7 @@ void getUserData().then(async a => {
 //pre loading glowing bird
 const glowingBird = new Entity()
 engine.addEntity(glowingBird)
-glowingBird.addComponent(new GLTFShape('models/birdSplat.glb'))
+glowingBird.addComponent(new GLTFShape('models/birdSplat2.glb'))
 glowingBird.addComponent(new Transform())
 glowingBird.getComponent(Transform).scale.setAll(0)
 
@@ -1048,10 +1058,10 @@ class BirdController{
                         bird.getComponent(Transform).position
             
                       // Glow for 1/4 of a second before disappearing
+                      engine.removeEntity(bird)
                       glowingBird.addComponent(
                         new utils.Delay(250, () => {
                           glowingBird.getComponent(Transform).scale.setAll(0) // Reset glowing spaceship scale
-                          engine.removeEntity(bird)
                         })
                       )
                       explosionSound.getComponent(AudioSource).playOnce()
