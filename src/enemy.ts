@@ -5,7 +5,7 @@ import { hud } from 'dcl-builder-hud'
 
 // Sound
 // const spawnSound = new Sound(new AudioClip('sounds/spawn.mp3'), false)
-const explosionSound = new Sound(new AudioClip('sounds/explosion.mp3'), false)
+const explosionSound = new Sound(new AudioClip('sounds/blasterExplosion.mp3'), false)
 
 // Preload glowing spaceship for when a spaceship is destroyed
 const glowingSpaceship = new Entity()

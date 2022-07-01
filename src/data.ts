@@ -15,4 +15,6 @@ export let PaperHands = new Sound(new AudioClip('sounds/PaperHands.mp3'), false)
 export let RobotQuest = new Sound(new AudioClip('sounds/RobotQuest.mp3'), false)
 export let StormComing = new Sound(new AudioClip('sounds/StormComing.mp3'), false)
 export let YouAreDiamond = new Sound(new AudioClip('sounds/YouAreDiamond.mp3'), false)
-export let explosionSound = new Sound(new AudioClip('sounds/explosion.mp3'), false)
+export let explosionSound = new Sound(new AudioClip('sounds/blasterExplosion.mp3'), false)
+export let blastBird = new Sound(new AudioClip('sounds/blastBlobBird.mp3'), false)
+

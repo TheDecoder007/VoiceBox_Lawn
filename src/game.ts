@@ -3,7 +3,7 @@ import { createInventory } from '../node_modules/decentraland-builder-scripts/in
 import Script1 from "../ff9257ec-9d62-404f-97c7-cf19c4035761/src/item"
 import * as utils from '@dcl/ecs-scene-utils'
 import { hud } from 'dcl-builder-hud'
-import { explosionSound, ChoasCocaine, DeadIntro, Detective, DoYouDare, GodVoice, HeavenMade, Octopus, PaperHands, RobotQuest, StormComing, YouAreDiamond } from './data'
+import { explosionSound, blastBird, ChoasCocaine, DeadIntro, Detective, DoYouDare, GodVoice, HeavenMade, Octopus, PaperHands, RobotQuest, StormComing, YouAreDiamond } from './data'
 import { Sound } from './sound'
 import { getUserData } from "@decentraland/Identity"
 //for bird fly
@@ -1064,7 +1064,7 @@ class BirdController{
                           glowingBird.getComponent(Transform).scale.setAll(0) // Reset glowing spaceship scale
                         })
                       )
-                      explosionSound.getComponent(AudioSource).playOnce()
+                      blastBird.getComponent(AudioSource).playOnce()
                     },
                     {
                       button: ActionButton.POINTER,
@@ -1105,7 +1105,7 @@ class BirdController{
                           engine.removeEntity(bird2)
                         })
                       )
-                      explosionSound.getComponent(AudioSource).playOnce()
+                      blastBird.getComponent(AudioSource).playOnce()
                     },
                     {
                       button: ActionButton.POINTER,
@@ -1145,7 +1145,7 @@ class BirdController{
                           engine.removeEntity(bird3)
                         })
                       )
-                      explosionSound.getComponent(AudioSource).playOnce()
+                      blastBird.getComponent(AudioSource).playOnce()
                     },
                     {
                       button: ActionButton.POINTER,
@@ -1185,7 +1185,7 @@ class BirdController{
                           engine.removeEntity(bird4)
                         })
                       )
-                      explosionSound.getComponent(AudioSource).playOnce()
+                      blastBird.getComponent(AudioSource).playOnce()
                     },
                     {
                       button: ActionButton.POINTER,
