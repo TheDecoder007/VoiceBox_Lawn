@@ -778,15 +778,15 @@ const transform38 = new Transform({
 fantasyChest.addComponentOrReplace(transform38)
 hud.attachToEntity(fantasyChest)
 
-let whiteSplat= new Entity('whiteSplat')
-whiteSplat.addComponent(new GLTFShape('models/birdSplat2.glb'))
-whiteSplat.addComponent(new Transform({
-  position: new Vector3(8, 1, -4),
-  rotation: new Quaternion( 0, 0, 0),
-  scale: new Vector3(1, 1, 1)
-}))
-whiteSplat.setParent(_scene)
-hud.attachToEntity(whiteSplat)
+// let whiteSplat= new Entity('whiteSplat')
+// whiteSplat.addComponent(new GLTFShape('models/birdSplat2.glb'))
+// whiteSplat.addComponent(new Transform({
+//   position: new Vector3(8, 1, -4),
+//   rotation: new Quaternion( 0, 0, 0),
+//   scale: new Vector3(1, 1, 1)
+// }))
+// whiteSplat.setParent(_scene)
+// hud.attachToEntity(whiteSplat)
 
 const channelId = Math.random().toString(16).slice(2)
 const channelBus = new MessageBus()
