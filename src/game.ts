@@ -687,7 +687,7 @@ hud.attachToEntity(fantasyChest)
 // CODE FOR PORTAL UPSTAIRS ON FANTASY CHEST
 fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
   new Vector3(4, 5, 4)), {
-    enableDebug: true,
+    enableDebug: false,
     onCameraEnter: ()=>{
       showInside()
     }
@@ -718,6 +718,53 @@ insideParent.addComponent(new Transform({
   position: new Vector3(8,10,8), scale: new Vector3(0,0,0)
 }))
 engine.addEntity(insideParent)
+
+let insideFloor = new Entity()
+insideFloor.addComponent(new PlaneShape())
+insideFloor.addComponent(new Transform({ rotation: Quaternion.Euler(90,0,0), scale: new Vector3(8,8.1) }))
+insideFloor.addComponent(new Material()).albedoColor = Color4.Red()
+insideFloor.setParent(insideParent)
+hud.attachToEntity(insideFloor)
+
+let insideBuilding = new Entity()
+insideBuilding.addComponent(new GLTFShape("models/Chest_Fantasy.glb"))
+insideBuilding.addComponent(new Transform())
+insideBuilding.setParent(insideParent)
+hud.attachToEntity(insideBuilding)
+
+let groundTrigger = new Entity('groundTrigger')
+groundTrigger.addComponent(new GLTFShape('models/bird.glb'))
+groundTrigger.addComponent(new Transform( {position: new Vector3(1.4,0,3.5), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+groundTrigger.setParent(insideParent)
+groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(3,3,1), new Vector3(-2.3,1.5,0)), {
+  enableDebug: true,
+  onCameraEnter:()=>{
+    showGround()
+  }
+}))
+hud.attachToEntity(groundTrigger)
+
+//code for showInside/showGround for moving player/hiding land
+// _scene replaces groundAreaParent
+function showInside() {
+  _scene.getComponent(Transform).scale.setAll(0)
+  engine.addEntity(hideGround)
+
+  insideParent.getComponent(Transform).scale.setAll(1)
+  engine.removeEntity(hideInside)
+  movePlayerTo({x: 8, y:11, z:8})
+}
+
+function showGround(){
+  _scene.getComponent(Transform).scale.setAll(1)
+  engine.removeEntity(hideGround)
+
+  insideParent.getComponent(Transform).scale.setAll(0)
+  engine.addEntity(hideInside)
+  movePlayerTo({x: 8, y:1, z:1})
+}
+
+
 
 
 
