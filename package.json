@@ -27,6 +27,8 @@
  
   "bundleDependencies": [
     "@dcl/ecs-scene-utils",
+    "@dcl/npc-scene-utils",
+    "@dcl/ui-scene-utils",
     "dcl-builder-hud"
   ]
 }

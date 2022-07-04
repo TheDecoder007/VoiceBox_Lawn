@@ -9,6 +9,7 @@ import { getUserData } from "@decentraland/Identity"
 //for bird fly
 import { birdIdleShape, birdFlyShape, sandShape, } from './modules/models'
 import { realDistance } from './modules/utilities'
+import { movePlayerTo } from '@decentraland/RestrictedActions'
 
 
 
@@ -396,54 +397,6 @@ murpheusnickeditd5.addComponentOrReplace(gltfShape6)
 hud.attachToEntity(murpheusnickeditd5)
 
 
-// const blackbutton23456789101112131415 = new Entity('blackbutton23456789101112131415')
-// engine.addEntity(blackbutton23456789101112131415)
-// blackbutton23456789101112131415.setParent(_scene)
-// const transform15 = new Transform({
-//   position: new Vector3(2.34301758, 0, 12.77417),
-//   rotation: new Quaternion(0, 0, 0, 1),
-//   scale: new Vector3(2, 3, 2)
-// })
-// blackbutton23456789101112131415.addComponentOrReplace(transform15)
-// hud.attachToEntity(blackbutton23456789101112131415)
-
-
-// const blackbutton2 = new Entity('blackbutton2')
-// engine.addEntity(blackbutton2)
-// blackbutton2.setParent(_scene)
-// const transform16 = new Transform({
-//   position: new Vector3(9, 0, 13.06543),
-//   rotation: new Quaternion(0, 0, 0, 1),
-//   scale: new Vector3(2, 3, 2)
-// })
-// blackbutton2.addComponentOrReplace(transform16)
-// hud.attachToEntity(blackbutton2)
-
-
-// const blackbutton2345 = new Entity('blackbutton2345')
-// engine.addEntity(blackbutton2345)
-// blackbutton2345.setParent(_scene)
-// const transform17 = new Transform({
-//   position: new Vector3(2.41772461, 0.0380592346, 2.57189941),
-//   rotation: new Quaternion(0, 0, 0, 1),
-//   scale: new Vector3(2, 3, 2)
-// })
-// blackbutton2345.addComponentOrReplace(transform17)
-// hud.attachToEntity(blackbutton2345)
-
-
-// const blackbutton23456789101112 = new Entity('blackbutton23456789101112')
-// engine.addEntity(blackbutton23456789101112)
-// blackbutton23456789101112.setParent(_scene)
-// const transform18 = new Transform({
-//   position: new Vector3(13.5510254, 0, 1.94067383),
-//   rotation: new Quaternion(0, 0, 0, 1),
-//   scale: new Vector3(2, 3, 2)
-// })
-// blackbutton23456789101112.addComponentOrReplace(transform18)
-// hud.attachToEntity(blackbutton23456789101112)
-
-
 const murpheusnickeditd6 = new Entity('murpheusnickeditd6')
 engine.addEntity(murpheusnickeditd6)
 murpheusnickeditd6.setParent(_scene)
@@ -547,54 +500,6 @@ gltfShape12.isPointerBlocker = true
 gltfShape12.visible = true
 murpheusnickeditd7.addComponentOrReplace(gltfShape12)
 hud.attachToEntity(murpheusnickeditd7)
-
-
-// const blackbutton = new Entity('blackbutton')
-// engine.addEntity(blackbutton)
-// blackbutton.setParent(_scene)
-// const transform25 = new Transform({
-//   position: new Vector3(2.336914, 0, 7.220337),
-//   rotation: new Quaternion(0, 0, 0, 1),
-//   scale: new Vector3(2, 3, 2)
-// })
-// blackbutton.addComponentOrReplace(transform25)
-// hud.attachToEntity(blackbutton)
-
-
-// const blackbutton23 = new Entity('blackbutton23')
-// engine.addEntity(blackbutton23)
-// blackbutton23.setParent(_scene)
-// const transform26 = new Transform({
-//   position: new Vector3(13.2243652, 0, 13.2862549),
-//   rotation: new Quaternion(0, 0, 0, 1),
-//   scale: new Vector3(2, 3, 2)
-// })
-// blackbutton23.addComponentOrReplace(transform26)
-// hud.attachToEntity(blackbutton23)
-
-
-// const blackbutton2345678 = new Entity('blackbutton2345678')
-// engine.addEntity(blackbutton2345678)
-// blackbutton2345678.setParent(_scene)
-// const transform27 = new Transform({
-//   position: new Vector3(4.287842, 0, 12.77417),
-//   rotation: new Quaternion(0, 0, 0, 1),
-//   scale: new Vector3(2, 3, 2)
-// })
-// blackbutton2345678.addComponentOrReplace(transform27)
-// hud.attachToEntity(blackbutton2345678)
-
-
-// const blackbutton2345678910 = new Entity('blackbutton2345678910')
-// engine.addEntity(blackbutton2345678910)
-// blackbutton2345678910.setParent(_scene)
-// const transform28 = new Transform({
-//   position: new Vector3(11, 0, 12.77417),
-//   rotation: new Quaternion(0, 0, 0, 1),
-//   scale: new Vector3(2, 3, 2)
-// })
-// blackbutton2345678910.addComponentOrReplace(transform28)
-// hud.attachToEntity(blackbutton2345678910)
 
 
 const murpheusnickeditd8 = new Entity('murpheusnickeditd8')
@@ -767,6 +672,7 @@ gltfShape19.isPointerBlocker = true
 gltfShape19.visible = true
 neatDRotating2.addComponentOrReplace(gltfShape19)
 
+
 const fantasyChest = new Entity('fantasyChest')
 engine.addEntity(fantasyChest)
 fantasyChest.setParent(_scene)
@@ -777,6 +683,43 @@ const transform38 = new Transform({
 })
 fantasyChest.addComponentOrReplace(transform38)
 hud.attachToEntity(fantasyChest)
+
+// CODE FOR PORTAL UPSTAIRS ON FANTASY CHEST
+fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
+  new Vector3(2, 3, 2), new Vector3(8, 0.1, -7)), {
+    enableDebug: true,
+    onCameraEnter: ()=>{
+      showInside()
+    }
+  }))
+
+  // HIDE AVATAR AREAS
+  let hideGround = new Entity('hideGround')
+  // hideGround.addComponent(new BoxShape()).withCollisions = false
+  hideGround.addComponent(new Transform({
+    position: new Vector3(8,3,8), scale: new Vector3(16,6,16)
+  }))
+  hideGround.addComponent(new AvatarModifierArea({area: { box: new Vector3 (16,6,16)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
+//engine.addEntity(hideGround)
+
+let hideInside = new Entity('hideInside')
+// hideInside.addComponent(new BoxShape()).withCollisions = false
+hideInside.addComponent(new Transform({
+  position: new Vector3(8,10,8), scale: new Vector3(8,6,16)
+}))
+hideInside.addComponent(new AvatarModifierArea({area: { box: new Vector3 (18,6,16)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
+engine.addEntity(hideInside)
+
+//CODE FOR UPSTAIRS
+
+//inside area
+let insideParent = new Entity("red area parent")
+insideParent.addComponent(new Transform({
+  position: new Vector3(8,10,8), scale: new Vector3(0,0,0)
+}))
+engine.addEntity(insideParent)
+
+
 
 // let whiteSplat= new Entity('whiteSplat')
 // whiteSplat.addComponent(new GLTFShape('models/birdSplat2.glb'))
