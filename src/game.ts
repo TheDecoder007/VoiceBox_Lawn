@@ -689,11 +689,36 @@ fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
   new Vector3(4, 5, 4)), {
     enableDebug: false,
     onCameraEnter: ()=>{
-      showInside()
+  //grows chest by 5
+      fantasyChest.addComponent(new utils.ScaleTransformComponent(
+        new Vector3(1,1,1),
+        new Vector3(5,5,5),
+        3
+      ))
+      // showInside()
     }
   }))
 
-  // HIDE AVATAR AREAS
+  //solid water child of fantasyChest
+  const solidWater = new Entity('solidWater')
+  engine.addEntity(solidWater)
+  solidWater.setParent(fantasyChest)
+  const transform39 = new Transform({
+    position: new Vector3(0, 0.1, 0),
+    rotation: new Quaternion(0, 0, 0, 1),
+    scale: new Vector3(1.23, 0.16, 0.86)
+  })
+  solidWater.addComponentOrReplace(transform39)
+  const gltfShape20 = new GLTFShape("models/solid_water.glb")
+  gltfShape20.withCollisions = true
+  gltfShape20.isPointerBlocker = true
+  gltfShape20.visible = true
+  solidWater.addComponentOrReplace(gltfShape20)
+  hud.attachToEntity(solidWater)
+
+
+
+  // HIDE AVATAR AREAS 
   let hideGround = new Entity('hideGround')
   // hideGround.addComponent(new BoxShape()).withCollisions = false
   hideGround.addComponent(new Transform({
