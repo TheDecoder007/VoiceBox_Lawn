@@ -686,7 +686,7 @@ hud.attachToEntity(fantasyChest)
 
 // CODE FOR PORTAL UPSTAIRS ON FANTASY CHEST
 fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
-  new Vector3(2, 3, 2), new Vector3(8, 0.1, -7)), {
+  new Vector3(4, 5, 4)), {
     enableDebug: true,
     onCameraEnter: ()=>{
       showInside()
