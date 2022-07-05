@@ -688,12 +688,14 @@ fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
     onCameraEnter: ()=>{
       showInside()
     }}))
+
+
+//     fantasyChest.addComponent(new utils.ScaleTransformComponent(
+//         new Vector3(1,1,1),
+//         new Vector3(5,5,5),
+//         3
+// ))}}))
       //grows chest by 5 over 3 seconds. need original scale, new scale, time period
-//           fantasyChest.addComponent(new utils.ScaleTransformComponent(
-//               new Vector3(1,1,1),
-//               new Vector3(5,5,5),
-//               3
-      // }}))
 
   // }}))
 
@@ -740,7 +742,7 @@ hud.attachToEntity(hideInside)
 //inside area
 let insideParent = new Entity("red area parent")
 insideParent.addComponent(new Transform({
-  position: new Vector3(8,5,0), scale: new Vector3(1.8,1.0,3.3)
+  position: new Vector3(8,5,0), scale: new Vector3(0,0,0)
 }))
 engine.addEntity(insideParent)
 hud.attachToEntity(insideParent)
@@ -791,7 +793,7 @@ function showInside() {
 
   insideParent.getComponent(Transform).scale.setAll(1)
   engine.removeEntity(hideInside)
-  movePlayerTo({x: 8, y:11, z:-14})
+  movePlayerTo({x: 8, y:12, z:-14})
 }
 
 function showGround(){
@@ -803,6 +805,7 @@ function showGround(){
   movePlayerTo({x: 8, y:1, z:-15})
 }
 
+//left side
 const glossyaethereatiles = new Entity('glossyaethereatiles')
 engine.addEntity(glossyaethereatiles)
 glossyaethereatiles.setParent(insideParent)
@@ -810,6 +813,7 @@ const transform21 = new Transform({
   position: new Vector3(-7.4, 3.2, 0.5),
   rotation: Quaternion.Euler(0, 0, 90,),
   scale: new Vector3(0.4, 0.6, 1.9)
+
 })
 glossyaethereatiles.addComponentOrReplace(transform21)
 const gltfShape9 = new GLTFShape("6b33f46e-9667-45e5-bd90-85f372ee2490/CityTile.glb")
@@ -818,6 +822,42 @@ gltfShape9.isPointerBlocker = true
 gltfShape9.visible = true
 glossyaethereatiles.addComponentOrReplace(gltfShape9)
 hud.attachToEntity(glossyaethereatiles)
+
+//right side
+const glossyaethereatiles2 = new Entity('glossyaethereatiles2')
+engine.addEntity(glossyaethereatiles2)
+glossyaethereatiles2.setParent(insideParent)
+const transform40 = new Transform({
+  position: new Vector3(7.4, 3.2, 0.5),
+  rotation: Quaternion.Euler(0, 0, -90,),
+  scale: new Vector3(0.4, 0.6, 1.9)
+
+})
+glossyaethereatiles2.addComponentOrReplace(transform40)
+const gltfShape22 = new GLTFShape("6b33f46e-9667-45e5-bd90-85f372ee2490/CityTile.glb")
+gltfShape22.withCollisions = true
+gltfShape22.isPointerBlocker = true
+gltfShape22.visible = true
+glossyaethereatiles2.addComponentOrReplace(gltfShape22)
+hud.attachToEntity(glossyaethereatiles2)
+
+//floor
+const glossyaethereatiles3 = new Entity('glossyaethereatiles3')
+engine.addEntity(glossyaethereatiles3)
+glossyaethereatiles3.setParent(insideParent)
+const transform41 = new Transform({
+  position: new Vector3(0, 0.06, 7),
+  rotation: Quaternion.Euler(0, 0, 0,),
+  scale: new Vector3(0.93, 1, 1)
+
+})
+glossyaethereatiles3.addComponentOrReplace(transform41)
+const gltfShape23 = new GLTFShape("6b33f46e-9667-45e5-bd90-85f372ee2490/CityTile.glb")
+gltfShape23.withCollisions = true
+gltfShape23.isPointerBlocker = true
+gltfShape23.visible = true
+glossyaethereatiles3.addComponentOrReplace(gltfShape23)
+hud.attachToEntity(glossyaethereatiles3)
 
 
 
