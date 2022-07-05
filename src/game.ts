@@ -10,6 +10,7 @@ import { getUserData } from "@decentraland/Identity"
 import { birdIdleShape, birdFlyShape, sandShape, } from './modules/models'
 import { realDistance } from './modules/utilities'
 import { movePlayerTo } from '@decentraland/RestrictedActions'
+import { BoxShape } from 'node_modules/decentraland-ecs/dist/index'
 
 
 
@@ -673,6 +674,12 @@ gltfShape19.visible = true
 neatDRotating2.addComponentOrReplace(gltfShape19)
 
 
+//STARTING CODE OF THE ANTICOLLIDER
+const antiCollider = new Entity('antiCollider')
+engine.addEntity(antiCollider)
+antiCollider.setParent(_scene)
+antiCollider.addComponent( new BoxShape())
+
 const fantasyChest = new Entity('fantasyChest')
 engine.addEntity(fantasyChest)
 fantasyChest.setParent(_scene)
@@ -689,32 +696,33 @@ fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
   new Vector3(4, 5, 4)), {
     enableDebug: false,
     onCameraEnter: ()=>{
-  //grows chest by 5
-      fantasyChest.addComponent(new utils.ScaleTransformComponent(
-        new Vector3(1,1,1),
-        new Vector3(5,5,5),
-        3
-      ))
-      // showInside()
-    }
-  }))
+    }}))
+      //grows chest by 5 over 3 seconds. need original scale, new scale, time period
+//           fantasyChest.addComponent(new utils.ScaleTransformComponent(
+//               new Vector3(1,1,1),
+//               new Vector3(5,5,5),
+//               3
+      // }}))
+
+    // showInside()
+  // }}))
 
   //solid water child of fantasyChest
-  const solidWater = new Entity('solidWater')
-  engine.addEntity(solidWater)
-  solidWater.setParent(fantasyChest)
-  const transform39 = new Transform({
-    position: new Vector3(0, 0.1, 0),
-    rotation: new Quaternion(0, 0, 0, 1),
-    scale: new Vector3(1.23, 0.16, 0.86)
-  })
-  solidWater.addComponentOrReplace(transform39)
-  const gltfShape20 = new GLTFShape("models/solid_water.glb")
-  gltfShape20.withCollisions = true
-  gltfShape20.isPointerBlocker = true
-  gltfShape20.visible = true
-  solidWater.addComponentOrReplace(gltfShape20)
-  hud.attachToEntity(solidWater)
+  // const solidWater = new Entity('solidWater')
+  // engine.addEntity(solidWater)
+  // solidWater.setParent(fantasyChest)
+  // const transform39 = new Transform({
+  //   position: new Vector3(0, 0.1, 0),
+  //   rotation: new Quaternion(0, 0, 0, 1),
+  //   scale: new Vector3(1.23, 0.16, 0.86)
+  // })
+  // solidWater.addComponentOrReplace(transform39)
+  // const gltfShape20 = new GLTFShape("models/solid_water.glb")
+  // gltfShape20.withCollisions = true
+  // gltfShape20.isPointerBlocker = true
+  // gltfShape20.visible = true
+  // solidWater.addComponentOrReplace(gltfShape20)
+  // hud.attachToEntity(solidWater)
 
 
 
@@ -740,9 +748,10 @@ engine.addEntity(hideInside)
 //inside area
 let insideParent = new Entity("red area parent")
 insideParent.addComponent(new Transform({
-  position: new Vector3(8,10,8), scale: new Vector3(0,0,0)
+  position: new Vector3(8,4.7,-0.2), scale: new Vector3(1.8,1.0,3.5)
 }))
 engine.addEntity(insideParent)
+hud.attachToEntity(insideParent)
 
 let insideFloor = new Entity()
 insideFloor.addComponent(new PlaneShape())
@@ -759,7 +768,7 @@ hud.attachToEntity(insideBuilding)
 
 let groundTrigger = new Entity('groundTrigger')
 groundTrigger.addComponent(new GLTFShape('models/bird.glb'))
-groundTrigger.addComponent(new Transform( {position: new Vector3(1.4,0,3.5), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+groundTrigger.addComponent(new Transform( {position: new Vector3(2,0,4), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
 groundTrigger.setParent(insideParent)
 groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(3,3,1), new Vector3(-2.3,1.5,0)), {
   enableDebug: true,
