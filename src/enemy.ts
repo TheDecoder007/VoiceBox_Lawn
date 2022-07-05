@@ -11,11 +11,11 @@ const explosionSound = new Sound(new AudioClip('sounds/blasterExplosion.mp3'), f
 const glowingSpaceship = new Entity()
 engine.addEntity(glowingSpaceship)
 glowingSpaceship.addComponent(new GLTFShape('models/glowingSpaceship.glb'))
-glowingSpaceship.addComponent(new Transform())
+glowingSpaceship.addComponent(new Transform({position: new Vector3(8,-10,0)}))
 glowingSpaceship.getComponent(Transform).scale.setAll(0)
 
 // Configuration
-const TRAVEL_DISTANCE = 28
+const TRAVEL_DISTANCE = 15.6
 const TRAVEL_TIME = 4
 const MAX_TRAVEL_TIME_OFFSET = 3
 
@@ -29,11 +29,12 @@ export class Enemy extends Entity {
 
     // Spaceship movement
     const startPos = transform.position
-    const endPos = new Vector3(8, 0, -7)
-    //   startPos.x,
-    //   startPos.y,
-    //   startPos.z - TRAVEL_DISTANCE
-    // )
+    const endPos = new Vector3 
+    (startPos.x,
+    startPos.y,
+    startPos.z - TRAVEL_DISTANCE)
+    
+    // new Vector3(8, 0, -7)
     this.addComponent(
       new utils.MoveTransformComponent(
         startPos,

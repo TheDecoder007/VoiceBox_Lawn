@@ -10,7 +10,8 @@ import { getUserData } from "@decentraland/Identity"
 import { birdIdleShape, birdFlyShape, sandShape, } from './modules/models'
 import { realDistance } from './modules/utilities'
 import { movePlayerTo } from '@decentraland/RestrictedActions'
-import { BoxShape } from 'node_modules/decentraland-ecs/dist/index'
+import { BoxShape, Color3 } from 'node_modules/decentraland-ecs/dist/index'
+ 
 
 
 
@@ -433,25 +434,6 @@ gltfShape8.visible = true
 murpheusnickeditd.addComponentOrReplace(gltfShape8)
 hud.attachToEntity(murpheusnickeditd)
 
-
-
-const glossyaethereatiles = new Entity('glossyaethereatiles')
-engine.addEntity(glossyaethereatiles)
-glossyaethereatiles.setParent(_scene)
-const transform21 = new Transform({
-  position: new Vector3(8, 0, 8),
-  rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1, 1, 1)
-})
-glossyaethereatiles.addComponentOrReplace(transform21)
-const gltfShape9 = new GLTFShape("6b33f46e-9667-45e5-bd90-85f372ee2490/CityTile.glb")
-gltfShape9.withCollisions = true
-gltfShape9.isPointerBlocker = true
-gltfShape9.visible = true
-glossyaethereatiles.addComponentOrReplace(gltfShape9)
-hud.attachToEntity(glossyaethereatiles)
-
-
 const murpheusnickeditd2 = new Entity('murpheusnickeditd2')
 engine.addEntity(murpheusnickeditd2)
 murpheusnickeditd2.setParent(_scene)
@@ -571,11 +553,7 @@ trigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Ve
   
   }
 }))
-
-
-
 trigger.setParent(_scene)
-
 //attatches builder tool to entity(trigger, button, etc)
 hud.attachToEntity(trigger)
 
@@ -675,10 +653,22 @@ neatDRotating2.addComponentOrReplace(gltfShape19)
 
 
 //STARTING CODE OF THE ANTICOLLIDER
-const antiCollider = new Entity('antiCollider')
-engine.addEntity(antiCollider)
-antiCollider.setParent(_scene)
-antiCollider.addComponent( new BoxShape())
+// const antiCollider = new Entity('antiCollider')
+// engine.addEntity(antiCollider)
+// antiCollider.setParent(_scene)
+// antiCollider.addComponent(new BoxShape())
+// const transform40 = new Transform({
+//   position: new Vector3(8,0,1),
+//   rotation: new Quaternion(0,0,0),
+//   scale: new Vector3(1,1,1)
+// })
+// antiCollider.addComponentOrReplace(transform40)
+// const myMaterial = new Material()
+// myMaterial.albedoColor = Color3.Blue()
+// myMaterial.albedoColor = new Color4(0.9)
+// myMaterial.transparencyMode = 1
+// antiCollider.addComponent(myMaterial)
+// hud.attachToEntity(antiCollider)
 
 const fantasyChest = new Entity('fantasyChest')
 engine.addEntity(fantasyChest)
@@ -696,6 +686,7 @@ fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
   new Vector3(4, 5, 4)), {
     enableDebug: false,
     onCameraEnter: ()=>{
+      showInside()
     }}))
       //grows chest by 5 over 3 seconds. need original scale, new scale, time period
 //           fantasyChest.addComponent(new utils.ScaleTransformComponent(
@@ -704,7 +695,6 @@ fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
 //               3
       // }}))
 
-    // showInside()
   // }}))
 
   //solid water child of fantasyChest
@@ -730,34 +720,49 @@ fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
   let hideGround = new Entity('hideGround')
   // hideGround.addComponent(new BoxShape()).withCollisions = false
   hideGround.addComponent(new Transform({
-    position: new Vector3(8,3,8), scale: new Vector3(16,6,16)
+    position: new Vector3(8,2,0), scale: new Vector3(16,5,16)
   }))
   hideGround.addComponent(new AvatarModifierArea({area: { box: new Vector3 (16,6,16)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
 //engine.addEntity(hideGround)
+hud.attachToEntity(hideGround)
 
 let hideInside = new Entity('hideInside')
 // hideInside.addComponent(new BoxShape()).withCollisions = false
 hideInside.addComponent(new Transform({
-  position: new Vector3(8,10,8), scale: new Vector3(8,6,16)
+  position: new Vector3(8,6,0), scale: new Vector3(8,6,16)
 }))
-hideInside.addComponent(new AvatarModifierArea({area: { box: new Vector3 (18,6,16)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
+hideInside.addComponent(new AvatarModifierArea({area: { box: new Vector3 (8,6,16)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
 engine.addEntity(hideInside)
+hud.attachToEntity(hideInside)
 
 //CODE FOR UPSTAIRS
 
 //inside area
 let insideParent = new Entity("red area parent")
 insideParent.addComponent(new Transform({
-  position: new Vector3(8,4.7,-0.2), scale: new Vector3(1.8,1.0,3.5)
+  position: new Vector3(8,5,0), scale: new Vector3(1.8,1.0,3.3)
 }))
 engine.addEntity(insideParent)
 hud.attachToEntity(insideParent)
 
-let insideFloor = new Entity()
+let insideFloor = new Entity('inside floor')
 insideFloor.addComponent(new PlaneShape())
-insideFloor.addComponent(new Transform({ rotation: Quaternion.Euler(90,0,0), scale: new Vector3(8,8.1) }))
-insideFloor.addComponent(new Material()).albedoColor = Color4.Red()
 insideFloor.setParent(insideParent)
+engine.addEntity(insideFloor)
+insideFloor.addComponent(new Material()).albedoColor = Color4.Red()
+insideFloor.addComponent(new Transform({ rotation: Quaternion.Euler(90,0,0), scale: new Vector3(15,30,1) }))
+// const gltfShape20 = new GLTFShape("6b33f46e-9667-45e5-bd90-85f372ee2490/CityTile.glb")
+// gltfShape20.withCollisions = true
+// gltfShape20.isPointerBlocker = true
+// gltfShape20.visible = true
+
+// insideFloor.addComponentOrReplace(gltfShape20)
+// const transform41 = new Transform({
+//   position: new Vector3(0, 0, 0),
+//   rotation: new Quaternion(0, 0, 0, 1),
+//   scale: new Vector3(1, 1, 1)
+// })
+// insideFloor.addComponentOrReplace(transform41)
 hud.attachToEntity(insideFloor)
 
 let insideBuilding = new Entity()
@@ -767,8 +772,8 @@ insideBuilding.setParent(insideParent)
 hud.attachToEntity(insideBuilding)
 
 let groundTrigger = new Entity('groundTrigger')
-groundTrigger.addComponent(new GLTFShape('models/bird.glb'))
-groundTrigger.addComponent(new Transform( {position: new Vector3(2,0,4), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+// groundTrigger.addComponent(new BoxShape())
+groundTrigger.addComponent(new Transform( {position: new Vector3(2,0,13), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
 groundTrigger.setParent(insideParent)
 groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(3,3,1), new Vector3(-2.3,1.5,0)), {
   enableDebug: true,
@@ -786,7 +791,7 @@ function showInside() {
 
   insideParent.getComponent(Transform).scale.setAll(1)
   engine.removeEntity(hideInside)
-  movePlayerTo({x: 8, y:11, z:8})
+  movePlayerTo({x: 8, y:11, z:-14})
 }
 
 function showGround(){
@@ -795,10 +800,24 @@ function showGround(){
 
   insideParent.getComponent(Transform).scale.setAll(0)
   engine.addEntity(hideInside)
-  movePlayerTo({x: 8, y:1, z:1})
+  movePlayerTo({x: 8, y:1, z:-15})
 }
 
-
+const glossyaethereatiles = new Entity('glossyaethereatiles')
+engine.addEntity(glossyaethereatiles)
+glossyaethereatiles.setParent(insideParent)
+const transform21 = new Transform({
+  position: new Vector3(-7.4, 3.2, 0.5),
+  rotation: Quaternion.Euler(0, 0, 90,),
+  scale: new Vector3(0.4, 0.6, 1.9)
+})
+glossyaethereatiles.addComponentOrReplace(transform21)
+const gltfShape9 = new GLTFShape("6b33f46e-9667-45e5-bd90-85f372ee2490/CityTile.glb")
+gltfShape9.withCollisions = true
+gltfShape9.isPointerBlocker = true
+gltfShape9.visible = true
+glossyaethereatiles.addComponentOrReplace(gltfShape9)
+hud.attachToEntity(glossyaethereatiles)
 
 
 
@@ -918,6 +937,19 @@ void getUserData().then(async a => {
 })
 
 // BIRD FLY BIRD FLY
+
+// Add ground terrain
+const sand = new Entity()      
+sand.addComponent(new Transform({ 
+          position: new Vector3(5.62,-0.06,-9.83),
+          rotation: Quaternion.Euler(0,0,0),
+          scale: new Vector3(.1,.2,.1)
+        }))        
+sand.addComponent(sandShape)   
+sand.setParent(_scene)
+engine.addEntity(sand)
+hud.attachToEntity(sand)
+
 //pre loading glowing bird
 const glowingBird = new Entity()
 engine.addEntity(glowingBird)
@@ -1068,7 +1100,8 @@ class BirdController{
                 
                 // save the bird's original position to the DistanceBird component
                 bird.addComponent(new DistanceBird( new Vector3(6.5,0.1,-8.5) ))          
-                bird.addComponent(birdIdleShape)             
+                bird.addComponent(birdIdleShape) 
+                bird.setParent(_scene)            
                 engine.addEntity(bird)    
                 hud.attachToEntity(bird)
 
@@ -1109,7 +1142,9 @@ class BirdController{
                 
                 // save the bird2's original position to the Distancebird2 component
                 bird2.addComponent(new DistanceBird( new Vector3(9.3,.57,-8) ))          
-                bird2.addComponent(birdIdleShape)             
+                bird2.addComponent(birdIdleShape)
+                bird2.setParent(_scene)            
+
                 engine.addEntity(bird2)    
                 hud.attachToEntity(bird2)
                 
@@ -1150,7 +1185,8 @@ class BirdController{
                 
                 // save the bird3's original position to the Distancebird3 component
                 bird3.addComponent(new DistanceBird( new Vector3(7,.5,-7) ))          
-                bird3.addComponent(birdIdleShape)             
+                bird3.addComponent(birdIdleShape) 
+                bird3.setParent(_scene)            
                 engine.addEntity(bird3)    
                 hud.attachToEntity(bird3)
                 //Shoot the birds
@@ -1190,7 +1226,8 @@ class BirdController{
                 
                 // save the bird4's original position to the Distancebird4 component
                 bird4.addComponent(new DistanceBird( new Vector3(9,.2,-9.5) ))          
-                bird4.addComponent(birdIdleShape)             
+                bird4.addComponent(birdIdleShape) 
+                bird4.setParent(_scene)            
                 engine.addEntity(bird4)    
                 hud.attachToEntity(bird4)
                 //Shoot the birds

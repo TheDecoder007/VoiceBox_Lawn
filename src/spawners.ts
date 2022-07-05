@@ -16,7 +16,7 @@ const POSITION_Z = 30
 function spawnEnemy(index: string, x: number, y: number, z: number): void {
   const enemy = new Enemy(
     spaceships[index],
-    new Transform({ position: new Vector3(x, y, 15.7),
+    new Transform({ position: new Vector3(x, y, z),
       rotation: new Quaternion(0,0,0),       
         scale: new Vector3(0.5, 0.5, 0.5) })
   )
@@ -41,12 +41,13 @@ circleSpawner.addComponent(
     const angle = Math.random() * 2 * Math.PI
     const x = circle.centerX + randomRadius * Math.cos(angle)
     const y = circle.centerY + randomRadius * Math.sin(angle)
-    spawnEnemy('greenSpaceship', 5.9, 13.5, 15.7)
-hud.attachToEntity(circleSpawner)
+    new Transform({ rotation: new Quaternion(0,90,0)})
+    spawnEnemy('greenSpaceship', 0.2, 12, 7)
     
   })
-)
-engine.addEntity(circleSpawner)
+  )
+  engine.addEntity(circleSpawner)
+  hud.attachToEntity(circleSpawner)
 
 const circleSpawner2 = new Entity()
 circleSpawner2.addComponent(
@@ -56,12 +57,12 @@ circleSpawner2.addComponent(
     const angle = Math.random() * 2 * Math.PI
     const x = circle.centerX + randomRadius * Math.cos(angle)
     const y = circle.centerY + randomRadius * Math.sin(angle)
-    spawnEnemy('greenSpaceship', 10.1, 13.5, 15.7)
-hud.attachToEntity(circleSpawner2)
+    spawnEnemy('greenSpaceship', 15.8, 12, 10)
     
   })
-)
-engine.addEntity(circleSpawner2)
+  )
+  engine.addEntity(circleSpawner2)
+  hud.attachToEntity(circleSpawner2)
 
 // // Spawning from a triangle
 // const triangle = {
