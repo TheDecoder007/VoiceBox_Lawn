@@ -1,6 +1,7 @@
 import * as utils from '@dcl/ecs-scene-utils'
 import { hud } from 'dcl-builder-hud'
 import { Enemy } from './enemy'
+// import {_scene} from "./game"
 
 const spaceships = {
   redSpaceship: new GLTFShape('models/redSpaceship.glb'),
@@ -34,6 +35,7 @@ const circle = {
   centerY: 1.2
 }
 const circleSpawner = new Entity()
+
 circleSpawner.addComponent(
 
   new utils.Interval(getRandomSpawnTime(), () => {

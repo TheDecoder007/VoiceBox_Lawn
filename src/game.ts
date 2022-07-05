@@ -690,14 +690,13 @@ fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
     }}))
 
 
+    //grows chest by 5 over 3 seconds. need original scale, new scale, time period
 //     fantasyChest.addComponent(new utils.ScaleTransformComponent(
 //         new Vector3(1,1,1),
 //         new Vector3(5,5,5),
 //         3
 // ))}}))
-      //grows chest by 5 over 3 seconds. need original scale, new scale, time period
 
-  // }}))
 
   //solid water child of fantasyChest
   // const solidWater = new Entity('solidWater')
@@ -859,6 +858,23 @@ gltfShape23.visible = true
 glossyaethereatiles3.addComponentOrReplace(gltfShape23)
 hud.attachToEntity(glossyaethereatiles3)
 
+//floor 2
+const glossyaethereatiles4 = new Entity('glossyaethereatiles4')
+engine.addEntity(glossyaethereatiles4)
+glossyaethereatiles4.setParent(insideParent)
+const transform42 = new Transform({
+  position: new Vector3(0, 0.06, -8),
+  rotation: Quaternion.Euler(0, 0, 0,),
+  scale: new Vector3(0.93, 1, 0.88)
+
+})
+glossyaethereatiles4.addComponentOrReplace(transform42)
+const gltfShape24 = new GLTFShape("6b33f46e-9667-45e5-bd90-85f372ee2490/CityTile.glb")
+gltfShape24.withCollisions = true
+gltfShape24.isPointerBlocker = true
+gltfShape24.visible = true
+glossyaethereatiles4.addComponentOrReplace(gltfShape24)
+hud.attachToEntity(glossyaethereatiles4)
 
 
 // let whiteSplat= new Entity('whiteSplat')

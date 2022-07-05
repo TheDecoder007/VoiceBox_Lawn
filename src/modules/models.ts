@@ -42,12 +42,12 @@ hud.attachToEntity(glowingBirdDummy)
 
 
 // Add ground terrain
-const sand = new Entity()      
-sand.addComponent(new Transform({ 
-          position: new Vector3(5.62,-0.06,-9.83),
-          rotation: Quaternion.Euler(0,0,0),
-          scale: new Vector3(.1,.2,.1)
-        }))        
-sand.addComponent(sandShape )               
-engine.addEntity(sand)
-hud.attachToEntity(sand)
+// const sand = new Entity()      
+// sand.addComponent(new Transform({ 
+//           position: new Vector3(5.62,-0.06,-9.83),
+//           rotation: Quaternion.Euler(0,0,0),
+//           scale: new Vector3(.1,.2,.1)
+//         }))        
+// sand.addComponent(sandShape)   
+// engine.addEntity(sand)
+// hud.attachToEntity(sand)

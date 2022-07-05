@@ -1,6 +1,7 @@
 import * as utils from '@dcl/ecs-scene-utils'
 import { Sound } from './sound'
 import { hud } from 'dcl-builder-hud'
+// import { _scene } from './game'
 
 
 // Sound
