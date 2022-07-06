@@ -544,7 +544,7 @@ hud.attachToEntity(murpheusnickeditd10)
 
 let trigger = new Entity("trigger area")
 trigger.addComponent(new Transform({position: new Vector3(8,0,0), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
-trigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(15, 15, 31),new Vector3(0, 0, 0)),
+trigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(15, 5.5, 31),new Vector3(0, 0, 0)),
 {
 
   enableDebug:false,
