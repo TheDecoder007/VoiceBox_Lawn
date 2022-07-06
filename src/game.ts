@@ -792,7 +792,7 @@ function showInside() {
 
   insideParent.getComponent(Transform).scale.setAll(1)
   engine.removeEntity(hideInside)
-  movePlayerTo({x: 8, y:12, z:-14})
+  movePlayerTo({x: 8, y:12, z:-13.5})
 }
 
 function showGround(){
@@ -809,9 +809,9 @@ const glossyaethereatiles = new Entity('glossyaethereatiles')
 engine.addEntity(glossyaethereatiles)
 glossyaethereatiles.setParent(insideParent)
 const transform21 = new Transform({
-  position: new Vector3(-7.4, 3.2, 0.5),
+  position: new Vector3(-7.4, 3.2, 0.39),
   rotation: Quaternion.Euler(0, 0, 90,),
-  scale: new Vector3(0.4, 0.6, 1.9)
+  scale: new Vector3(0.4, 0.6, 1.92)
 
 })
 glossyaethereatiles.addComponentOrReplace(transform21)
@@ -827,9 +827,9 @@ const glossyaethereatiles2 = new Entity('glossyaethereatiles2')
 engine.addEntity(glossyaethereatiles2)
 glossyaethereatiles2.setParent(insideParent)
 const transform40 = new Transform({
-  position: new Vector3(7.4, 3.2, 0.5),
+  position: new Vector3(7.4, 3.2, 0.47),
   rotation: Quaternion.Euler(0, 0, -90,),
-  scale: new Vector3(0.4, 0.6, 1.9)
+  scale: new Vector3(0.4, 0.6, 1.931)
 
 })
 glossyaethereatiles2.addComponentOrReplace(transform40)
@@ -875,6 +875,42 @@ gltfShape24.isPointerBlocker = true
 gltfShape24.visible = true
 glossyaethereatiles4.addComponentOrReplace(gltfShape24)
 hud.attachToEntity(glossyaethereatiles4)
+
+//entry side
+const glossyaethereatiles5 = new Entity('glossyaethereatiles5')
+engine.addEntity(glossyaethereatiles5)
+glossyaethereatiles5.setParent(insideParent)
+const transform43 = new Transform({
+  position: new Vector3(0, 3.16, -15),
+  rotation: Quaternion.Euler(-90, 0, 0,),
+  scale: new Vector3(0.93, 0.4, 0.4)
+
+})
+glossyaethereatiles5.addComponentOrReplace(transform43)
+const gltfShape25 = new GLTFShape("6b33f46e-9667-45e5-bd90-85f372ee2490/CityTile.glb")
+gltfShape25.withCollisions = true
+gltfShape25.isPointerBlocker = true
+gltfShape25.visible = true
+glossyaethereatiles5.addComponentOrReplace(gltfShape25)
+hud.attachToEntity(glossyaethereatiles5)
+
+//exit side
+const glossyaethereatiles6 = new Entity('glossyaethereatiles6')
+engine.addEntity(glossyaethereatiles6)
+glossyaethereatiles6.setParent(insideParent)
+const transform44 = new Transform({
+  position: new Vector3(0, 3.16, 15),
+  rotation: Quaternion.Euler(90, 0, 0,),
+  scale: new Vector3(0.93, 0.4, 0.4)
+
+})
+glossyaethereatiles6.addComponentOrReplace(transform44)
+const gltfShape26 = new GLTFShape("6b33f46e-9667-45e5-bd90-85f372ee2490/CityTile.glb")
+gltfShape26.withCollisions = true
+gltfShape26.isPointerBlocker = true
+gltfShape26.visible = true
+glossyaethereatiles6.addComponentOrReplace(gltfShape26)
+hud.attachToEntity(glossyaethereatiles6)
 
 
 // let whiteSplat= new Entity('whiteSplat')
