@@ -543,8 +543,8 @@ hud.attachToEntity(murpheusnickeditd10)
 // script1.spawn(blackbutton, {}, createChannel(channelId, blackbutton, channelBus))
 
 let trigger = new Entity("trigger area")
-trigger.addComponent(new Transform({position: new Vector3(8,0,0), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
-trigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(15, 5.5, 31),new Vector3(0, 0, 0)),
+trigger.addComponent(new Transform({position: new Vector3(8,0,5), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+trigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(15, 5, 20),new Vector3(0, 0, 0)),
 {
 
   enableDebug:false,
@@ -564,7 +564,7 @@ email.addComponent(new Transform({
   position: new Vector3(8, -2.20, 15.5),
   rotation: new Quaternion(NaN, 180, 0, 1),
   scale: new Vector3(21, 21, 2)
-}))
+})) 
 email.setParent(_scene)
 hud.attachToEntity(email)
 
@@ -652,17 +652,17 @@ gltfShape19.visible = true
 neatDRotating2.addComponentOrReplace(gltfShape19)
 
 
-//STARTING CODE OF THE ANTICOLLIDER
+// STARTING CODE OF THE ANTICOLLIDER
 // const antiCollider = new Entity('antiCollider')
+// antiCollider.addComponent(new BoxShape())
 // engine.addEntity(antiCollider)
 // antiCollider.setParent(_scene)
-// antiCollider.addComponent(new BoxShape())
-// const transform40 = new Transform({
+// antiCollider.addComponent(new Transform({
 //   position: new Vector3(8,0,1),
-//   rotation: new Quaternion(0,0,0),
+//   rotation: Quaternion.Euler(0,0,0),
 //   scale: new Vector3(1,1,1)
-// })
-// antiCollider.addComponentOrReplace(transform40)
+// }))
+// antiCollider.addComponentOrReplace(transform45)
 // const myMaterial = new Material()
 // myMaterial.albedoColor = Color3.Blue()
 // myMaterial.albedoColor = new Color4(0.9)
@@ -686,16 +686,32 @@ fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
   new Vector3(4, 5, 4)), {
     enableDebug: false,
     onCameraEnter: ()=>{
-      showInside()
-    }}))
+        showInside()
+      }}))
+      
+      //grows chest by 5 over 3 seconds. need original scale, new scale, time period
+      //     fantasyChest.addComponent(new utils.ScaleTransformComponent(
+      //         new Vector3(1,1,1),
+      //         new Vector3(5,5,5),
+      //         3
+      // ))}}))
 
+// const mineCart = new Entity('mine cart')
+// engine.addEntity(mineCart)
+// mineCart.setParent(_scene)
+// const transform45 = new Transform({
+//   position: new Vector3(8,0,-1),
+//   rotation: new Quaternion(0,0,0),
+//   scale: new Vector3(1,1,1)
+// })
+// mineCart.addComponentOrReplace(transform45)
+// hud.attachToEntity(mineCart)
+// const gltfShape20 = new GLTFShape("models/goldCoin2.glb")
+// gltfShape20.withCollisions = true
+// gltfShape20.isPointerBlocker = true
+// gltfShape20.visible = true
+// mineCart.addComponentOrReplace(gltfShape20)
 
-    //grows chest by 5 over 3 seconds. need original scale, new scale, time period
-//     fantasyChest.addComponent(new utils.ScaleTransformComponent(
-//         new Vector3(1,1,1),
-//         new Vector3(5,5,5),
-//         3
-// ))}}))
 
 
   //solid water child of fantasyChest
@@ -721,7 +737,7 @@ fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
   let hideGround = new Entity('hideGround')
   // hideGround.addComponent(new BoxShape()).withCollisions = false
   hideGround.addComponent(new Transform({
-    position: new Vector3(8,2,0), scale: new Vector3(16,5,16)
+    position: new Vector3(8,0,0), scale: new Vector3(16,5,25)
   }))
   hideGround.addComponent(new AvatarModifierArea({area: { box: new Vector3 (16,6,16)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
 //engine.addEntity(hideGround)
@@ -733,7 +749,7 @@ hideInside.addComponent(new Transform({
   position: new Vector3(8,6,0), scale: new Vector3(8,6,16)
 }))
 hideInside.addComponent(new AvatarModifierArea({area: { box: new Vector3 (8,6,16)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
-engine.addEntity(hideInside)
+engine.addEntity(hideInside) 
 hud.attachToEntity(hideInside)
 
 //CODE FOR UPSTAIRS
@@ -741,7 +757,7 @@ hud.attachToEntity(hideInside)
 //inside area
 let insideParent = new Entity("red area parent")
 insideParent.addComponent(new Transform({
-  position: new Vector3(8,5,0), scale: new Vector3(0,0,0)
+  position: new Vector3(8,4,0), scale: new Vector3(0,0,0)
 }))
 engine.addEntity(insideParent)
 hud.attachToEntity(insideParent)
