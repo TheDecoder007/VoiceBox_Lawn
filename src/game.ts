@@ -652,6 +652,8 @@ gltfShape19.visible = true
 neatDRotating2.addComponentOrReplace(gltfShape19)
 
 
+
+
 // STARTING CODE OF THE ANTICOLLIDER
 // const antiCollider = new Entity('antiCollider')
 // antiCollider.addComponent(new BoxShape())
@@ -819,6 +821,38 @@ function showGround(){
   engine.addEntity(hideInside)
   movePlayerTo({x: 8, y:1, z:-15})
 }
+
+const wolf = new Entity('wolf')
+engine.addEntity(wolf)
+wolf.setParent(insideParent)
+const transform45 = new Transform({
+  position: new Vector3(2, 0.1, 9.7),
+  rotation: new Quaternion(0, 180, 0,),
+  scale: new Vector3(1, 1, 1)
+})
+wolf.addComponentOrReplace(transform45)
+hud.attachToEntity(wolf)
+const gltfShape27 = new GLTFShape("models/Wolfglb.glb")
+gltfShape27.withCollisions = true
+gltfShape27.isPointerBlocker = true 
+gltfShape27.visible = true
+wolf.addComponentOrReplace(gltfShape27)
+
+const wolf2 = new Entity('wolf2')
+engine.addEntity(wolf2)
+wolf2.setParent(insideParent)
+const transform46 = new Transform({
+  position: new Vector3(-2.7, 0.1, 9.7),
+  rotation: new Quaternion(0, 180, 0,),
+  scale: new Vector3(1, 1, 1)
+})
+wolf2.addComponentOrReplace(transform46)
+hud.attachToEntity(wolf2)
+const gltfShape28 = new GLTFShape("models/Wolfglb.glb")
+gltfShape28.withCollisions = true
+gltfShape28.isPointerBlocker = true 
+gltfShape28.visible = true
+wolf2.addComponentOrReplace(gltfShape28)
 
 //left side
 const glossyaethereatiles = new Entity('glossyaethereatiles')
