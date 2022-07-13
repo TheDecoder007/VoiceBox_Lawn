@@ -757,6 +757,13 @@ hud.attachToEntity(hideInside)
 
 //CODE FOR UPSTAIRS
 
+// let visibleWall = new Entity('visible wall')
+// visibleWall.addComponent(new GLTFShape(""))
+// visibleWall.addComponent(new Transform({position: new Vector3(0,0,0)}))
+// visibleWall.setParent(parent)
+
+
+
 //inside area
 let insideParent = new Entity("red area parent")
 insideParent.addComponent(new Transform({
@@ -793,9 +800,9 @@ hud.attachToEntity(insideBuilding)
 
 let groundTrigger = new Entity('groundTrigger')
 // groundTrigger.addComponent(new BoxShape())
-groundTrigger.addComponent(new Transform( {position: new Vector3(2,0,13), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+groundTrigger.addComponent(new Transform( {position: new Vector3(2,0,14.8), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
 groundTrigger.setParent(insideParent)
-groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(3,3,1), new Vector3(-2.3,1.5,0)), {
+groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(3,3,0.5), new Vector3(-2.3,1.5,0)), {
   enableDebug: true,
   onCameraEnter:()=>{
     showGround()
@@ -822,6 +829,51 @@ function showGround(){
   engine.addEntity(hideInside)
   movePlayerTo({x: 8, y:1, z:-15})
 }
+
+//UPSTAIRS WALL COLLIDERS
+let colliderWall = new Entity('collider wall')
+colliderWall.addComponent(new PlaneShape())
+colliderWall.addComponent(new Transform(
+  {position: new Vector3(-7.4,1.3,0), 
+    rotation: Quaternion.Euler(0,90,0),
+  scale: new Vector3(30,2.3,1)}))
+colliderWall.setParent(insideParent)
+colliderWall.getComponent(PlaneShape).visible = false
+// colliderWall.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall)
+
+let colliderWall2 = new Entity('collider wall2')
+colliderWall2.addComponent(new PlaneShape())
+colliderWall2.addComponent(new Transform(
+  {position: new Vector3(7.4,1.3,0), 
+    rotation: Quaternion.Euler(0,90,0),
+  scale: new Vector3(30,2.3,1)}))
+colliderWall2.setParent(insideParent)
+colliderWall2.getComponent(PlaneShape).visible = false
+// colliderWall2.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall2)
+
+let colliderWall3 = new Entity('collider wall3')
+colliderWall3.addComponent(new PlaneShape())
+colliderWall3.addComponent(new Transform(
+  {position: new Vector3(0,1.3,-15), 
+    rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(15,2.3,1)}))
+colliderWall3.setParent(insideParent)
+colliderWall3.getComponent(PlaneShape).visible = false
+// colliderWall3.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall3)
+
+let colliderWall4 = new Entity('collider wall4')
+colliderWall4.addComponent(new PlaneShape())
+colliderWall4.addComponent(new Transform(
+  {position: new Vector3(0,1.3,15), 
+    rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(15,2.3,1)}))
+colliderWall4.setParent(insideParent)
+colliderWall4.getComponent(PlaneShape).visible = false
+// colliderWall4.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall4)
 
 const wolf = new Entity('wolf')
 engine.addEntity(wolf)
