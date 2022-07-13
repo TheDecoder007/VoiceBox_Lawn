@@ -1,7 +1,7 @@
 import * as utils from '@dcl/ecs-scene-utils'
 import { Sound } from './sound'
 import { hud } from 'dcl-builder-hud'
-// import { _scene } from './game'
+import { _scene } from './game'
 
 
 // Sound
@@ -14,6 +14,7 @@ engine.addEntity(glowingSpaceship)
 glowingSpaceship.addComponent(new GLTFShape('models/glowingSpaceship.glb'))
 glowingSpaceship.addComponent(new Transform({position: new Vector3(8,-10,0)}))
 glowingSpaceship.getComponent(Transform).scale.setAll(0)
+glowingSpaceship.setParent(_scene)
 
 // Configuration
 const TRAVEL_DISTANCE = 15.6
@@ -26,14 +27,15 @@ export class Enemy extends Entity {
     engine.addEntity(this)
     this.addComponent(model)
     this.addComponent(transform)
+    this.setParent(_scene)
 //     spawnSound.getComponent(AudioSource).playOnce()
 
     // Spaceship movement
     const startPos = transform.position
-    const endPos = new Vector3 
-    (startPos.x,
-    startPos.y,
-    startPos.z - TRAVEL_DISTANCE)
+    const endPos = new Vector3 (8, 0.1, -7)
+    // (startPos.x,
+    // startPos.y,
+    // startPos.z - TRAVEL_DISTANCE)
     
     // new Vector3(8, 0, -7)
     this.addComponent(
@@ -71,6 +73,7 @@ export class Enemy extends Entity {
           distance: 50
         }
       )
-    )
+      )
+      this.setParent(_scene)
+    }
   }
-}

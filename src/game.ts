@@ -11,6 +11,7 @@ import { birdIdleShape, birdFlyShape, sandShape, } from './modules/models'
 import { realDistance } from './modules/utilities'
 import { movePlayerTo } from '@decentraland/RestrictedActions'
 import { BoxShape, Color3 } from 'node_modules/decentraland-ecs/dist/index'
+export { _scene }
  
 
 
@@ -838,6 +839,8 @@ gltfShape27.isPointerBlocker = true
 gltfShape27.visible = true
 wolf.addComponentOrReplace(gltfShape27)
 
+      
+
 const wolf2 = new Entity('wolf2')
 engine.addEntity(wolf2)
 wolf2.setParent(insideParent)
@@ -853,6 +856,26 @@ gltfShape28.withCollisions = true
 gltfShape28.isPointerBlocker = true 
 gltfShape28.visible = true
 wolf2.addComponentOrReplace(gltfShape28)
+
+let wolfTrigger = new Entity('wolfTrigger')
+// wolfTrigger.addComponent(new BoxShape())
+wolfTrigger.addComponent(new Transform( {position: new Vector3(2,0,0), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+wolfTrigger.setParent(insideParent)
+wolfTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(14.5,3,1), new Vector3(-2.3,1.5,0)), {
+  enableDebug: false,
+  onCameraEnter:()=>{
+    wolf.addComponent(new utils.ScaleTransformComponent(
+      new Vector3(1,1,1),
+      new Vector3(2,2,2),
+      0.5
+))
+wolf2.addComponent(new utils.ScaleTransformComponent(
+new Vector3(1,1,1),
+new Vector3(2,2,2),
+0.5
+))
+  }}))
+hud.attachToEntity(wolfTrigger)
 
 //left side
 const glossyaethereatiles = new Entity('glossyaethereatiles')
