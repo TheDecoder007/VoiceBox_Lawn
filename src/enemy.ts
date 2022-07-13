@@ -72,8 +72,7 @@ export class Enemy extends Entity {
           showFeedback: false,
           distance: 50
         }
-      )
-      )
-      this.setParent(_scene)
+        )
+        )
+      }
     }
-  }

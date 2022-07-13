@@ -811,7 +811,7 @@ function showInside() {
 
   insideParent.getComponent(Transform).scale.setAll(1)
   engine.removeEntity(hideInside)
-  movePlayerTo({x: 8, y:12, z:-13.5})
+  movePlayerTo({x: 8, y:5, z:-13.5})
 }
 
 function showGround(){
@@ -873,8 +873,8 @@ wolf2.addComponent(new utils.ScaleTransformComponent(
 new Vector3(1,1,1),
 new Vector3(2,2,2),
 0.5
-))
-  }}))
+)); engine.removeEntity(wolfTrigger)
+}}))
 hud.attachToEntity(wolfTrigger)
 
 //left side
@@ -882,7 +882,7 @@ const glossyaethereatiles = new Entity('glossyaethereatiles')
 engine.addEntity(glossyaethereatiles)
 glossyaethereatiles.setParent(insideParent)
 const transform21 = new Transform({
-  position: new Vector3(-7.4, 3.2, 0.39),
+  position: new Vector3(-7.4, 3.2, 0.39), 
   rotation: Quaternion.Euler(0, 0, 90,),
   scale: new Vector3(0.4, 0.6, 1.92)
 
