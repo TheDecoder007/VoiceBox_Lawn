@@ -23,7 +23,6 @@ const billboard = new Billboard(false, true, false)
 let myBlackButton = new GLTFShape('2e1c4446-c99a-4698-9e13-819d232ca849/models/Black_Fantasy_Button.glb')
 // const myBlackButtonClip = new AnimationState('trigger', { looping: false })
 const messageBus = new MessageBus()
-
 const _scene = new Entity('_scene')
 engine.addEntity(_scene)
 const transform = new Transform({
@@ -1091,7 +1090,7 @@ avatar.addComponent(new Transform({ position: new Vector3(1.3, -1.16, -2.3),
   scale: new Vector3(2,2,2) }));
 engine.addEntity(avatar);
 if (!avatar.hasComponent(Billboard)) avatar.addComponent(billboard)
-hud.attachToEntity(avatar)
+hud.attachToEntity(avatar) 
  
 
 void getUserData().then(async a => {
@@ -1562,11 +1561,12 @@ onSceneReadyObservable.add(()=>{
 //CHANGE PLAYER TO POOP. 
 
 const poop = new Poop(
-  new GLTFShape('models/poop.glb'),
+  new GLTFShape('models/poopy.glb'),
 
    new Transform({
-    position: new Vector3(0, 0.05, -0.1),
-    scale: new Vector3(0, 0, 0)
+    position: new Vector3(0, 0.2, -0.1),
+    scale: new Vector3(0, 0, 0),
+    rotation: new Quaternion(0, 90, 90)
   })
 )
 poop.setParent(Attachable.AVATAR)
@@ -1593,7 +1593,7 @@ hideAvatarsEntity.addComponent(
     
     { enableDebug: false,
       onCameraEnter: () => {
-        poop.getComponent(Transform).scale.setAll(1)
+        poop.getComponent(Transform).scale.setAll(0.5)
       },
       onCameraExit: () => {
         poop.getComponent(Transform).scale.setAll(0)
