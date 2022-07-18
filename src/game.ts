@@ -12,6 +12,7 @@ import { realDistance } from './modules/utilities'
 import { movePlayerTo } from '@decentraland/RestrictedActions'
 import { BoxShape, Color3 } from 'node_modules/decentraland-ecs/dist/index'
 export { _scene }
+import { Poop } from './poop'
  
 
 
@@ -1087,7 +1088,7 @@ avatarShape.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
 avatar.addComponent(avatarShape);
 avatar.addComponent(new Transform({ position: new Vector3(1.3, -1.16, -2.3),
   rotation: new Quaternion(0,180,0),
-  scale: new Vector3(2.5, 2.5, 2.5) }));
+  scale: new Vector3(2,2,2) }));
 engine.addEntity(avatar);
 if (!avatar.hasComponent(Billboard)) avatar.addComponent(billboard)
 hud.attachToEntity(avatar)
@@ -1134,7 +1135,7 @@ avatarShape2.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
 avatar2.addComponent(avatarShape2);
 avatar2.addComponent(new Transform({ position: new Vector3(14.3, -1.16, -2.3),
   rotation: new Quaternion(0,180,0),
-  scale: new Vector3(2.5, 2.5, 2.5) }));
+  scale: new Vector3(2,2,2) }));
 engine.addEntity(avatar2);
 if (!avatar2.hasComponent(Billboard)) avatar2.addComponent(billboard)
 hud.attachToEntity(avatar2)
@@ -1557,3 +1558,61 @@ onSceneReadyObservable.add(()=>{
 
 //END ENEMY SPAWNER END ENEMY SPAWNER
 
+
+//CHANGE PLAYER TO POOP. 
+
+const poop = new Poop(
+  new GLTFShape('models/poop.glb'),
+
+   new Transform({
+    position: new Vector3(0, 0.05, -0.1),
+    scale: new Vector3(0, 0, 0)
+  })
+)
+poop.setParent(Attachable.AVATAR)
+
+// Hide avatars
+const hideAvatarsEntity = new Entity('poop hide')
+hideAvatarsEntity.addComponent(
+  new AvatarModifierArea({
+    area: { box: new Vector3(15, 4,24) },
+    modifiers: [AvatarModifiers.HIDE_AVATARS]
+  })
+)
+hideAvatarsEntity.addComponent(
+  new Transform({ position: new Vector3(0, 3, 5) })
+)
+hud.attachToEntity(hideAvatarsEntity)
+engine.addEntity(hideAvatarsEntity)
+hideAvatarsEntity.setParent(insideParent)
+
+// Create to show poop avatar
+hideAvatarsEntity.addComponent(
+  new utils.TriggerComponent(
+    new utils.TriggerBoxShape(new Vector3(15, 4, 24), Vector3.Zero()),
+    
+    { enableDebug: false,
+      onCameraEnter: () => {
+        poop.getComponent(Transform).scale.setAll(1)
+      },
+      onCameraExit: () => {
+        poop.getComponent(Transform).scale.setAll(0)
+      }
+    }
+  )
+)
+
+// // Check if player is moving
+// const currentPosition = new Vector3()
+
+// class CheckPlayerIsMovingSystem implements ISystem {
+//   update() {
+//     if (currentPosition.equals(Camera.instance.position)) {
+//       poop.playIdle()
+//     } else {
+//       currentPosition.copyFrom(Camera.instance.position)
+//       poop.playRunning()
+//     }
+//   }
+// }
+// engine.addSystem(new CheckPlayerIsMovingSystem())
