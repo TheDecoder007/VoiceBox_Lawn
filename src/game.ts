@@ -372,7 +372,7 @@ irishglowjpegspikes.setParent(_scene)
 const transform13 = new Transform({
   position: new Vector3(8, 0, 8),
   rotation: new Quaternion(0.00000166893, 0.707106, 0.707107663, 0.00000171363354),
-  scale: new Vector3(14.0002384, 13.0001507, 4.00002766)
+  scale: new Vector3(14.3, 13.0, 4.0)
 })
 irishglowjpegspikes.addComponentOrReplace(transform13)
 const gltfShape5 = new GLTFShape("models/Irish glow3D.glb")
