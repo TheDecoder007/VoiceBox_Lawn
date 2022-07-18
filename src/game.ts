@@ -1575,7 +1575,7 @@ poop.setParent(Attachable.AVATAR)
 const hideAvatarsEntity = new Entity('poop hide')
 hideAvatarsEntity.addComponent(
   new AvatarModifierArea({
-    area: { box: new Vector3(15, 4,24) },
+    area: { box: new Vector3(15, 4, 26) },
     modifiers: [AvatarModifiers.HIDE_AVATARS]
   })
 )

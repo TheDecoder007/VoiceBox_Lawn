@@ -26,7 +26,7 @@ export class ThrowSmoke implements ISystem {
 }
 
 // Reusable material for smoke puffs
-const smokeTexture = new Texture('textures/smoke-puff2.png', { hasAlpha: true })
+const smokeTexture = new Texture('images/smoke-puff2.png', { hasAlpha: true })
 
 const smokeMaterial = new Material()
 smokeMaterial.albedoTexture = smokeTexture
