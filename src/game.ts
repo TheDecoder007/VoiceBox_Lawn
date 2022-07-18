@@ -375,7 +375,7 @@ const transform13 = new Transform({
   scale: new Vector3(14.0002384, 13.0001507, 4.00002766)
 })
 irishglowjpegspikes.addComponentOrReplace(transform13)
-const gltfShape5 = new GLTFShape("c2ac20f4-5a4c-41b9-be94-cfb5490ef984/Irish glow JPEGSpikes.glb")
+const gltfShape5 = new GLTFShape("models/Irish glow3D.glb")
 gltfShape5.withCollisions = true
 gltfShape5.isPointerBlocker = true
 gltfShape5.visible = true
