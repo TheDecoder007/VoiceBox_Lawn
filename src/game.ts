@@ -10,7 +10,7 @@ import { getUserData } from "@decentraland/Identity"
 import { birdIdleShape, birdFlyShape, sandShape, } from './modules/models'
 import { realDistance } from './modules/utilities'
 import { movePlayerTo } from '@decentraland/RestrictedActions'
-import { BoxShape, Color3 } from 'node_modules/decentraland-ecs/dist/index'
+import { Color3 } from 'node_modules/decentraland-ecs/dist/index'
 export { _scene }
 import { Poop } from './poop'
  
@@ -38,7 +38,7 @@ murpheusnickeditd1.setParent(_scene)
 if (!murpheusnickeditd1.hasComponent(Billboard)) murpheusnickeditd1.addComponent(billboard)
 
 const transform2 = new Transform({
-  position: new Vector3(8, 3.5, 4),
+  position: new Vector3(8, 6.3, 4),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
   scale: new Vector3(1.5, 2, 1.5)
 })
@@ -143,7 +143,7 @@ engine.addEntity(murpheusnickeditd3)
 murpheusnickeditd3.setParent(_scene)
 if (!murpheusnickeditd3.hasComponent(Billboard)) murpheusnickeditd3.addComponent(billboard)
 const transform4 = new Transform({
-  position: new Vector3(8, 2, 0.5),
+  position: new Vector3(8, 4.6, 0.5),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
   scale: new Vector3(0.49999994, 1, 0.49999994)
 })
@@ -372,7 +372,7 @@ irishglowjpegspikes.setParent(_scene)
 const transform13 = new Transform({
   position: new Vector3(8, 0, 8),
   rotation: new Quaternion(0.00000166893, 0.707106, 0.707107663, 0.00000171363354),
-  scale: new Vector3(14.3, 13.0, 4.0)
+  scale: new Vector3(14.3, 13.4, 4.0)
 })
 irishglowjpegspikes.addComponentOrReplace(transform13)
 const gltfShape5 = new GLTFShape("models/Irish glow3D.glb")
@@ -405,7 +405,7 @@ engine.addEntity(murpheusnickeditd6)
 murpheusnickeditd6.setParent(_scene)
 if (!murpheusnickeditd6.hasComponent(Billboard)) murpheusnickeditd6.addComponent(billboard)
 const transform19 = new Transform({
-  position: new Vector3(8, 2.5, 1.5),
+  position: new Vector3(8, 5.1, 1.5),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
   scale: new Vector3(0.99999994, 1.5, 0.5)
 })
@@ -423,7 +423,7 @@ engine.addEntity(murpheusnickeditd)
 murpheusnickeditd.setParent(_scene)
 if (!murpheusnickeditd.hasComponent(Billboard)) murpheusnickeditd.addComponent(billboard)
 const transform20 = new Transform({
-  position: new Vector3(8, 5, 6.5),
+  position: new Vector3(8, 7.8, 6.5),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
   scale: new Vector3(2.5, 3, 1.00000024)
 })
@@ -490,9 +490,9 @@ const murpheusnickeditd8 = new Entity('murpheusnickeditd8')
 engine.addEntity(murpheusnickeditd8)
 murpheusnickeditd8.setParent(_scene)
 const transform29 = new Transform({
-  position: new Vector3(8, 9.8, 15.4),
+  position: new Vector3(8, 10.9, 15.4),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
-  scale: new Vector3(9.2, 10.7, 1)
+  scale: new Vector3(7.2, 8.7, 1)
 })
 murpheusnickeditd8.addComponentOrReplace(transform29)
 const gltfShape13 = new GLTFShape("2d8fafc8-3b0c-4f5e-8e25-ab17d0ac26dc/Murpheus nickedit3D.glb")
@@ -508,7 +508,7 @@ engine.addEntity(murpheusnickeditd9)
 murpheusnickeditd9.setParent(_scene)
 if (!murpheusnickeditd9.hasComponent(Billboard)) murpheusnickeditd9.addComponent(billboard)
 const transform30 = new Transform({
-  position: new Vector3(8, 7, 10),
+  position: new Vector3(8, 9.5, 10),
   rotation: new Quaternion(1.04254907e-14, -1, 1.19209261e-7, 0.000002220273),
   scale: new Vector3(4.5, 4.5, 1.00000024)
 })
@@ -543,7 +543,7 @@ hud.attachToEntity(murpheusnickeditd10)
 
 // script1.spawn(blackbutton, {}, createChannel(channelId, blackbutton, channelBus))
 
-let trigger = new Entity("trigger area")
+let trigger = new Entity("voice trigger")
 trigger.addComponent(new Transform({position: new Vector3(8,0,5), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
 trigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(15, 5, 20),new Vector3(0, 0, 0)),
 {
@@ -552,8 +552,10 @@ trigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Ve
   onCameraEnter:()=>{
     GodVoice.playOnce()
   
+    engine.removeEntity(trigger)
   }
-}))
+}
+))
 trigger.setParent(_scene)
 //attatches builder tool to entity(trigger, button, etc)
 hud.attachToEntity(trigger)
@@ -562,7 +564,7 @@ hud.attachToEntity(trigger)
 let email= new Entity('emails')
 email.addComponent(new GLTFShape('models/voice_email.glb'))
 email.addComponent(new Transform({
-  position: new Vector3(8, -2.20, 15.5),
+  position: new Vector3(8, -0.20, 15.5),
   rotation: new Quaternion(NaN, 180, 0, 1),
   scale: new Vector3(21, 21, 2)
 })) 
@@ -653,25 +655,65 @@ gltfShape19.visible = true
 neatDRotating2.addComponentOrReplace(gltfShape19)
 
 
+const GreenHouse = new Entity('GreenHouse')
+engine.addEntity(GreenHouse)
+GreenHouse.setParent(_scene)
+const transform39 = new Transform({
+  position: new Vector3(8, 0, 7.6),
+  rotation: new Quaternion(0, 180, 0),
+  scale: new Vector3(0.19, 0.28, 0.5)
+})
+GreenHouse.addComponentOrReplace(transform39)
+const gltfshape20 = new GLTFShape("GreenHouse/GreenHouse.glb")
+gltfshape20.withCollisions = true
+gltfshape20.isPointerBlocker = true
+gltfshape20.visible = true
+GreenHouse.addComponentOrReplace(gltfshape20)
+hud.attachToEntity(GreenHouse)
+
+let houseTrigger = new Entity('houseTrigger')
+// houseTrigger.addComponent(new BoxShape())
+houseTrigger.addComponent(new Transform( {position: new Vector3(10.2,0,5), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+houseTrigger.setParent(_scene)
+houseTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(14.5,12,17), new Vector3(-2.3,1.5,0)), {
+  enableDebug: false,
+  onCameraEnter:()=>{
+    GreenHouse.addComponent(new utils.ScaleTransformComponent(
+      new Vector3(0.19,0.28,0.5),
+      new Vector3(0.4,0.8,1.3),
+      0.5
+      ));
+    },
+  onCameraExit:()=> {
+    GreenHouse.addComponent(new utils.ScaleTransformComponent(
+      new Vector3(0.4,0.8,1.3),
+      new Vector3(0.19,0.28,0.5),
+      0.5
+      ));
+    },
+  
+  }))
+hud.attachToEntity(houseTrigger)
+
+let upTrigger = new Entity('upTrigger')
+// houseTrigger.addComponent(new BoxShape())
+upTrigger.addComponent(new Transform( {position: new Vector3(10.3,0,4), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+upTrigger.setParent(_scene)
+upTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(2,3,1), new Vector3(-2.3,1.5,0)), {
+    enableDebug: false,
+         onCameraEnter: ()=>{
+            showInside()
+}}))
+hud.attachToEntity(upTrigger)
 
 
-// STARTING CODE OF THE ANTICOLLIDER
-// const antiCollider = new Entity('antiCollider')
-// antiCollider.addComponent(new BoxShape())
-// engine.addEntity(antiCollider)
-// antiCollider.setParent(_scene)
-// antiCollider.addComponent(new Transform({
-//   position: new Vector3(8,0,1),
-//   rotation: Quaternion.Euler(0,0,0),
-//   scale: new Vector3(1,1,1)
-// }))
-// antiCollider.addComponentOrReplace(transform45)
-// const myMaterial = new Material()
-// myMaterial.albedoColor = Color3.Blue()
-// myMaterial.albedoColor = new Color4(0.9)
-// myMaterial.transparencyMode = 1
-// antiCollider.addComponent(myMaterial)
-// hud.attachToEntity(antiCollider)
+// CODE FOR PORTAL UPSTAIRS ON FANTASY CHEST
+// GreenHouse.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
+//   new Vector3(4, 5, 1)), {
+//     enableDebug: true,
+//     onCameraEnter: ()=>{
+//         showInside()
+//       }}))
 
 const fantasyChest = new Entity('fantasyChest')
 engine.addEntity(fantasyChest)
@@ -684,13 +726,17 @@ const transform38 = new Transform({
 fantasyChest.addComponentOrReplace(transform38)
 hud.attachToEntity(fantasyChest)
 
-// CODE FOR PORTAL UPSTAIRS ON FANTASY CHEST
-fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
-  new Vector3(4, 5, 4)), {
-    enableDebug: false,
-    onCameraEnter: ()=>{
-        showInside()
-      }}))
+
+const channelId = Math.random().toString(16).slice(2)
+const channelBus = new MessageBus()
+const inventory = createInventory(UICanvas, UIContainerStack, UIImage)
+const options = { inventory }
+
+const script1 = new Script1()
+script1.init()
+script1.spawn(fantasyChest, {"onClickText":"Open/Close","onClick":[{"entityName":"fantasyChest","actionId":"toggle","values":{}}]}, createChannel(channelId, fantasyChest, channelBus))
+
+
       
       //grows chest by 5 over 3 seconds. need original scale, new scale, time period
       //     fantasyChest.addComponent(new utils.ScaleTransformComponent(
@@ -699,63 +745,29 @@ fantasyChest.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
       //         3
       // ))}}))
 
-// const mineCart = new Entity('mine cart')
-// engine.addEntity(mineCart)
-// mineCart.setParent(_scene)
-// const transform45 = new Transform({
-//   position: new Vector3(8,0,-1),
-//   rotation: new Quaternion(0,0,0),
-//   scale: new Vector3(1,1,1)
-// })
-// mineCart.addComponentOrReplace(transform45)
-// hud.attachToEntity(mineCart)
-// const gltfShape20 = new GLTFShape("models/goldCoin2.glb")
-// gltfShape20.withCollisions = true
-// gltfShape20.isPointerBlocker = true
-// gltfShape20.visible = true
-// mineCart.addComponentOrReplace(gltfShape20)
 
-
-
-  //solid water child of fantasyChest
-  // const solidWater = new Entity('solidWater')
-  // engine.addEntity(solidWater)
-  // solidWater.setParent(fantasyChest)
-  // const transform39 = new Transform({
-  //   position: new Vector3(0, 0.1, 0),
-  //   rotation: new Quaternion(0, 0, 0, 1),
-  //   scale: new Vector3(1.23, 0.16, 0.86)
-  // })
-  // solidWater.addComponentOrReplace(transform39)
-  // const gltfShape20 = new GLTFShape("models/solid_water.glb")
-  // gltfShape20.withCollisions = true
-  // gltfShape20.isPointerBlocker = true
-  // gltfShape20.visible = true
-  // solidWater.addComponentOrReplace(gltfShape20)
-  // hud.attachToEntity(solidWater)
-
-
+      //CODE FOR UPSTAIRS 
 
   // HIDE AVATAR AREAS 
   let hideGround = new Entity('hideGround')
   // hideGround.addComponent(new BoxShape()).withCollisions = false
   hideGround.addComponent(new Transform({
-    position: new Vector3(8,0,0), scale: new Vector3(16,5,25)
+    position: new Vector3(8,0,0), scale: new Vector3(1,1,1)
   }))
-  hideGround.addComponent(new AvatarModifierArea({area: { box: new Vector3 (16,6,16)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
+  hideGround.addComponent(new AvatarModifierArea({area: { box: new Vector3 (16,6,32)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
 //engine.addEntity(hideGround)
 hud.attachToEntity(hideGround)
 
 let hideInside = new Entity('hideInside')
 // hideInside.addComponent(new BoxShape()).withCollisions = false
 hideInside.addComponent(new Transform({
-  position: new Vector3(8,6,0), scale: new Vector3(8,6,16)
+  position: new Vector3(8,7,0), scale: new Vector3(1,1,1)
 }))
-hideInside.addComponent(new AvatarModifierArea({area: { box: new Vector3 (8,6,16)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
+hideInside.addComponent(new AvatarModifierArea({area: { box: new Vector3 (16,6,32) }, modifiers:[AvatarModifiers.HIDE_AVATARS]})),
+// {enableDebug:true}
 engine.addEntity(hideInside) 
 hud.attachToEntity(hideInside)
 
-//CODE FOR UPSTAIRS
 
 // let visibleWall = new Entity('visible wall')
 // visibleWall.addComponent(new GLTFShape(""))
@@ -763,11 +775,10 @@ hud.attachToEntity(hideInside)
 // visibleWall.setParent(parent)
 
 
-
 //inside area
 let insideParent = new Entity("red area parent")
 insideParent.addComponent(new Transform({
-  position: new Vector3(8,4,0), scale: new Vector3(0,0,0)
+  position: new Vector3(8,7.5,0), scale: new Vector3(0,0,0)
 }))
 engine.addEntity(insideParent)
 hud.attachToEntity(insideParent)
@@ -792,20 +803,28 @@ insideFloor.addComponent(new Transform({ rotation: Quaternion.Euler(90,0,0), sca
 // insideFloor.addComponentOrReplace(transform41)
 hud.attachToEntity(insideFloor)
 
-let insideBuilding = new Entity()
-insideBuilding.addComponent(new GLTFShape("models/Chest_Fantasy.glb"))
-insideBuilding.addComponent(new Transform())
-insideBuilding.setParent(insideParent)
-hud.attachToEntity(insideBuilding)
+// let insideBuilding = new Entity()
+// insideBuilding.addComponent(new GLTFShape("models/Chest_Fantasy.glb"))
+// insideBuilding.addComponent(new Transform())
+// insideBuilding.setParent(insideParent)
+// hud.attachToEntity(insideBuilding)
 
 let groundTrigger = new Entity('groundTrigger')
 // groundTrigger.addComponent(new BoxShape())
-groundTrigger.addComponent(new Transform( {position: new Vector3(2,0,14.8), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+groundTrigger.addComponent(new Transform( {position: new Vector3(2.3,0,8.5), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
 groundTrigger.setParent(insideParent)
-groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(3,3,0.5), new Vector3(-2.3,1.5,0)), {
-  enableDebug: true,
+groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(2,3,3), new Vector3(-2.3,1.5,0)), {
+  enableDebug: false,
   onCameraEnter:()=>{
-    showGround()
+    poop.getComponent(Transform).scale.setAll(0)
+    GreenHouse4.addComponent(new utils.ScaleTransformComponent(
+      new Vector3(.4, 1.5,0.9),
+      new Vector3(0.01,0.01,0.01),
+      0.5
+      ))
+      groundTrigger.addComponent(new utils.Delay(500, () => {
+        showGround()
+      }))
   }
 }))
 hud.attachToEntity(groundTrigger)
@@ -818,7 +837,7 @@ function showInside() {
 
   insideParent.getComponent(Transform).scale.setAll(1)
   engine.removeEntity(hideInside)
-  movePlayerTo({x: 8, y:5, z:-13.5})
+  movePlayerTo({x: 8, y:7.8, z:-12.5})
 }
 
 function showGround(){
@@ -827,7 +846,7 @@ function showGround(){
 
   insideParent.getComponent(Transform).scale.setAll(0)
   engine.addEntity(hideInside)
-  movePlayerTo({x: 8, y:1, z:-15})
+  movePlayerTo({x: 8, y:1, z:-2})
 }
 
 //UPSTAIRS WALL COLLIDERS
@@ -879,9 +898,9 @@ const wolf = new Entity('wolf')
 engine.addEntity(wolf)
 wolf.setParent(insideParent)
 const transform45 = new Transform({
-  position: new Vector3(2, 0.1, 9.7),
+  position: new Vector3(3.4, 0.1, 8.3),
   rotation: new Quaternion(0, 180, 0,),
-  scale: new Vector3(1, 1, 1)
+  scale: new Vector3(.5, .5, .5)
 })
 wolf.addComponentOrReplace(transform45)
 hud.attachToEntity(wolf)
@@ -897,9 +916,9 @@ const wolf2 = new Entity('wolf2')
 engine.addEntity(wolf2)
 wolf2.setParent(insideParent)
 const transform46 = new Transform({
-  position: new Vector3(-2.7, 0.1, 9.7),
+  position: new Vector3(-3.8, 0.1, 8.1),
   rotation: new Quaternion(0, 180, 0,),
-  scale: new Vector3(1, 1, 1)
+  scale: new Vector3(.5, .5, .5)
 })
 wolf2.addComponentOrReplace(transform46)
 hud.attachToEntity(wolf2)
@@ -909,25 +928,7 @@ gltfShape28.isPointerBlocker = true
 gltfShape28.visible = true
 wolf2.addComponentOrReplace(gltfShape28)
 
-let wolfTrigger = new Entity('wolfTrigger')
-// wolfTrigger.addComponent(new BoxShape())
-wolfTrigger.addComponent(new Transform( {position: new Vector3(2,0,0), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
-wolfTrigger.setParent(insideParent)
-wolfTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(14.5,3,1), new Vector3(-2.3,1.5,0)), {
-  enableDebug: false,
-  onCameraEnter:()=>{
-    wolf.addComponent(new utils.ScaleTransformComponent(
-      new Vector3(1,1,1),
-      new Vector3(2,2,2),
-      0.5
-))
-wolf2.addComponent(new utils.ScaleTransformComponent(
-new Vector3(1,1,1),
-new Vector3(2,2,2),
-0.5
-)); engine.removeEntity(wolfTrigger)
-}}))
-hud.attachToEntity(wolfTrigger)
+
 
 //left side
 const glossyaethereatiles = new Entity('glossyaethereatiles')
@@ -1037,6 +1038,110 @@ gltfShape26.visible = true
 glossyaethereatiles6.addComponentOrReplace(gltfShape26)
 hud.attachToEntity(glossyaethereatiles6)
 
+//upstairs greenhouses
+
+const GreenHouse2 = new Entity('GreenHouse2')
+engine.addEntity(GreenHouse2)
+GreenHouse2.setParent(insideParent)
+const transform47 = new Transform({
+  position: new Vector3(0, 0.1, -11.7),
+  rotation: new Quaternion(0, 0, 0),
+  scale: new Vector3(0.43, 0.62, 0.72)
+})
+GreenHouse2.addComponentOrReplace(transform47)
+const gltfshape21 = new GLTFShape("GreenHouse/GreenHouse.glb")
+gltfshape21.withCollisions = true
+gltfshape21.isPointerBlocker = true
+gltfshape21.visible = true
+GreenHouse2.addComponentOrReplace(gltfshape21)
+hud.attachToEntity(GreenHouse2)
+
+const GreenHouse3 = new Entity('GreenHouse3')
+engine.addEntity(GreenHouse3)
+GreenHouse3.setParent(insideParent)
+const transform48 = new Transform({
+  position: new Vector3(0, -0.3, 5),
+  rotation: new Quaternion(0, 180, 0),
+  scale: new Vector3(1.7, 2.0, 2.2)
+})
+GreenHouse3.addComponentOrReplace(transform48)
+const gltfshape22 = new GLTFShape("GreenHouse/GreenHouse.glb")
+gltfshape22.withCollisions = true
+gltfshape22.isPointerBlocker = true
+gltfshape22.visible = true
+GreenHouse3.addComponentOrReplace(gltfshape22)
+hud.attachToEntity(GreenHouse3)
+
+const GreenHouse4 = new Entity('GreenHouse4')
+engine.addEntity(GreenHouse4)
+GreenHouse4.setParent(insideParent)
+const transform49 = new Transform({
+  position: new Vector3(0, -0.3, 10),
+  rotation: new Quaternion(0, 180, 0),
+  scale: new Vector3(.4, 0.7,0.9)
+})
+GreenHouse4.addComponentOrReplace(transform49)
+const gltfshape23 = new GLTFShape("GreenHouse/GreenHouse.glb")
+gltfshape23.withCollisions = true
+gltfshape23.isPointerBlocker = true
+gltfshape23.visible = true
+GreenHouse4.addComponentOrReplace(gltfshape23)
+hud.attachToEntity(GreenHouse4)
+
+
+let wolfTrigger = new Entity('wolfTrigger')
+// wolfTrigger.addComponent(new BoxShape())
+wolfTrigger.addComponent(new Transform( {position: new Vector3(2,0,3.3), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+wolfTrigger.setParent(insideParent)
+wolfTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(14.5,3,14), new Vector3(-2.3,1.5,0)), {
+  enableDebug: false,
+  onCameraEnter:()=>{
+    wolf.addComponent(new utils.ScaleTransformComponent(
+      new Vector3(.65, .65, .65),
+      new Vector3(2,2,2),
+      0.5
+))
+wolf2.addComponent(new utils.ScaleTransformComponent(
+new Vector3(.65, .65, .65),
+new Vector3(2,2,2),
+0.5
+))
+// ; engine.removeEntity(wolfTrigger)
+},
+  onCameraExit: ()=> {
+    wolf.addComponent(new utils.ScaleTransformComponent(
+      new Vector3(2,2,2),
+      new Vector3(.65, .65, .65),
+      0.5
+))
+wolf2.addComponent(new utils.ScaleTransformComponent(
+  new Vector3(2,2,2),
+new Vector3(.65, .65, .65),
+0.5
+))}}))
+hud.attachToEntity(wolfTrigger)
+
+let GreenTrigger = new Entity('GreenTrigger')
+// GreenTrigger.addComponent(new BoxShape())
+GreenTrigger.addComponent(new Transform( {position: new Vector3(2,0,3.3), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+GreenTrigger.setParent(insideParent)
+GreenTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(14.5,3,14), new Vector3(-2.3,1.5,0)), {
+  enableDebug: false,
+  onCameraEnter:()=>{
+GreenHouse4.addComponent(new utils.ScaleTransformComponent(
+  new Vector3(.4, 0.7,0.9),
+  new Vector3(.4,1.5,0.9),
+  0.5
+  ))},
+onCameraExit:()=> {
+  GreenHouse4.addComponent(new utils.ScaleTransformComponent(
+    new Vector3(.4,1.5,0.9),
+    new Vector3(.4, 0.7,0.9),
+    0.5
+    ))
+}}))
+hud.attachToEntity(GreenTrigger)
+
 
 // let whiteSplat= new Entity('whiteSplat')
 // whiteSplat.addComponent(new GLTFShape('models/birdSplat2.glb'))
@@ -1048,15 +1153,6 @@ hud.attachToEntity(glossyaethereatiles6)
 // whiteSplat.setParent(_scene)
 // hud.attachToEntity(whiteSplat)
 
-const channelId = Math.random().toString(16).slice(2)
-const channelBus = new MessageBus()
-const inventory = createInventory(UICanvas, UIContainerStack, UIImage)
-const options = { inventory }
-
-const script1 = new Script1()
-script1.init()
-script1.spawn(fantasyChest, {"onClickText":"Open/Close","onClick":[{"entityName":"fantasyChest","actionId":"toggle","values":{}}]}, createChannel(channelId, fantasyChest, channelBus))
-
 
 //CODE FOR MIRROR
 // const stand = new Entity();
@@ -1066,92 +1162,86 @@ script1.spawn(fantasyChest, {"onClickText":"Open/Close","onClick":[{"entityName"
 //   scale: new Vector3(0.8, 0.1, 0.9) }));
 // engine.addEntity(stand);
 
-const avatar = new Entity();
-const avatarShape = new AvatarShape();
-// hud.attachToEntity(stand)
+// const avatar = new Entity();
+// const avatarShape = new AvatarShape();
+// // hud.attachToEntity(stand)
 
 
-avatarShape.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseFemale";
-avatarShape.wearables = [
-  "urn:decentraland:off-chain:base-avatars:f_sweater",
-  "urn:decentraland:off-chain:base-avatars:f_jeans",
-  "urn:decentraland:off-chain:base-avatars:bun_shoes",
-  "urn:decentraland:off-chain:base-avatars:standard_hair",
-  "urn:decentraland:off-chain:base-avatars:f_eyes_00",
-  "urn:decentraland:off-chain:base-avatars:f_eyebrows_00",
-  "urn:decentraland:off-chain:base-avatars:f_mouth_00",
-];
-avatarShape.skinColor = new Color4(0.94921875, 0.76171875, 0.6484375, 1);
-avatarShape.eyeColor = new Color4(0.23046875, 0.625, 0.3125, 1);
-avatarShape.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
-avatar.addComponent(avatarShape);
-avatar.addComponent(new Transform({ position: new Vector3(1.3, -1.16, -2.3),
-  rotation: new Quaternion(0,180,0),
-  scale: new Vector3(2,2,2) }));
-engine.addEntity(avatar);
-if (!avatar.hasComponent(Billboard)) avatar.addComponent(billboard)
-hud.attachToEntity(avatar) 
+// avatarShape.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseFemale";
+// avatarShape.wearables = [
+//   "urn:decentraland:off-chain:base-avatars:f_sweater",
+//   "urn:decentraland:off-chain:base-avatars:f_jeans",
+//   "urn:decentraland:off-chain:base-avatars:bun_shoes",
+//   "urn:decentraland:off-chain:base-avatars:standard_hair",
+//   "urn:decentraland:off-chain:base-avatars:f_eyes_00",
+//   "urn:decentraland:off-chain:base-avatars:f_eyebrows_00",
+//   "urn:decentraland:off-chain:base-avatars:f_mouth_00",
+// ];
+// avatarShape.skinColor = new Color4(0.94921875, 0.76171875, 0.6484375, 1);
+// avatarShape.eyeColor = new Color4(0.23046875, 0.625, 0.3125, 1);
+// avatarShape.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
+// avatar.addComponent(avatarShape);
+// avatar.addComponent(new Transform({ position: new Vector3(1.3, 0, -2.3),
+//   rotation: new Quaternion(0,180,0),
+//   scale: new Vector3(2,2,2) }));
+// engine.addEntity(avatar);
+// if (!avatar.hasComponent(Billboard)) avatar.addComponent(billboard)
+// hud.attachToEntity(avatar) 
  
 
-void getUserData().then(async a => {
-  const res = await fetch(`https://peer.decentraland.org/lambdas/profiles/${a?.publicKey}`)
-  const json = await res.json()
-  const av = json.avatars[0].avatar
-  avatarShape.bodyShape = av.bodyShape
-  avatarShape.skinColor = new Color4(av.skin.color.r, av.skin.color.g, av.skin.color.b, 1);
-  avatarShape.eyeColor = new Color4(av.eyes.color.r, av.eyes.color.g, av.eyes.color.b, 1);
-  avatarShape.hairColor = new Color4(av.hair.color.r, av.hair.color.g, av.hair.color.b, 1);
-  avatarShape.wearables = av.wearables
+// void getUserData().then(async a => {
+//   const res = await fetch(`https://peer.decentraland.org/lambdas/profiles/${a?.publicKey}`)
+//   const json = await res.json()
+//   const av = json.avatars[0].avatar
+//   avatarShape.bodyShape = av.bodyShape
+//   avatarShape.skinColor = new Color4(av.skin.color.r, av.skin.color.g, av.skin.color.b, 1);
+//   avatarShape.eyeColor = new Color4(av.eyes.color.r, av.eyes.color.g, av.eyes.color.b, 1);
+//   avatarShape.hairColor = new Color4(av.hair.color.r, av.hair.color.g, av.hair.color.b, 1);
+//   avatarShape.wearables = av.wearables
 
-})
+// })
 
 //MIRROR 2
-// const stand = new Entity();
-// stand.addComponent(new BoxShape());
-// stand.addComponent(new Transform({ position: new Vector3(8.0, -0, 10.3),
+
+
+// const avatar2 = new Entity();
+// const avatarShape2 = new AvatarShape();
+
+
+// avatarShape2.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseFemale";
+// avatarShape2.wearables = [
+//   "urn:decentraland:off-chain:base-avatars:f_sweater",
+//   "urn:decentraland:off-chain:base-avatars:f_jeans",
+//   "urn:decentraland:off-chain:base-avatars:bun_shoes",
+//   "urn:decentraland:off-chain:base-avatars:standard_hair",
+//   "urn:decentraland:off-chain:base-avatars:f_eyes_00",
+//   "urn:decentraland:off-chain:base-avatars:f_eyebrows_00",
+//   "urn:decentraland:off-chain:base-avatars:f_mouth_00",
+// ];
+// avatarShape2.skinColor = new Color4(0.94921875, 0.76171875, 0.6484375, 1);
+// avatarShape2.eyeColor = new Color4(0.23046875, 0.625, 0.3125, 1);
+// avatarShape2.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
+// avatar2.addComponent(avatarShape2);
+// avatar2.addComponent(new Transform({ position: new Vector3(14.3,  0, -2.3),
 //   rotation: new Quaternion(0,180,0),
-//   scale: new Vector3(0.8, 0.1, 0.9) }));
-// engine.addEntity(stand);
-// hud.attachToEntity(stand)
-
-const avatar2 = new Entity();
-const avatarShape2 = new AvatarShape();
-
-
-avatarShape2.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseFemale";
-avatarShape2.wearables = [
-  "urn:decentraland:off-chain:base-avatars:f_sweater",
-  "urn:decentraland:off-chain:base-avatars:f_jeans",
-  "urn:decentraland:off-chain:base-avatars:bun_shoes",
-  "urn:decentraland:off-chain:base-avatars:standard_hair",
-  "urn:decentraland:off-chain:base-avatars:f_eyes_00",
-  "urn:decentraland:off-chain:base-avatars:f_eyebrows_00",
-  "urn:decentraland:off-chain:base-avatars:f_mouth_00",
-];
-avatarShape2.skinColor = new Color4(0.94921875, 0.76171875, 0.6484375, 1);
-avatarShape2.eyeColor = new Color4(0.23046875, 0.625, 0.3125, 1);
-avatarShape2.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
-avatar2.addComponent(avatarShape2);
-avatar2.addComponent(new Transform({ position: new Vector3(14.3, -1.16, -2.3),
-  rotation: new Quaternion(0,180,0),
-  scale: new Vector3(2,2,2) }));
-engine.addEntity(avatar2);
-if (!avatar2.hasComponent(Billboard)) avatar2.addComponent(billboard)
-hud.attachToEntity(avatar2)
+//   scale: new Vector3(2,2,2) }));
+// engine.addEntity(avatar2);
+// if (!avatar2.hasComponent(Billboard)) avatar2.addComponent(billboard)
+// hud.attachToEntity(avatar2)
 
 
 
-void getUserData().then(async a => {
-  const res = await fetch(`https://peer.decentraland.org/lambdas/profiles/${a?.publicKey}`)
-  const json = await res.json()
-  const av = json.avatars[0].avatar
-  avatarShape2.bodyShape = av.bodyShape
-  avatarShape2.skinColor = new Color4(av.skin.color.r, av.skin.color.g, av.skin.color.b, 1);
-  avatarShape2.eyeColor = new Color4(av.eyes.color.r, av.eyes.color.g, av.eyes.color.b, 1);
-  avatarShape2.hairColor = new Color4(av.hair.color.r, av.hair.color.g, av.hair.color.b, 1);
-  avatarShape2.wearables = av.wearables
+// void getUserData().then(async a => {
+//   const res = await fetch(`https://peer.decentraland.org/lambdas/profiles/${a?.publicKey}`)
+//   const json = await res.json()
+//   const av = json.avatars[0].avatar
+//   avatarShape2.bodyShape = av.bodyShape
+//   avatarShape2.skinColor = new Color4(av.skin.color.r, av.skin.color.g, av.skin.color.b, 1);
+//   avatarShape2.eyeColor = new Color4(av.eyes.color.r, av.eyes.color.g, av.eyes.color.b, 1);
+//   avatarShape2.hairColor = new Color4(av.hair.color.r, av.hair.color.g, av.hair.color.b, 1);
+//   avatarShape2.wearables = av.wearables
 
-})
+// })
 
 // BIRD FLY BIRD FLY
 
@@ -1575,12 +1665,12 @@ poop.setParent(Attachable.AVATAR)
 const hideAvatarsEntity = new Entity('poop hide')
 hideAvatarsEntity.addComponent(
   new AvatarModifierArea({
-    area: { box: new Vector3(15, 4, 26) },
+    area: { box: new Vector3(15, 3, 24) },
     modifiers: [AvatarModifiers.HIDE_AVATARS]
   })
 )
 hideAvatarsEntity.addComponent(
-  new Transform({ position: new Vector3(0, 3, 5) })
+  new Transform({ position: new Vector3(0, 3.4, 4) })
 )
 hud.attachToEntity(hideAvatarsEntity)
 engine.addEntity(hideAvatarsEntity)
