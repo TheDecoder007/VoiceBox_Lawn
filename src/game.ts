@@ -13,6 +13,9 @@ import { movePlayerTo } from '@decentraland/RestrictedActions'
 import { Color3 } from 'node_modules/decentraland-ecs/dist/index'
 export { _scene }
 import { Poop } from './poop'
+export { insideParent }
+export { hideGround, hideInside, showGround, poop}
+import { hideThird, thirdParent, showThird } from 'src/third'
  
 
 
@@ -816,11 +819,11 @@ hud.attachToEntity(insideFloor)
 // insideBuilding.setParent(insideParent)
 // hud.attachToEntity(insideBuilding)
 
-let groundTrigger = new Entity('groundTrigger')
-// groundTrigger.addComponent(new BoxShape())
-groundTrigger.addComponent(new Transform( {position: new Vector3(2.3,0.75,8.3), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
-groundTrigger.setParent(insideParent)
-groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(2,2,3), new Vector3(-2.3,1.5,0)), {
+let thirdTrigger = new Entity('thirdTrigger')
+// thirdTrigger.addComponent(new BoxShape())
+thirdTrigger.addComponent(new Transform( {position: new Vector3(2.3,0.75,8.3), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+thirdTrigger.setParent(insideParent)
+thirdTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(2,2,3), new Vector3(-2.3,1.5,0)), {
   enableDebug: false,
   onCameraEnter:()=>{
     poop.getComponent(Transform).scale.setAll(0)
@@ -829,18 +832,20 @@ groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(
       new Vector3(0.01,0.01,0.01),
       0.5
       ))
-      groundTrigger.addComponent(new utils.Delay(500, () => {
-        showGround()
+      thirdTrigger.addComponent(new utils.Delay(500, () => {
+        showThird()
       }))
   }
 }))
-hud.attachToEntity(groundTrigger)
+hud.attachToEntity(thirdTrigger)
 
 //code for showInside/showGround for moving player/hiding land
 // _scene replaces groundAreaParent
 function showInside() {
   _scene.getComponent(Transform).scale.setAll(0)
+  thirdParent.getComponent(Transform).scale.setAll(0)
   engine.addEntity(hideGround)
+  engine.addEntity(hideThird)
 
   insideParent.getComponent(Transform).scale.setAll(1)
   // engine.removeEntity(hideInside)
@@ -852,6 +857,7 @@ function showGround(){
   engine.removeEntity(hideGround)
 
   insideParent.getComponent(Transform).scale.setAll(0)
+  thirdParent.getComponent(Transform).scale.setAll(0)
   // engine.addEntity(hideInside)
   movePlayerTo({x: 8, y:1, z:-2})
 }
