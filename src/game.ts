@@ -752,21 +752,26 @@ script1.spawn(fantasyChest, {"onClickText":"Open/Close","onClick":[{"entityName"
   let hideGround = new Entity('hideGround')
   // hideGround.addComponent(new BoxShape()).withCollisions = false
   hideGround.addComponent(new Transform({
-    position: new Vector3(8,0,0), scale: new Vector3(1,1,1)
+    position: new Vector3(8,0,0), scale: new Vector3(16,8,32)
   }))
-  hideGround.addComponent(new AvatarModifierArea({area: { box: new Vector3 (16,6,32)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
+  hideGround.addComponent(new AvatarModifierArea({area: { box: new Vector3 (16,8,32)}, modifiers:[AvatarModifiers.HIDE_AVATARS]}))
 //engine.addEntity(hideGround)
 hud.attachToEntity(hideGround)
 
 let hideInside = new Entity('hideInside')
 // hideInside.addComponent(new BoxShape()).withCollisions = false
 hideInside.addComponent(new Transform({
-  position: new Vector3(8,7,0), scale: new Vector3(1,1,1)
+  position: new Vector3(8,8,0), scale: new Vector3(16,6,32)
 }))
 hideInside.addComponent(new AvatarModifierArea({area: { box: new Vector3 (16,6,32) }, modifiers:[AvatarModifiers.HIDE_AVATARS]})),
 // {enableDebug:true}
 engine.addEntity(hideInside) 
 hud.attachToEntity(hideInside)
+
+
+
+
+
 
 
 // let visibleWall = new Entity('visible wall')
@@ -778,7 +783,7 @@ hud.attachToEntity(hideInside)
 //inside area
 let insideParent = new Entity("red area parent")
 insideParent.addComponent(new Transform({
-  position: new Vector3(8,7.5,0), scale: new Vector3(0,0,0)
+  position: new Vector3(8,8,0), scale: new Vector3(0,0,0)
 }))
 engine.addEntity(insideParent)
 hud.attachToEntity(insideParent)
@@ -803,6 +808,8 @@ insideFloor.addComponent(new Transform({ rotation: Quaternion.Euler(90,0,0), sca
 // insideFloor.addComponentOrReplace(transform41)
 hud.attachToEntity(insideFloor)
 
+
+
 // let insideBuilding = new Entity()
 // insideBuilding.addComponent(new GLTFShape("models/Chest_Fantasy.glb"))
 // insideBuilding.addComponent(new Transform())
@@ -811,9 +818,9 @@ hud.attachToEntity(insideFloor)
 
 let groundTrigger = new Entity('groundTrigger')
 // groundTrigger.addComponent(new BoxShape())
-groundTrigger.addComponent(new Transform( {position: new Vector3(2.3,0,8.5), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+groundTrigger.addComponent(new Transform( {position: new Vector3(2.3,0.75,8.3), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
 groundTrigger.setParent(insideParent)
-groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(2,3,3), new Vector3(-2.3,1.5,0)), {
+groundTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(2,2,3), new Vector3(-2.3,1.5,0)), {
   enableDebug: false,
   onCameraEnter:()=>{
     poop.getComponent(Transform).scale.setAll(0)
@@ -836,8 +843,8 @@ function showInside() {
   engine.addEntity(hideGround)
 
   insideParent.getComponent(Transform).scale.setAll(1)
-  engine.removeEntity(hideInside)
-  movePlayerTo({x: 8, y:7.8, z:-12.5})
+  // engine.removeEntity(hideInside)
+  movePlayerTo({x: 8, y:8.3, z:-12.5})
 }
 
 function showGround(){
@@ -845,7 +852,7 @@ function showGround(){
   engine.removeEntity(hideGround)
 
   insideParent.getComponent(Transform).scale.setAll(0)
-  engine.addEntity(hideInside)
+  // engine.addEntity(hideInside)
   movePlayerTo({x: 8, y:1, z:-2})
 }
 
@@ -1093,7 +1100,7 @@ let wolfTrigger = new Entity('wolfTrigger')
 // wolfTrigger.addComponent(new BoxShape())
 wolfTrigger.addComponent(new Transform( {position: new Vector3(2,0,3.3), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
 wolfTrigger.setParent(insideParent)
-wolfTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(14.5,3,14), new Vector3(-2.3,1.5,0)), {
+wolfTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(14.5,6,14), new Vector3(-2.3,1.5,0)), {
   enableDebug: false,
   onCameraEnter:()=>{
     wolf.addComponent(new utils.ScaleTransformComponent(
@@ -1125,7 +1132,7 @@ let GreenTrigger = new Entity('GreenTrigger')
 // GreenTrigger.addComponent(new BoxShape())
 GreenTrigger.addComponent(new Transform( {position: new Vector3(2,0,3.3), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
 GreenTrigger.setParent(insideParent)
-GreenTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(14.5,3,14), new Vector3(-2.3,1.5,0)), {
+GreenTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(14.5,6,14), new Vector3(-2.3,1.5,0)), {
   enableDebug: false,
   onCameraEnter:()=>{
 GreenHouse4.addComponent(new utils.ScaleTransformComponent(
@@ -1143,7 +1150,7 @@ onCameraExit:()=> {
 hud.attachToEntity(GreenTrigger)
 
 
-// let whiteSplat= new Entity('whiteSplat')
+// let whiteSplat= new Entity('whiteSplat')   
 // whiteSplat.addComponent(new GLTFShape('models/birdSplat2.glb'))
 // whiteSplat.addComponent(new Transform({
 //   position: new Vector3(8, 1, -4),
@@ -1663,36 +1670,37 @@ poop.setParent(Attachable.AVATAR)
 
 // Hide avatars
 const hideAvatarsEntity = new Entity('poop hide')
+hideAvatarsEntity.addComponent(new BoxShape()).withCollisions = false
 hideAvatarsEntity.addComponent(
   new AvatarModifierArea({
-    area: { box: new Vector3(15, 3, 24) },
+    area: { box: new Vector3(15, 5, 25) },
     modifiers: [AvatarModifiers.HIDE_AVATARS]
   })
 )
 hideAvatarsEntity.addComponent(
-  new Transform({ position: new Vector3(0, 3.4, 4) })
+  new Transform({ position: new Vector3(0, 3, 2) })
 )
-hud.attachToEntity(hideAvatarsEntity)
+hud.attachToEntity(hideAvatarsEntity) 
 engine.addEntity(hideAvatarsEntity)
 hideAvatarsEntity.setParent(insideParent)
 
 // Create to show poop avatar
 hideAvatarsEntity.addComponent(
   new utils.TriggerComponent(
-    new utils.TriggerBoxShape(new Vector3(15, 4, 24), Vector3.Zero()),
+    new utils.TriggerBoxShape(new Vector3(15, 5, 25), Vector3.Zero()),
     
-    { enableDebug: false,
+    { enableDebug: true,
       onCameraEnter: () => {
         poop.getComponent(Transform).scale.setAll(0.5)
       },
-      onCameraExit: () => {
-        poop.getComponent(Transform).scale.setAll(0)
-      }
+      // onCameraExit: () => {
+      //   poop.getComponent(Transform).scale.setAll(0)
+      // }
     }
   )
 )
 
-// // Check if player is moving
+// Check if player is moving
 // const currentPosition = new Vector3()
 
 // class CheckPlayerIsMovingSystem implements ISystem {
