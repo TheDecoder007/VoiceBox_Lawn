@@ -901,6 +901,72 @@ colliderWall4.getComponent(PlaneShape).visible = false
 // colliderWall4.addComponent(new Material()).albedoColor = Color4.Red()
 hud.attachToEntity(colliderWall4)
 
+let colliderWall5 = new Entity('collider wall5')
+colliderWall5.addComponent(new PlaneShape())
+colliderWall5.addComponent(new Transform(
+  {position: new Vector3(-4.6,1.3,-11), 
+    rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(5,2.3,1)}))
+colliderWall5.setParent(insideParent)
+colliderWall5.getComponent(PlaneShape).visible = false
+// colliderWall5.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall5)
+
+let colliderWall6 = new Entity('collider wall6')
+colliderWall6.addComponent(new PlaneShape())
+colliderWall6.addComponent(new Transform(
+  {position: new Vector3(4.6,1.3,-11), 
+    rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(5,2.3,1)}))
+colliderWall6.setParent(insideParent)
+colliderWall6.getComponent(PlaneShape).visible = false
+// colliderWall6.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall6)
+
+let colliderWall7 = new Entity('collider wall7')
+colliderWall7.addComponent(new PlaneShape())
+colliderWall7.addComponent(new Transform(
+  {position: new Vector3(0,2.6,-10), 
+    rotation: Quaternion.Euler(90,0,0),
+  scale: new Vector3(14,5.3,1)}))
+colliderWall7.setParent(insideParent)
+colliderWall7.getComponent(PlaneShape).visible = false
+// colliderWall7.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall7)
+
+let colliderWall8 = new Entity('collider wall8')
+colliderWall8.addComponent(new PlaneShape())
+colliderWall8.addComponent(new Transform(
+  {position: new Vector3(0,4,4), 
+    rotation: Quaternion.Euler(90,0,0),
+  scale: new Vector3(14,18,1)}))
+colliderWall8.setParent(insideParent)
+colliderWall8.getComponent(PlaneShape).visible = false
+// colliderWall8.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall8)
+
+let colliderWall9 = new Entity('collider wall9')
+colliderWall9.addComponent(new PlaneShape())
+colliderWall9.addComponent(new Transform(
+  {position: new Vector3(-5.2,2.3,-4), 
+    rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(4.5,4,1)}))
+colliderWall9.setParent(insideParent)
+colliderWall9.getComponent(PlaneShape).visible = false
+// colliderWall9.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall9)
+
+let colliderWall10 = new Entity('collider wall10')
+colliderWall10.addComponent(new PlaneShape())
+colliderWall10.addComponent(new Transform(
+  {position: new Vector3(5.2,2.3,-4), 
+    rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(4.5,4,1)}))
+colliderWall10.setParent(insideParent)
+colliderWall10.getComponent(PlaneShape).visible = false
+// colliderWall10.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall10)
+
 const wolf = new Entity('wolf')
 engine.addEntity(wolf)
 wolf.setParent(insideParent)
@@ -1069,7 +1135,7 @@ GreenHouse3.setParent(insideParent)
 const transform48 = new Transform({
   position: new Vector3(0, -0.3, 5),
   rotation: new Quaternion(0, 180, 0),
-  scale: new Vector3(1.7, 2.0, 2.2)
+  scale: new Vector3(1.71, 2.0, 2.2)
 })
 GreenHouse3.addComponentOrReplace(transform48)
 const gltfshape22 = new GLTFShape("GreenHouse/GreenHouse.glb")
@@ -1670,7 +1736,7 @@ poop.setParent(Attachable.AVATAR)
 
 // Hide avatars
 const hideAvatarsEntity = new Entity('poop hide')
-hideAvatarsEntity.addComponent(new BoxShape()).withCollisions = false
+// hideAvatarsEntity.addComponent(new BoxShape()).withCollisions = false
 hideAvatarsEntity.addComponent(
   new AvatarModifierArea({
     area: { box: new Vector3(15, 5, 25) },
@@ -1689,13 +1755,13 @@ hideAvatarsEntity.addComponent(
   new utils.TriggerComponent(
     new utils.TriggerBoxShape(new Vector3(15, 5, 25), Vector3.Zero()),
     
-    { enableDebug: true,
+    { enableDebug: false,
       onCameraEnter: () => {
         poop.getComponent(Transform).scale.setAll(0.5)
       },
-      // onCameraExit: () => {
-      //   poop.getComponent(Transform).scale.setAll(0)
-      // }
+      onCameraExit: () => {
+        poop.getComponent(Transform).scale.setAll(0)
+      }
     }
   )
 )
