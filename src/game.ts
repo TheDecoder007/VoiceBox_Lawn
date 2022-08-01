@@ -7,7 +7,7 @@ import { explosionSound, blastBird, ChoasCocaine, DeadIntro, Detective, DoYouDar
 import { Sound } from './sound'
 import { getUserData } from "@decentraland/Identity"
 //for bird fly
-import { birdIdleShape, birdFlyShape, sandShape, } from './modules/models'
+import { birdIdleShape, birdFlyShape } from './modules/models'
 import { realDistance } from './modules/utilities'
 import { movePlayerTo } from '@decentraland/RestrictedActions'
 import { Color3 } from 'node_modules/decentraland-ecs/dist/index'
@@ -16,6 +16,8 @@ import { Poop } from './poop'
 export { insideParent }
 export { hideGround, hideInside, showGround, poop}
 import { hideThird, thirdParent, showThird } from 'src/third'
+let sandShape = new GLTFShape('models/sand.glb')
+
  
 
 
@@ -834,6 +836,7 @@ thirdTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(n
       ))
       thirdTrigger.addComponent(new utils.Delay(500, () => {
         showThird()
+        
       }))
   }
 }))
