@@ -16,7 +16,9 @@ import { Poop } from './poop'
 export { insideParent }
 export { hideGround, hideInside, showGround, poop}
 import { hideThird, thirdParent, showThird } from 'src/third'
+import { DanceSystem, danceAreas, PredefinedEmote } from './danceArea'
 let sandShape = new GLTFShape('models/sand.glb')
+export { avatar1 }
 
  
 
@@ -613,7 +615,7 @@ const lastSlicePizzaBox = new Entity('lastSlicePizzaBox')
 engine.addEntity(lastSlicePizzaBox)
 lastSlicePizzaBox.setParent(_scene)
 const transform35 = new Transform({
-  position: new Vector3(8.4, 0.03, -9.9),
+  position: new Vector3(8.4, 0.03, -13.5),
   rotation: new Quaternion(0.2, 0.20526227355003357, 0.6766590476036072, 0.6766590476036072),
   scale: new Vector3(0.415, 0.25, 0.27)
 })
@@ -1328,16 +1330,16 @@ hud.attachToEntity(GreenTrigger)
 // BIRD FLY BIRD FLY
 
 // Add ground terrain
-const sand = new Entity()      
-sand.addComponent(new Transform({ 
+const sand1 = new Entity('sand 1')      
+sand1.addComponent(new Transform({ 
           position: new Vector3(5.62,-0.06,-9.83),
           rotation: Quaternion.Euler(0,0,0),
           scale: new Vector3(.1,.2,.1)
         }))        
-sand.addComponent(sandShape)   
-sand.setParent(_scene)
-engine.addEntity(sand)
-hud.attachToEntity(sand)
+sand1.addComponent(sandShape)   
+sand1.setParent(_scene)
+engine.addEntity(sand1)
+hud.attachToEntity(sand1)
 
 //pre loading glowing bird
 const glowingBird = new Entity()
@@ -1347,109 +1349,109 @@ glowingBird.addComponent(new Transform())
 glowingBird.getComponent(Transform).scale.setAll(0)
 
 // used for raycasting later on to generate bird positions along the terrain collider surface
-let physicsCast = PhysicsCast.instance
+// let physicsCast = PhysicsCast.instance
 
-// used to get player position, player distance to birds etc.
-let player = Camera.instance
+// // used to get player position, player distance to birds etc.
+// let player = Camera.instance
 
-// a component to store each bird's default idle positions, animation state, and a timer with a random delay
-@Component("DistanceBird")
-export class DistanceBird {  
-  originalPos:Vector3    
-  flying:boolean = false
-  elapsed:number = Math.random()
+// // a component to store each bird's default idle positions, animation state, and a timer with a random delay
+// @Component("DistanceBird")
+// export class DistanceBird {  
+//   originalPos:Vector3    
+//   flying:boolean = false
+//   elapsed:number = Math.random()
 
-  constructor(pos:Vector3){
-    this.originalPos = new Vector3(pos.x, pos.y, pos.z)           
-  }
-}
+//   constructor(pos:Vector3){
+//     this.originalPos = new Vector3(pos.x, pos.y, pos.z)           
+//   }
+// }
 
-// System that checks distances to each bird
-class ProximitySystem {
-  radius:number = 4 // how close you can get to a bird before it reacts
-  amplitude:number = 1    
-  group = engine.getComponentGroup(Transform, DistanceBird)
+// // System that checks distances to each bird
+// class ProximitySystem {
+//   radius:number = 4 // how close you can get to a bird before it reacts
+//   amplitude:number = 1    
+//   group = engine.getComponentGroup(Transform, DistanceBird)
 
-  update(dt: number) {
+//   update(dt: number) {
 
-    // iterate through all the birds that have the DistanceBird component
-    for (let bird of this.group.entities){
+//     // iterate through all the birds that have the DistanceBird component
+//     for (let bird of this.group.entities){
 
-      const transform = bird.getComponent(Transform)
-      const birdInfo = bird.getComponent(DistanceBird)      
+//       const transform = bird.getComponent(Transform)
+//       const birdInfo = bird.getComponent(DistanceBird)      
 
-      // calculate the distance between the player and the birds original position
-      let dist = realDistance(birdInfo.originalPos, player.position)
+//       // calculate the distance between the player and the birds original position
+//       let dist = realDistance(birdInfo.originalPos, player.position)
 
       
-      // if the player is within a certain distance from the birds original perching position
-      if( dist < this.radius ){     
+//       // if the player is within a certain distance from the birds original perching position
+//       if( dist < this.radius ){     
 
-        // calculate a ratio (0-1) based on how close the player is to the bird and multiply it with a constant to amplify the effect
-        let multiplier = ( 1 - dist / this.radius) * this.amplitude
+//         // calculate a ratio (0-1) based on how close the player is to the bird and multiply it with a constant to amplify the effect
+//         let multiplier = ( 1 - dist / this.radius) * this.amplitude
 
-        // calculate the direction pointing from the player to the bird's default position
-        let playerDir = birdInfo.originalPos.subtract(player.position)
+//         // calculate the direction pointing from the player to the bird's default position
+//         let playerDir = birdInfo.originalPos.subtract(player.position)
 
-        // if the bird was idle, change it to flying and replace the GLTF model with the flying one
-        if(!birdInfo.flying){
-          birdInfo.flying = true
-          bird.addComponentOrReplace(birdFlyShape)
-        }
+//         // if the bird was idle, change it to flying and replace the GLTF model with the flying one
+//         if(!birdInfo.flying){
+//           birdInfo.flying = true
+//           bird.addComponentOrReplace(birdFlyShape)
+//         }
         
-        // move the bird away from the player on the X and Z axis based on the closeness multiplier
-        transform.position = birdInfo.originalPos.add(playerDir.multiplyByFloats(multiplier, 0, multiplier))
+//         // move the bird away from the player on the X and Z axis based on the closeness multiplier
+//         transform.position = birdInfo.originalPos.add(playerDir.multiplyByFloats(multiplier, 0, multiplier))
 
-        // always move the bird upwards on the Y axis (never downwards) regardless of player direction
-        transform.position.y = birdInfo.originalPos.y + 6*multiplier
+//         // always move the bird upwards on the Y axis (never downwards) regardless of player direction
+//         transform.position.y = birdInfo.originalPos.y + 6*multiplier
 
-        // increment the timer stored for each bird and use the sine of this time to wiggle the bird around the actual position calculated above
-        birdInfo.elapsed +=dt
-        transform.position.x += Math.sin( birdInfo.elapsed * 10) * multiplier
-        transform.position.y += Math.sin( birdInfo.elapsed * 8 ) * multiplier
-        transform.position.z += Math.sin( birdInfo.elapsed * 11) * multiplier
+//         // increment the timer stored for each bird and use the sine of this time to wiggle the bird around the actual position calculated above
+//         birdInfo.elapsed +=dt
+//         transform.position.x += Math.sin( birdInfo.elapsed * 10) * multiplier
+//         transform.position.y += Math.sin( birdInfo.elapsed * 8 ) * multiplier
+//         transform.position.z += Math.sin( birdInfo.elapsed * 11) * multiplier
 
-        // make the flying bird always face the player
-        transform.lookAt(player.position)
-      }
-      // in case the player is farther from the bird than the given radius
-      else{
+//         // make the flying bird always face the player
+//         transform.lookAt(player.position)
+//       }
+//       // in case the player is farther from the bird than the given radius
+//       else{
 
-        // make the flying bird change GLTF shape to the idle one
-        if(birdInfo.flying){
-          birdInfo.flying = false
-          bird.addComponentOrReplace(birdIdleShape)
-        }
+//         // make the flying bird change GLTF shape to the idle one
+//         if(birdInfo.flying){
+//           birdInfo.flying = false
+//           bird.addComponentOrReplace(birdIdleShape)
+//         }
 
-        //make the bird land on its original position
-        transform.position.copyFrom(birdInfo.originalPos)
+//         //make the bird land on its original position
+//         transform.position.copyFrom(birdInfo.originalPos)
         
-      }
-    }
-  }
-}
-engine.addSystem(new ProximitySystem())
+//       }
+//     }
+//   }
+// }
+// engine.addSystem(new ProximitySystem())
 
 // class that generates bird starting positions and spawns the birds themselves
-class BirdController{
+// class BirdController{
   
-  center:Vector3
-  sideLength:number = 8 // size of the area to spawn birds in
-  rows:number = 4
-  cols:number = 4
-  spacing:number = this.sideLength/this.rows
-  base:Vector3 = new Vector3(8,0,-7) 
+//   center:Vector3
+//   sideLength:number = 8 // size of the area to spawn birds in
+//   rows:number = 4
+//   cols:number = 4
+//   spacing:number = this.sideLength/this.rows
+//   base:Vector3 = new Vector3(8,0,-7) 
 
-  constructor(){      
+//   constructor(){      
 
-    //set the center of the bird scattering area to the center of the scene
-    this.center = new Vector3(8,0,7)    
+//     //set the center of the bird scattering area to the center of the scene
+//     this.center = new Vector3(8,0,7)    
     
-    //set the starting positions of the bird spawn grid to the south-west corner of the spawn area
-    this.base = new Vector3(this.center.x - this.sideLength/2, this.center.y, this.center.z - this.sideLength/2) 
-  }
+//     //set the starting positions of the bird spawn grid to the south-west corner of the spawn area
+//     this.base = new Vector3(this.center.x - this.sideLength/2, this.center.y, this.center.z - this.sideLength/2) 
+//   }
 
-  spawnBirds(){
+//   spawnBirds(){
 
     // for(let i=0; i< this.rows; i++){
     //   for(let j=0; j< this.cols; j++){     
@@ -1478,8 +1480,8 @@ class BirdController{
     //             newPos.y = e.hitPoint.y 
                 
                 //spawn a bird at the generated and terrain adapted position
-                const bird = new Entity()      
-                bird.addComponent(new Transform({ 
+                const bird5 = new Entity()      
+                bird5.addComponent(new Transform({ 
                   position: new Vector3(6.5, 0.1, -8.5),
                   scale: new Vector3(.5, .5, .5),
                   rotation: Quaternion.Euler(0, Math.random()*360,0) 
@@ -1487,24 +1489,24 @@ class BirdController{
                 
                 // position: newPos,
                 
-                // save the bird's original position to the DistanceBird component
-                bird.addComponent(new DistanceBird( new Vector3(6.5,0.1,-8.5) ))          
-                bird.addComponent(birdIdleShape) 
-                bird.setParent(_scene)            
-                engine.addEntity(bird)    
-                hud.attachToEntity(bird)
+                // save the bird5's original position to the DistanceBird component
+                // bird5.addComponent(new DistanceBird( new Vector3(6.5,0.1,-8.5) ))          
+                bird5.addComponent(birdIdleShape) 
+                bird5.setParent(_scene)            
+                engine.addEntity(bird5)    
+                hud.attachToEntity(bird5)
 
-          //Shoot the birds
-                bird.addComponent(
+          //Shoot the bird5s
+                bird5.addComponent(
                   new OnPointerDown(
                     () => {
-                      bird.removeComponent(utils.MoveTransformComponent) // Stop the spaceship
+                      bird5.removeComponent(utils.MoveTransformComponent) // Stop the spaceship
                       glowingBird.getComponent(Transform).scale.setAll(1)
                       glowingBird.getComponent(Transform).position =
-                        bird.getComponent(Transform).position
+                        bird5.getComponent(Transform).position
             
                       // Glow for 1/4 of a second before disappearing
-                      engine.removeEntity(bird)
+                      engine.removeEntity(bird5)
                       glowingBird.addComponent(
                         new utils.Delay(250, () => {
                           glowingBird.getComponent(Transform).scale.setAll(0) // Reset glowing spaceship scale
@@ -1530,7 +1532,7 @@ class BirdController{
                 // position: newPos,
                 
                 // save the bird2's original position to the Distancebird2 component
-                bird2.addComponent(new DistanceBird( new Vector3(9.3,.57,-8) ))          
+                // bird2.addComponent(new DistanceBird( new Vector3(9.3,.57,-8) ))          
                 bird2.addComponent(birdIdleShape)
                 bird2.setParent(_scene)            
 
@@ -1573,7 +1575,7 @@ class BirdController{
                 // position: newPos,
                 
                 // save the bird3's original position to the Distancebird3 component
-                bird3.addComponent(new DistanceBird( new Vector3(7,.5,-7) ))          
+                // bird3.addComponent(new DistanceBird( new Vector3(7,.5,-7) ))          
                 bird3.addComponent(birdIdleShape) 
                 bird3.setParent(_scene)            
                 engine.addEntity(bird3)    
@@ -1614,7 +1616,7 @@ class BirdController{
                 // position: newPos,
                 
                 // save the bird4's original position to the Distancebird4 component
-                bird4.addComponent(new DistanceBird( new Vector3(9,.2,-9.5) ))          
+                // bird4.addComponent(new DistanceBird( new Vector3(9,.2,-9.5) ))          
                 bird4.addComponent(birdIdleShape) 
                 bird4.setParent(_scene)            
                 engine.addEntity(bird4)    
@@ -1644,20 +1646,20 @@ class BirdController{
                     }
                   )
                 )
-              }        
-            }            
+              // }        
+            // }            
 //           )
 //       }
 //     }
 //   }  
 // }
 
-let birdControl = new BirdController()
+// let birdControl = new BirdController()
 
 // delay bird spawning to only start casting rays on the terrain it's collider is fully loaded
-onSceneReadyObservable.add(()=>{
-  birdControl.spawnBirds()  
-})
+// onSceneReadyObservable.add(()=>{
+//   birdControl.spawnBirds()  
+// })
 
 //END BIRD FLY END BIRD FLY
 
@@ -1789,3 +1791,60 @@ hideAvatarsEntity.addComponent(
 //   }
 // }
 // engine.addSystem(new CheckPlayerIsMovingSystem())
+
+//Slicer
+
+const Slicer = new Entity('Slicer')
+engine.addEntity(Slicer)
+Slicer.setParent(_scene)
+const transform50 = new Transform({
+  position: new Vector3(8, 0, -12),
+  rotation: new Quaternion(0, 180, 0),
+  scale: new Vector3(1,1,1)
+})
+Slicer.addComponentOrReplace(transform50)
+const gltfshape30 = new GLTFShape("models/Slicer.glb")
+gltfshape20.withCollisions = true
+gltfshape20.isPointerBlocker = true
+gltfshape20.visible = true
+Slicer.addComponentOrReplace(gltfshape30)
+hud.attachToEntity(Slicer)
+
+
+//avatar shape
+
+// const dsystem2 = new DanceSystem(PredefinedEmote.TIK)
+
+const avatar1 = new Entity();
+const avatarShape1 = new AvatarShape();
+
+avatarShape1.name = 'Last Slice General'
+avatarShape1.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseFemale";
+avatarShape1.wearables = [
+//Red Slicer
+"urn:decentraland:matic:collections-v2:0xf87a8372437c40ef9176c1b224cbe9307a617a25:0",
+"urn:decentraland:matic:collections-v2:0xf87a8372437c40ef9176c1b224cbe9307a617a25:2",
+"urn:decentraland:matic:collections-v2:0xf87a8372437c40ef9176c1b224cbe9307a617a25:1",
+]
+avatarShape1.skinColor = new Color4(0.94921875, 0.76171875, 0.6484375, 1);
+avatarShape1.eyeColor = new Color4(0.23046875, 0.625, 0.3125, 1);
+avatarShape1.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
+avatar1.addComponent(avatarShape1);
+avatar1.addComponent(new Transform({ position: new Vector3(7, 0, -12),
+  rotation: new Quaternion(0,180,0),
+  scale: new Vector3(1,1,1) }));
+engine.addEntity(avatar1);
+if (!avatar1.hasComponent(Billboard)) avatar1.addComponent(billboard)
+hud.attachToEntity(avatar1) 
+// engine.addSystem(dsystem2)
+avatar1.setParent(_scene)
+
+//Red Slicer
+// "urn:decentraland:matic:collections-v2:0xf87a8372437c40ef9176c1b224cbe9307a617a25:0",
+// "urn:decentraland:matic:collections-v2:0xf87a8372437c40ef9176c1b224cbe9307a617a25:2",
+// "urn:decentraland:matic:collections-v2:0xf87a8372437c40ef9176c1b224cbe9307a617a25:1",
+
+  // //Black Slicer
+  // "urn:decentraland:matic:collections-v2:0xe7cdc8ba8f437954a60bacaccefc0766a5e27af9:2",
+  // "urn:decentraland:matic:collections-v2:0xe7cdc8ba8f437954a60bacaccefc0766a5e27af9:1",
+  // "urn:decentraland:matic:collections-v2:0xe7cdc8ba8f437954a60bacaccefc0766a5e27af9:0",

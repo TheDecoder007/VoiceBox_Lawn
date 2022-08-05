@@ -56,7 +56,7 @@ function showThird(){
     insideParent.getComponent(Transform).scale.setAll(0)
     _scene.getComponent(Transform).scale.setAll(0)
     // engine.addEntity(hideInside)
-    movePlayerTo({x: 8, y:19, z:-14})
+    movePlayerTo({x: 8, y:100.5, z:3})
     
   }
 
@@ -104,7 +104,7 @@ hud.attachToEntity(GreenHouse5)
 // engine.addEntity(sand)
 // hud.attachToEntity(sand)
 
-//pre loading glowing bird
+// pre loading glowing bird
 const glowingBird = new Entity()
 engine.addEntity(glowingBird)
 glowingBird.addComponent(new GLTFShape('models/birdSplat2.glb'))
@@ -205,7 +205,7 @@ class BirdController{
   rows:number = 20
   cols:number = 20
   spacing:number = this.sideLength/this.rows
-  base:Vector3 = new Vector3(-15,16,1) 
+  base:Vector3 = new Vector3(0,16,0) 
 
   constructor(){      
 
@@ -230,9 +230,9 @@ class BirdController{
 
           // create a ray at the X,Z coord of the generated position which starts high up and has a downward direction
           let rayDown: Ray = {
-            origin: new Vector3(newPos.x, 32, newPos.z),
+            origin: new Vector3(newPos.x, 20, newPos.z),
             direction: Vector3.Down(),
-            distance: 16,
+            distance: 22,
             
           }
 
@@ -254,35 +254,36 @@ class BirdController{
                                  
                 // save the bird's original position to the DistanceBird component
                 bird.addComponent(new DistanceBird( newPos ))          
-                bird.addComponent(birdIdleShape)   
+                bird.addComponent(birdIdleShape) 
+                // bird.setParent(thirdParent)  
                 engine.addEntity(bird) 
 
                 
-                 //shoot birds
-                //  bird.addComponent(
-                //     new OnPointerDown(
-                //       () => {
-                //         bird.removeComponent(utils.MoveTransformComponent) // Stop the spaceship
-                //         glowingBird.getComponent(Transform).scale.setAll(1)
-                //         glowingBird.getComponent(Transform).position =
-                //           bird.getComponent(Transform).position
-                //           engine.removeEntity(bird)
+                //  shoot birds
+                 bird.addComponent(
+                    new OnPointerDown(
+                      () => {
+                        bird.removeComponent(utils.MoveTransformComponent) // Stop the spaceship
+                        glowingBird.getComponent(Transform).scale.setAll(1)
+                        glowingBird.getComponent(Transform).position =
+                          bird.getComponent(Transform).position
+                          engine.removeEntity(bird)
               
-                //         // Glow for 1/4 of a second before disappearing
-                //         glowingBird.addComponent(
-                //           new utils.Delay(250, () => {
-                //             glowingBird.getComponent(Transform).scale.setAll(0) // Reset glowing spaceship scale
-                //           })
-                //         )
-                //         blastBird.getComponent(AudioSource).playOnce()
-                //       },
-                //       {
-                //         button: ActionButton.POINTER,
-                //         showFeedback: false,
-                //         distance: 50
-                //       }
-                //     )
-                //   ) 
+                        // Glow for 1/4 of a second before disappearing
+                        glowingBird.addComponent(
+                          new utils.Delay(250, () => {
+                            glowingBird.getComponent(Transform).scale.setAll(0) // Reset glowing spaceship scale
+                          })
+                        )
+                        blastBird.getComponent(AudioSource).playOnce()
+                      },
+                      {
+                        button: ActionButton.POINTER,
+                        showFeedback: false,
+                        distance: 50
+                      }
+                    )
+                  ) 
             } 
                    
         }            

@@ -3,6 +3,9 @@ import { isPreviewMode } from '@decentraland/EnvironmentAPI'
 import { triggerEmote, PredefinedEmote } from '@decentraland/RestrictedActions'
 import { hud } from 'dcl-builder-hud'
 //// List of dance areas - add here the locations where you want dancing to happen
+import {avatar1} from './game'
+    
+    export {PredefinedEmote}
 
 export const danceAreas: any = [
   {
@@ -155,6 +158,8 @@ for (const i in danceAreas) {
         onCameraEnter: () => {
           engine.addSystem(dsystem)
           dsystem.addEvents()
+  avatar1.addComponent(new DanceSystem())
+
         },
         onCameraExit: () => {
           dsystem.removeEvents()
