@@ -11,7 +11,8 @@ export { thirdParent, thirdFloor, hideThird, showThird, birdControl, BirdControl
 import { Poop } from './poop'
 import { birdIdleShape, birdFlyShape } from './modules/models'
 import { blastBird } from './data'
-import {sand} from './modules/models'
+// import {sand} from './modules/models'
+export {sand1}
 
 
 
@@ -47,7 +48,14 @@ hud.attachToEntity(hideThird)
 function showThird(){
     thirdParent.getComponent(Transform).scale.setAll(1)
  
-//  birdControl.spawnBirds() 
+// birdControl.spawnBirds()
+
+    // onEnterSceneObservable.add(() => {
+    //   birdControl.spawnBirds()
+    // })
+    onSceneReadyObservable.add(()=>{
+      birdControl.spawnBirds()  
+    })
         
     engine.addEntity(hideGround)
     engine.addEntity(hideInside)
@@ -56,7 +64,7 @@ function showThird(){
     insideParent.getComponent(Transform).scale.setAll(0)
     _scene.getComponent(Transform).scale.setAll(0)
     // engine.addEntity(hideInside)
-    movePlayerTo({x: 8, y:100.5, z:3})
+    movePlayerTo({x: 8, y:75.5, z:3})
     
   }
 
@@ -93,16 +101,18 @@ hud.attachToEntity(GreenHouse5)
 
 // FLY BIRDS FLY
 
-      
-// sand.addComponent(new Transform({ 
-//           position: new Vector3(-7.520,0.01,-15.92),
-//           rotation: Quaternion.Euler(0,0,0),
-//           scale: new Vector3(0.316,0.852,0.663)
-//         }))        
-// sand.setParent(thirdParent)
-// sand.addComponent(sandShape)   
-// engine.addEntity(sand)
-// hud.attachToEntity(sand)
+const sand1 = new Entity('sand1')      
+const transform51 = new Transform({ 
+          position: new Vector3(-7.520,0.01,-15.92),
+          rotation: Quaternion.Euler(0,0,0),
+          scale: new Vector3(0.316,0.852,0.663)
+        })      
+sand1.addComponentOrReplace(transform51)
+const sandShape1 = new GLTFShape('models/sand.glb')
+sand1.addComponentOrReplace(sandShape1)
+sand1.setParent(thirdParent)
+// engine.addEntity(sand1)
+hud.attachToEntity(sand1)
 
 // pre loading glowing bird
 const glowingBird = new Entity()
@@ -130,6 +140,7 @@ export class DistanceBird {
     this.originalPos = new Vector3(pos.x, pos.y, pos.z)           
   }
 }
+
 
 // System that checks distances to each bird
 class ProximitySystem {
@@ -186,8 +197,8 @@ class ProximitySystem {
         if(birdInfo.flying){
           birdInfo.flying = false
           bird.addComponentOrReplace(birdIdleShape)
-        }
 
+        }
         //make the bird land on its original position
         transform.position.copyFrom(birdInfo.originalPos)
         
@@ -201,16 +212,16 @@ engine.addSystem(new ProximitySystem())
 class BirdController{
 
   center:Vector3
-  sideLength:number = 40 // size of the area to spawn birds in
-  rows:number = 20
-  cols:number = 20
+  sideLength:number = 20 // size of the area to spawn birds in
+  rows:number = 10
+  cols:number = 10
   spacing:number = this.sideLength/this.rows
   base:Vector3 = new Vector3(0,16,0) 
 
   constructor(){      
 
     //set the center of the bird scattering area to the center of the scene
-    this.center = new Vector3(8,16,0)    
+    this.center = new Vector3(8,0,0)    
     
     //set the starting positions of the bird spawn grid to the south-west corner of the spawn area
     this.base = new Vector3(this.center.x - this.sideLength/2, this.center.y, this.center.z - this.sideLength/2) 
@@ -226,6 +237,7 @@ class BirdController{
           this.base.x + i* this.spacing + Math.random()*20-10, 
           this.base.y , 
           this.base.z  + j * this.spacing + Math.random()*20-10
+          
           ) 
 
           // create a ray at the X,Z coord of the generated position which starts high up and has a downward direction
@@ -255,7 +267,8 @@ class BirdController{
                 // save the bird's original position to the DistanceBird component
                 bird.addComponent(new DistanceBird( newPos ))          
                 bird.addComponent(birdIdleShape) 
-                // bird.setParent(thirdParent)  
+
+  bird.setParent(thirdParent)  
                 engine.addEntity(bird) 
 
                 
@@ -297,6 +310,6 @@ let birdControl = new BirdController()
 
 
 // delay bird spawning to only start casting rays on the terrain it's collider is fully loaded
-onSceneReadyObservable.add(()=>{
-  birdControl.spawnBirds()  
-})
+// onSceneReadyObservable.add(()=>{
+//   birdControl.spawnBirds()  
+// })

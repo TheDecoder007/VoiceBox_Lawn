@@ -9,7 +9,7 @@ import { getUserData } from "@decentraland/Identity"
 //for bird fly
 import { birdIdleShape, birdFlyShape } from './modules/models'
 import { realDistance } from './modules/utilities'
-import { movePlayerTo } from '@decentraland/RestrictedActions'
+import { movePlayerTo, triggerEmote } from '@decentraland/RestrictedActions'
 import { Color3 } from 'node_modules/decentraland-ecs/dist/index'
 export { _scene }
 import { Poop } from './poop'
@@ -18,11 +18,9 @@ export { hideGround, hideInside, showGround, poop}
 import { hideThird, thirdParent, showThird } from 'src/third'
 import { DanceSystem, danceAreas, PredefinedEmote } from './danceArea'
 let sandShape = new GLTFShape('models/sand.glb')
-export { avatar1 }
+export { avatar1, avatarShape1 }
 
  
-
-
 
 const billboard = new Billboard(false, true, false)
 //VOICE BOX VOICE BOX VOICE BOX
@@ -30,6 +28,7 @@ const billboard = new Billboard(false, true, false)
 let myBlackButton = new GLTFShape('2e1c4446-c99a-4698-9e13-819d232ca849/models/Black_Fantasy_Button.glb')
 // const myBlackButtonClip = new AnimationState('trigger', { looping: false })
 const messageBus = new MessageBus()
+
 const _scene = new Entity('_scene')
 engine.addEntity(_scene)
 const transform = new Transform({
@@ -704,12 +703,30 @@ hud.attachToEntity(houseTrigger)
 
 let upTrigger = new Entity('upTrigger')
 // houseTrigger.addComponent(new BoxShape())
-upTrigger.addComponent(new Transform( {position: new Vector3(10.3,0,4), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+upTrigger.addComponent(new Transform( {position: new Vector3(10.3,0,2), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
 upTrigger.setParent(_scene)
 upTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(2,3,1), new Vector3(-2.3,1.5,0)), {
     enableDebug: false,
          onCameraEnter: ()=>{
-            showInside()
+          const transform = new Transform({
+            position: new Vector3(6, 0, 0),
+            rotation: new Quaternion(0, 0, 0, 1),
+            scale: new Vector3(1, 1, 1)
+          })
+          _scene.addComponentOrReplace(transform)
+
+           _scene.addComponent(new utils.ScaleTransformComponent(
+             new Vector3(1,1,1),
+             new Vector3(0.1,0.1,0.1),
+             3
+             ))
+            
+             //  _scene.addComponent(new Transform( {position: new Vector3(8,0,0)}))
+            // _scene.setParent(Attachable.AVATAR)
+            // upTrigger.addComponent(new utils.Delay(5000, () => {
+            //   showInside()
+              
+            // }))
 }}))
 hud.attachToEntity(upTrigger)
 
@@ -1348,137 +1365,7 @@ glowingBird.addComponent(new GLTFShape('models/birdSplat2.glb'))
 glowingBird.addComponent(new Transform())
 glowingBird.getComponent(Transform).scale.setAll(0)
 
-// used for raycasting later on to generate bird positions along the terrain collider surface
-// let physicsCast = PhysicsCast.instance
-
-// // used to get player position, player distance to birds etc.
-// let player = Camera.instance
-
-// // a component to store each bird's default idle positions, animation state, and a timer with a random delay
-// @Component("DistanceBird")
-// export class DistanceBird {  
-//   originalPos:Vector3    
-//   flying:boolean = false
-//   elapsed:number = Math.random()
-
-//   constructor(pos:Vector3){
-//     this.originalPos = new Vector3(pos.x, pos.y, pos.z)           
-//   }
-// }
-
-// // System that checks distances to each bird
-// class ProximitySystem {
-//   radius:number = 4 // how close you can get to a bird before it reacts
-//   amplitude:number = 1    
-//   group = engine.getComponentGroup(Transform, DistanceBird)
-
-//   update(dt: number) {
-
-//     // iterate through all the birds that have the DistanceBird component
-//     for (let bird of this.group.entities){
-
-//       const transform = bird.getComponent(Transform)
-//       const birdInfo = bird.getComponent(DistanceBird)      
-
-//       // calculate the distance between the player and the birds original position
-//       let dist = realDistance(birdInfo.originalPos, player.position)
-
-      
-//       // if the player is within a certain distance from the birds original perching position
-//       if( dist < this.radius ){     
-
-//         // calculate a ratio (0-1) based on how close the player is to the bird and multiply it with a constant to amplify the effect
-//         let multiplier = ( 1 - dist / this.radius) * this.amplitude
-
-//         // calculate the direction pointing from the player to the bird's default position
-//         let playerDir = birdInfo.originalPos.subtract(player.position)
-
-//         // if the bird was idle, change it to flying and replace the GLTF model with the flying one
-//         if(!birdInfo.flying){
-//           birdInfo.flying = true
-//           bird.addComponentOrReplace(birdFlyShape)
-//         }
-        
-//         // move the bird away from the player on the X and Z axis based on the closeness multiplier
-//         transform.position = birdInfo.originalPos.add(playerDir.multiplyByFloats(multiplier, 0, multiplier))
-
-//         // always move the bird upwards on the Y axis (never downwards) regardless of player direction
-//         transform.position.y = birdInfo.originalPos.y + 6*multiplier
-
-//         // increment the timer stored for each bird and use the sine of this time to wiggle the bird around the actual position calculated above
-//         birdInfo.elapsed +=dt
-//         transform.position.x += Math.sin( birdInfo.elapsed * 10) * multiplier
-//         transform.position.y += Math.sin( birdInfo.elapsed * 8 ) * multiplier
-//         transform.position.z += Math.sin( birdInfo.elapsed * 11) * multiplier
-
-//         // make the flying bird always face the player
-//         transform.lookAt(player.position)
-//       }
-//       // in case the player is farther from the bird than the given radius
-//       else{
-
-//         // make the flying bird change GLTF shape to the idle one
-//         if(birdInfo.flying){
-//           birdInfo.flying = false
-//           bird.addComponentOrReplace(birdIdleShape)
-//         }
-
-//         //make the bird land on its original position
-//         transform.position.copyFrom(birdInfo.originalPos)
-        
-//       }
-//     }
-//   }
-// }
-// engine.addSystem(new ProximitySystem())
-
-// class that generates bird starting positions and spawns the birds themselves
-// class BirdController{
-  
-//   center:Vector3
-//   sideLength:number = 8 // size of the area to spawn birds in
-//   rows:number = 4
-//   cols:number = 4
-//   spacing:number = this.sideLength/this.rows
-//   base:Vector3 = new Vector3(8,0,-7) 
-
-//   constructor(){      
-
-//     //set the center of the bird scattering area to the center of the scene
-//     this.center = new Vector3(8,0,7)    
-    
-//     //set the starting positions of the bird spawn grid to the south-west corner of the spawn area
-//     this.base = new Vector3(this.center.x - this.sideLength/2, this.center.y, this.center.z - this.sideLength/2) 
-//   }
-
-//   spawnBirds(){
-
-    // for(let i=0; i< this.rows; i++){
-    //   for(let j=0; j< this.cols; j++){     
-
-    //     //generate positions iterating through all rows and columns  and add large random offsets along X an Z (Y will adapt to the terrain later)
-    //     let newPos = new Vector3(
-    //       this.base.x + i* this.spacing + Math.random()*8-4, 
-    //       this.base.y , 
-    //       this.base.z  + j * this.spacing + Math.random()*8-4
-    //       ) 
-
-    //       // create a ray at the X,Z coord of the generated position which starts high up and has a downward direction
-    //       let rayDown: Ray = {
-    //         origin: new Vector3(newPos.x, 15, newPos.z),
-    //         direction: Vector3.Down(),
-    //         distance: 17,
-    //       }
-
-    //       // cast the ray downward and try to intersect it with the terrain's collider
-    //       physicsCast.hitFirst(
-    //         rayDown,
-    //         (e) => {
-    //           if(e.didHit){          
-                
-    //             //if we hit the collider set the generated bird position's Y coord to the hitpoint's height
-    //             newPos.y = e.hitPoint.y 
-                
+               
                 //spawn a bird at the generated and terrain adapted position
                 const bird5 = new Entity()      
                 bird5.addComponent(new Transform({ 
@@ -1794,21 +1681,21 @@ hideAvatarsEntity.addComponent(
 
 //Slicer
 
-const Slicer = new Entity('Slicer')
-engine.addEntity(Slicer)
-Slicer.setParent(_scene)
-const transform50 = new Transform({
-  position: new Vector3(8, 0, -12),
-  rotation: new Quaternion(0, 180, 0),
-  scale: new Vector3(1,1,1)
-})
-Slicer.addComponentOrReplace(transform50)
-const gltfshape30 = new GLTFShape("models/Slicer.glb")
-gltfshape20.withCollisions = true
-gltfshape20.isPointerBlocker = true
-gltfshape20.visible = true
-Slicer.addComponentOrReplace(gltfshape30)
-hud.attachToEntity(Slicer)
+// const Slicer = new Entity('Slicer')
+// engine.addEntity(Slicer)
+// Slicer.setParent(_scene)
+// const transform50 = new Transform({
+//   position: new Vector3(8, 0, -12),
+//   rotation: new Quaternion(0, 180, 0),
+//   scale: new Vector3(1,1,1)
+// })
+// Slicer.addComponentOrReplace(transform50)
+// const gltfshape30 = new GLTFShape("models/Slicer.glb")
+// gltfshape20.withCollisions = true
+// gltfshape20.isPointerBlocker = true
+// gltfshape20.visible = true
+// Slicer.addComponentOrReplace(gltfshape30)
+// hud.attachToEntity(Slicer)
 
 
 //avatar shape
@@ -1818,26 +1705,46 @@ hud.attachToEntity(Slicer)
 const avatar1 = new Entity();
 const avatarShape1 = new AvatarShape();
 
-avatarShape1.name = 'Last Slice General'
-avatarShape1.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseFemale";
+avatarShape1.name = 'Murpheus'
+avatarShape1.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseMale";
 avatarShape1.wearables = [
-//Red Slicer
-"urn:decentraland:matic:collections-v2:0xf87a8372437c40ef9176c1b224cbe9307a617a25:0",
-"urn:decentraland:matic:collections-v2:0xf87a8372437c40ef9176c1b224cbe9307a617a25:2",
-"urn:decentraland:matic:collections-v2:0xf87a8372437c40ef9176c1b224cbe9307a617a25:1",
+// Michael K cyber suit
+"urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_helmet",
+"urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_torso_upper_body",
+"urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_leggings_lower_body",
+"urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_boots_feet"
 ]
 avatarShape1.skinColor = new Color4(0.94921875, 0.76171875, 0.6484375, 1);
 avatarShape1.eyeColor = new Color4(0.23046875, 0.625, 0.3125, 1);
 avatarShape1.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
 avatar1.addComponent(avatarShape1);
-avatar1.addComponent(new Transform({ position: new Vector3(7, 0, -12),
-  rotation: new Quaternion(0,180,0),
+// avatar1.addComponent(new BoxShape())
+
+avatar1.addComponent(new Transform({ position: new Vector3(3.5, 0.05, 6),
+  rotation: new Quaternion(0,180,0), 
   scale: new Vector3(1,1,1) }));
-engine.addEntity(avatar1);
-if (!avatar1.hasComponent(Billboard)) avatar1.addComponent(billboard)
-hud.attachToEntity(avatar1) 
-// engine.addSystem(dsystem2)
-avatar1.setParent(_scene)
+  hud.attachToEntity(avatar1) 
+  avatar1.setParent(_scene)
+
+  let animator = new Animator
+  const clipDance = new AnimationState(PredefinedEmote.HAMMER)
+  animator.addClip(clipDance)
+  avatar1.addComponent(animator)
+  clipDance.play()
+  clipDance.looping=true
+  // avatar1.getComponent(Animator)
+  
+
+  // avatar1.addComponent(new Transform({predefined: PredefinedEmote.HAMMER}))
+  // avatar1.addComponent(billboard)
+// avatar1.getComponent(PredefinedEmote.HAMMER)
+// avatar1.addComponentOrReplace({predefined: PredefinedEmote.HAMMER})
+// DanceSystem.apply(avatar1, PredefinedEmote.HAMMER)
+// avatar1.addComponent(dsystem2)
+
+// engine.addSystem(dsystem2) 
+// avatar1.addComponent(PredefinedEmote.TIK)
+
 
 //Red Slicer
 // "urn:decentraland:matic:collections-v2:0xf87a8372437c40ef9176c1b224cbe9307a617a25:0",
@@ -1848,3 +1755,27 @@ avatar1.setParent(_scene)
   // "urn:decentraland:matic:collections-v2:0xe7cdc8ba8f437954a60bacaccefc0766a5e27af9:2",
   // "urn:decentraland:matic:collections-v2:0xe7cdc8ba8f437954a60bacaccefc0766a5e27af9:1",
   // "urn:decentraland:matic:collections-v2:0xe7cdc8ba8f437954a60bacaccefc0766a5e27af9:0",
+
+  //glow errywhere
+//   "urn:decentraland:ethereum:collections-v1:dc_meta:meta_tiara",
+// "urn:decentraland:ethereum:collections-v1:dc_meta:meta_upper_body",
+// "urn:decentraland:ethereum:collections-v1:dc_meta:meta_hair",
+// "urn:decentraland:ethereum:collections-v1:dc_meta:meta_helmet",
+// "urn:decentraland:ethereum:collections-v1:dc_meta:meta_lower_body",
+// "urn:decentraland:matic:collections-v2:0x6105f0f5ef8b28cf81e64551588d13221d4151ad:0"
+
+//BAYC Robot
+// "urn:decentraland:matic:collections-v2:0x9cac588b45b72d0476297cc47947dc488db9878f:1",
+// "urn:decentraland:matic:collections-v2:0x9cac588b45b72d0476297cc47947dc488db9878f:3",
+// "urn:decentraland:matic:collections-v2:0x9cac588b45b72d0476297cc47947dc488db9878f:2",
+// "urn:decentraland:matic:collections-v2:0x9cac588b45b72d0476297cc47947dc488db9878f:0"
+
+//Michael K cyber suit
+// "urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_helmet",
+// "urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_torso_upper_body",
+// "urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_leggings_lower_body",
+// "urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_boots_feet"
+
+//cyber goggles and mask
+// "urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_nightvision_eyewear",
+// "urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_gas_mask"
