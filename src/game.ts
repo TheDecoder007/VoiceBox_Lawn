@@ -708,23 +708,25 @@ upTrigger.setParent(_scene)
 upTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(2,3,1), new Vector3(-2.3,1.5,0)), {
     enableDebug: false,
          onCameraEnter: ()=>{
-          const transform = new Transform({
-            position: new Vector3(6, 0, 0),
-            rotation: new Quaternion(0, 0, 0, 1),
-            scale: new Vector3(1, 1, 1)
-          })
-          _scene.addComponentOrReplace(transform)
 
-           _scene.addComponent(new utils.ScaleTransformComponent(
-             new Vector3(1,1,1),
-             new Vector3(0.1,0.1,0.1),
-             3
-             ))
+             showInside()
+
+          // const transform = new Transform({
+          //   position: new Vector3(6, 0, 0),
+          //   rotation: new Quaternion(0, 0, 0, 1),
+          //   scale: new Vector3(1, 1, 1)
+          // })
+          // _scene.addComponentOrReplace(transform)
+
+          //  _scene.addComponent(new utils.ScaleTransformComponent(
+          //    new Vector3(1,1,1),
+          //    new Vector3(0.1,0.1,0.1),
+          //    3
+          //    ))
             
              //  _scene.addComponent(new Transform( {position: new Vector3(8,0,0)}))
             // _scene.setParent(Attachable.AVATAR)
             // upTrigger.addComponent(new utils.Delay(5000, () => {
-            //   showInside()
               
             // }))
 }}))
@@ -1347,16 +1349,16 @@ hud.attachToEntity(GreenTrigger)
 // BIRD FLY BIRD FLY
 
 // Add ground terrain
-const sand1 = new Entity('sand 1')      
-sand1.addComponent(new Transform({ 
+const sand = new Entity('sand bottom')      
+sand.addComponent(new Transform({ 
           position: new Vector3(5.62,-0.06,-9.83),
           rotation: Quaternion.Euler(0,0,0),
           scale: new Vector3(.1,.2,.1)
         }))        
-sand1.addComponent(sandShape)   
-sand1.setParent(_scene)
-engine.addEntity(sand1)
-hud.attachToEntity(sand1)
+sand.addComponent(sandShape)   
+sand.setParent(_scene)
+engine.addEntity(sand)
+hud.attachToEntity(sand)
 
 //pre loading glowing bird
 const glowingBird = new Entity()
@@ -1702,17 +1704,14 @@ hideAvatarsEntity.addComponent(
 
 // const dsystem2 = new DanceSystem(PredefinedEmote.TIK)
 
-const avatar1 = new Entity();
+const avatar1 = new Entity("Avatar1");
 const avatarShape1 = new AvatarShape();
 
 avatarShape1.name = 'Murpheus'
 avatarShape1.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseMale";
 avatarShape1.wearables = [
-// Michael K cyber suit
-"urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_helmet",
-"urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_torso_upper_body",
-"urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_leggings_lower_body",
-"urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_boots_feet"
+// Mr. Sinister
+"urn:decentraland:matic:collections-v2:0x2dab1140c3ca258363ff3d08ba4e0834dd573611:0"
 ]
 avatarShape1.skinColor = new Color4(0.94921875, 0.76171875, 0.6484375, 1);
 avatarShape1.eyeColor = new Color4(0.23046875, 0.625, 0.3125, 1);
@@ -1720,9 +1719,9 @@ avatarShape1.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
 avatar1.addComponent(avatarShape1);
 // avatar1.addComponent(new BoxShape())
 
-avatar1.addComponent(new Transform({ position: new Vector3(3.5, 0.05, 6),
+avatar1.addComponent(new Transform({ position: new Vector3(3.5, -0.7, -13),
   rotation: new Quaternion(0,180,0), 
-  scale: new Vector3(1,1,1) }));
+  scale: new Vector3(2,2,2) }));
   hud.attachToEntity(avatar1) 
   avatar1.setParent(_scene)
 
@@ -1779,3 +1778,6 @@ avatar1.addComponent(new Transform({ position: new Vector3(3.5, 0.05, 6),
 //cyber goggles and mask
 // "urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_nightvision_eyewear",
 // "urn:decentraland:ethereum:collections-v1:cybermike_cybersoldier_set:cybersoldier_gas_mask"
+
+//Mr. Sinister
+// "urn:decentraland:matic:collections-v2:0x2dab1140c3ca258363ff3d08ba4e0834dd573611:0"

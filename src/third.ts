@@ -97,7 +97,50 @@ gltfshape23.visible = true
 GreenHouse5.addComponentOrReplace(gltfshape23)
 hud.attachToEntity(GreenHouse5)
 
+//Third Floor Colliders
+let colliderWall20 = new Entity('collider wall 20')
+colliderWall20.addComponent(new PlaneShape())
+colliderWall20.addComponent(new Transform(
+  {position: new Vector3(-7.4,2.7,0), 
+    rotation: Quaternion.Euler(0,90,0),
+  scale: new Vector3(31.9,6.3,1)}))
+colliderWall20.setParent(thirdParent)
+colliderWall20.getComponent(PlaneShape).visible = false
+// colliderWall20.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall20)
 
+let colliderWall21 = new Entity('collider wall 21')
+colliderWall21.addComponent(new PlaneShape())
+colliderWall21.addComponent(new Transform(
+  {position: new Vector3(7.4,2.7,0), 
+    rotation: Quaternion.Euler(0,90,0),
+  scale: new Vector3(31.9,6.3,1)}))
+colliderWall21.setParent(thirdParent)
+colliderWall21.getComponent(PlaneShape).visible = false
+// colliderWall21.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall21)
+
+let colliderWall22 = new Entity('collider wall 22')
+colliderWall22.addComponent(new PlaneShape())
+colliderWall22.addComponent(new Transform(
+  {position: new Vector3(0,2.7,-15.8), 
+    rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(15,6.3,1)}))
+colliderWall22.setParent(thirdParent)
+colliderWall22.getComponent(PlaneShape).visible = false
+// colliderWall22.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall22)
+
+let colliderWall23 = new Entity('collider wall 23')
+colliderWall23.addComponent(new PlaneShape())
+colliderWall23.addComponent(new Transform(
+  {position: new Vector3(0,2.7,15.8), 
+    rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(15,6.3,1)}))
+colliderWall23.setParent(thirdParent)
+colliderWall23.getComponent(PlaneShape).visible = false
+// colliderWall23.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall23)
 
 // FLY BIRDS FLY
 
@@ -216,7 +259,7 @@ class BirdController{
   rows:number = 10
   cols:number = 10
   spacing:number = this.sideLength/this.rows
-  base:Vector3 = new Vector3(0,16,0) 
+  base:Vector3 = new Vector3(0,16,-15) 
 
   constructor(){      
 
@@ -307,7 +350,7 @@ class BirdController{
 }
 
 let birdControl = new BirdController()
-
+birdControl.spawnBirds()
 
 // delay bird spawning to only start casting rays on the terrain it's collider is fully loaded
 // onSceneReadyObservable.add(()=>{
