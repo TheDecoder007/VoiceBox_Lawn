@@ -17,8 +17,10 @@ export { insideParent }
 export { hideGround, hideInside, showGround, poop}
 import { hideThird, thirdParent, showThird } from 'src/third'
 import { DanceSystem, danceAreas, PredefinedEmote } from './danceArea'
-let sandShape = new GLTFShape('models/sand.glb')
+let sandShape = new GLTFShape('models/sand1.glb')
 export { avatar1, avatarShape1 }
+import { birdControl } from 'src/third'
+import { sand } from './modules/models'
 
  
 
@@ -703,7 +705,7 @@ hud.attachToEntity(houseTrigger)
 
 let upTrigger = new Entity('upTrigger')
 // houseTrigger.addComponent(new BoxShape())
-upTrigger.addComponent(new Transform( {position: new Vector3(10.3,0,2), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
+upTrigger.addComponent(new Transform( {position: new Vector3(10.3,0,4), rotation: Quaternion.Euler(0,0,0), scale: new Vector3(1,1,1)}))
 upTrigger.setParent(_scene)
 upTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(new Vector3(2,3,1), new Vector3(-2.3,1.5,0)), {
     enableDebug: false,
@@ -856,8 +858,9 @@ thirdTrigger.addComponent(new utils.TriggerComponent(new utils.TriggerBoxShape(n
       0.5
       ))
       thirdTrigger.addComponent(new utils.Delay(500, () => {
+
         showThird()
-        
+   
       }))
   }
 }))
@@ -868,6 +871,7 @@ hud.attachToEntity(thirdTrigger)
 function showInside() {
   _scene.getComponent(Transform).scale.setAll(0)
   thirdParent.getComponent(Transform).scale.setAll(0)
+  sand.getComponent(Transform).scale.setAll(0)
   engine.addEntity(hideGround)
   engine.addEntity(hideThird)
 
@@ -882,6 +886,7 @@ function showGround(){
 
   insideParent.getComponent(Transform).scale.setAll(0)
   thirdParent.getComponent(Transform).scale.setAll(0)
+  sand.getComponent(Transform).scale.setAll(0)
   // engine.addEntity(hideInside)
   movePlayerTo({x: 8, y:1, z:-2})
 }
@@ -1349,16 +1354,16 @@ hud.attachToEntity(GreenTrigger)
 // BIRD FLY BIRD FLY
 
 // Add ground terrain
-const sand = new Entity('sand bottom')      
-sand.addComponent(new Transform({ 
+const sand1 = new Entity('sand1 bottom')      
+sand1.addComponent(new Transform({ 
           position: new Vector3(5.62,-0.06,-9.83),
           rotation: Quaternion.Euler(0,0,0),
           scale: new Vector3(.1,.2,.1)
         }))        
-sand.addComponent(sandShape)   
-sand.setParent(_scene)
-engine.addEntity(sand)
-hud.attachToEntity(sand)
+sand1.addComponent(sandShape)   
+sand1.setParent(_scene)
+engine.addEntity(sand1)
+hud.attachToEntity(sand1)
 
 //pre loading glowing bird
 const glowingBird = new Entity()
