@@ -1660,7 +1660,7 @@ avatarShape1.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
 avatar1.addComponent(avatarShape1);
 // avatar1.addComponent(new BoxShape())
 
-avatar1.addComponent(new Transform({ position: new Vector3(3.5, -0.7, -13),
+avatar1.addComponent(new Transform({ position: new Vector3(3.5, 0, -13),
   rotation: new Quaternion(0,180,0), 
   scale: new Vector3(1,1,1) }));
   hud.attachToEntity(avatar1) 
@@ -1669,10 +1669,10 @@ avatar1.addComponent(new Transform({ position: new Vector3(3.5, -0.7, -13),
 
 
   //AVATAR MOVE PATH
-  const point1 = new Vector3(3.5, -0.7, -13)
-const point2 = new Vector3(12.5, -0.7, -13)
-const point3 = new Vector3(3.5, -0.7, -13)
-const point4 = new Vector3(12.5, -0.7, -13)
+  const point1 = new Vector3(3.5, 0, -13)
+const point2 = new Vector3(12.5, 0, -13)
+const point3 = new Vector3(3.5, 0, -13)
+const point4 = new Vector3(12.5, 0, -13)
 
 const myPath = new Path3D([point1, point2, point3, point4])
 
