@@ -49,20 +49,20 @@ function showThird(){
     thirdParent.getComponent(Transform).scale.setAll(1)
   sand.getComponent(Transform).scale = new Vector3(0.316,0.852,0.663)
 
-    // onEnterSceneObservable.add(() => {
-    //   birdControl.spawnBirds()
-    // })
-
-
-    engine.addEntity(hideGround)
-    engine.addEntity(hideInside)
-    engine.removeEntity(hideThird)
   
-    insideParent.getComponent(Transform).scale.setAll(0)
-    _scene.getComponent(Transform).scale.setAll(0)
-    // engine.addEntity(hideInside)
-    movePlayerTo({x: 8, y:75.5, z:3})
-    
+  
+  engine.addEntity(hideGround)
+  engine.addEntity(hideInside)
+  engine.removeEntity(hideThird)
+  
+  insideParent.getComponent(Transform).scale.setAll(0)
+  _scene.getComponent(Transform).scale.setAll(0)
+  // engine.addEntity(hideInside)
+  movePlayerTo({x: 8, y:75.5, z:3})
+  
+  onEnterSceneObservable.add(() => {
+    birdControl.spawnBirds()
+  })
   }
 
   let groundTrigger = new Entity('groundTrigger')
@@ -359,7 +359,7 @@ let birdControl = new BirdController()
 // birdControl.spawnBirds()
 
 // delay bird spawning to only start casting rays on the terrain it's collider is fully loaded
-onSceneReadyObservable.add(()=>{
-  birdControl.spawnBirds()  
-})
+// onSceneReadyObservable.add(()=>{
+//   birdControl.spawnBirds()  
+// })
 

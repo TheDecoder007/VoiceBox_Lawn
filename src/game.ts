@@ -616,7 +616,7 @@ const lastSlicePizzaBox = new Entity('lastSlicePizzaBox')
 engine.addEntity(lastSlicePizzaBox)
 lastSlicePizzaBox.setParent(_scene)
 const transform35 = new Transform({
-  position: new Vector3(8.4, 0.03, -13.5),
+  position: new Vector3(8.4, 0.03, -10.2),
   rotation: new Quaternion(0.2, 0.20526227355003357, 0.6766590476036072, 0.6766590476036072),
   scale: new Vector3(0.415, 0.25, 0.27)
 })
@@ -1002,6 +1002,17 @@ colliderWall10.getComponent(PlaneShape).visible = false
 // colliderWall10.addComponent(new Material()).albedoColor = Color4.Red()
 hud.attachToEntity(colliderWall10)
 
+let colliderWall11 = new Entity('collider wall11')
+colliderWall11.addComponent(new PlaneShape())
+colliderWall11.addComponent(new Transform(
+  {position: new Vector3(0.0, 1.3, 8.2), 
+    rotation: Quaternion.Euler(0,0,0),
+  scale: new Vector3(1.5,2.4,0.3)}))
+colliderWall11.setParent(insideParent)
+colliderWall11.getComponent(PlaneShape).visible = false
+// colliderWall11.addComponent(new Material()).albedoColor = Color4.Red()
+hud.attachToEntity(colliderWall11)
+
 const wolf = new Entity('wolf')
 engine.addEntity(wolf)
 wolf.setParent(insideParent)
@@ -1372,7 +1383,92 @@ glowingBird.addComponent(new GLTFShape('models/birdSplat2.glb'))
 glowingBird.addComponent(new Transform())
 glowingBird.getComponent(Transform).scale.setAll(0)
 
-               
+              // used for raycasting later on to generate bird positions along the terrain collider surface
+let physicsCast = PhysicsCast.instance
+
+
+// used to get player position, player distance to birds etc.
+let player = Camera.instance
+
+// a component to store each bird's default idle positions, animation state, and a timer with a random delay
+@Component("DistanceBird")
+export class DistanceBird {  
+  originalPos:Vector3    
+  flying:boolean = false
+  elapsed:number = Math.random()
+
+  constructor(pos:Vector3){
+    this.originalPos = new Vector3(pos.x, pos.y, pos.z)           
+  }
+}
+
+
+// System that checks distances to each bird
+class ProximitySystem {
+  radius:number = 8 // how close you can get to a bird before it reacts
+  amplitude:number = 1    
+  group = engine.getComponentGroup(Transform, DistanceBird)
+
+  update(dt: number) {
+
+    // iterate through all the birds that have the DistanceBird component
+    for (let bird of this.group.entities){
+
+      const transform = bird.getComponent(Transform)
+      const birdInfo = bird.getComponent(DistanceBird)      
+
+      // calculate the distance between the player and the birds original position
+      let dist = realDistance(birdInfo.originalPos, player.position)
+
+      
+      // if the player is within a certain distance from the birds original perching position
+      if( dist < this.radius ){     
+
+        // calculate a ratio (0-1) based on how close the player is to the bird and multiply it with a constant to amplify the effect
+        let multiplier = ( 1 - dist / this.radius) * this.amplitude
+
+        // calculate the direction pointing from the player to the bird's default position
+        let playerDir = birdInfo.originalPos.subtract(player.position)
+
+        // if the bird was idle, change it to flying and replace the GLTF model with the flying one
+        if(!birdInfo.flying){
+          birdInfo.flying = true
+          bird.addComponentOrReplace(birdFlyShape)
+        }
+        
+        // move the bird away from the player on the X and Z axis based on the closeness multiplier
+        transform.position = birdInfo.originalPos.add(playerDir.multiplyByFloats(multiplier, 0, multiplier))
+
+        // always move the bird upwards on the Y axis (never downwards) regardless of player direction
+        transform.position.y = birdInfo.originalPos.y + 6*multiplier
+
+        // increment the timer stored for each bird and use the sine of this time to wiggle the bird around the actual position calculated above
+        birdInfo.elapsed +=dt
+        transform.position.x += Math.sin( birdInfo.elapsed * 10) * multiplier
+        transform.position.y += Math.sin( birdInfo.elapsed * 8 ) * multiplier
+        transform.position.z += Math.sin( birdInfo.elapsed * 11) * multiplier
+
+        // make the flying bird always face the player
+        transform.lookAt(player.position)
+      }
+      // in case the player is farther from the bird than the given radius
+      else{
+
+        // make the flying bird change GLTF shape to the idle one
+        if(birdInfo.flying){
+          birdInfo.flying = false
+          bird.addComponentOrReplace(birdIdleShape)
+
+        }
+        //make the bird land on its original position
+        transform.position.copyFrom(birdInfo.originalPos)
+        
+      }
+    }
+  }
+}
+engine.addSystem(new ProximitySystem()) 
+
                 //spawn a bird at the generated and terrain adapted position
                 const bird5 = new Entity()      
                 bird5.addComponent(new Transform({ 
@@ -1384,7 +1480,7 @@ glowingBird.getComponent(Transform).scale.setAll(0)
                 // position: newPos,
                 
                 // save the bird5's original position to the DistanceBird component
-                // bird5.addComponent(new DistanceBird( new Vector3(6.5,0.1,-8.5) ))          
+                bird5.addComponent(new DistanceBird( new Vector3(6.5,0.1,-8.5) ))          
                 bird5.addComponent(birdIdleShape) 
                 bird5.setParent(_scene)            
                 engine.addEntity(bird5)    
@@ -1426,7 +1522,7 @@ glowingBird.getComponent(Transform).scale.setAll(0)
                 // position: newPos,
                 
                 // save the bird2's original position to the Distancebird2 component
-                // bird2.addComponent(new DistanceBird( new Vector3(9.3,.57,-8) ))          
+                bird2.addComponent(new DistanceBird( new Vector3(9.3,.57,-8) ))          
                 bird2.addComponent(birdIdleShape)
                 bird2.setParent(_scene)            
 
@@ -1469,7 +1565,7 @@ glowingBird.getComponent(Transform).scale.setAll(0)
                 // position: newPos,
                 
                 // save the bird3's original position to the Distancebird3 component
-                // bird3.addComponent(new DistanceBird( new Vector3(7,.5,-7) ))          
+                bird3.addComponent(new DistanceBird( new Vector3(7,.5,-7) ))          
                 bird3.addComponent(birdIdleShape) 
                 bird3.setParent(_scene)            
                 engine.addEntity(bird3)    
@@ -1510,7 +1606,7 @@ glowingBird.getComponent(Transform).scale.setAll(0)
                 // position: newPos,
                 
                 // save the bird4's original position to the Distancebird4 component
-                // bird4.addComponent(new DistanceBird( new Vector3(9,.2,-9.5) ))          
+                bird4.addComponent(new DistanceBird( new Vector3(9,.2,-9.5) ))          
                 bird4.addComponent(birdIdleShape) 
                 bird4.setParent(_scene)            
                 engine.addEntity(bird4)    
@@ -1712,7 +1808,7 @@ hideAvatarsEntity.addComponent(
 const avatar1 = new Entity("Avatar1");
 const avatarShape1 = new AvatarShape();
 
-avatarShape1.name = 'Murpheus'
+avatarShape1.name = 'Mr. Sinister'
 avatarShape1.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseMale";
 avatarShape1.wearables = [
 // Mr. Sinister
@@ -1730,13 +1826,97 @@ avatar1.addComponent(new Transform({ position: new Vector3(3.5, -0.7, -13),
   hud.attachToEntity(avatar1) 
   avatar1.setParent(_scene)
 
-  let animator = new Animator
-  const clipDance = new AnimationState(PredefinedEmote.HAMMER)
-  animator.addClip(clipDance)
-  avatar1.addComponent(animator)
-  clipDance.play()
-  clipDance.looping=true
-  // avatar1.getComponent(Animator)
+
+
+  //AVATAR MOVE PATH
+  const point1 = new Vector3(3.5, -0.7, -13)
+const point2 = new Vector3(12.5, -0.7, -13)
+const point3 = new Vector3(3.5, -0.7, -13)
+const point4 = new Vector3(12.5, -0.7, -13)
+
+const myPath = new Path3D([point1, point2, point3, point4])
+
+@Component("pathData")
+export class PathData {
+  origin: Vector3 = myPath.path[0]
+  target: Vector3 = myPath.path[1]
+  fraction: number = 0
+  nextPathIndex: number = 1
+}
+
+export class PatrolPath implements ISystem {
+  update(dt: number) {
+    let transform = avatar1.getComponent(Transform)
+    let path = avatar1.getComponent(PathData)
+    if (path.fraction < 1) {
+      transform.position = Vector3.Lerp(path.origin, path.target, path.fraction)
+      path.fraction += dt / 6
+    } else {
+      path.nextPathIndex += 1
+      if (path.nextPathIndex >= myPath.path.length) {
+        path.nextPathIndex = 0
+      }
+      path.origin = path.target
+      path.target = myPath.path[path.nextPathIndex]
+      path.fraction = 0
+    }
+  }
+}
+
+engine.addSystem(new PatrolPath())
+
+avatar1.addComponent(new PathData())
+
+engine.addEntity(avatar1)
+  
+  
+  
+  
+  // AVATAR MOVE
+  //   @Component("lerpData")
+  //   export class LerpData {
+  //     origin: Vector3 = Vector3.Zero()
+  //     target: Vector3 = Vector3.Zero ()
+  //     fraction: number = 0
+  //   }
+    
+  //   // a system to carry out the movement
+  //   export class LerpMove implements ISystem {
+  //     update(dt: number) {
+  //       let transform = avatar1.getComponent(Transform)
+  //       let lerp = avatar1.getComponent(LerpData)
+  //       if (lerp.fraction < 1) {
+  //         transform.position = Vector3.Lerp(lerp.origin, lerp.target, lerp.fraction)
+  //         lerp.fraction += dt / 6
+  //       }
+  //     }
+  //   }
+    
+  //   // Add system to engine
+  //   engine.addSystem(new LerpMove())
+  //   avatar1.addComponent(new LerpData())
+  // avatar1.getComponent(LerpData).origin = new Vector3(3.5, -0.7, -13)
+  // avatar1.getComponent(LerpData).target = new Vector3(12.5, -0.7, -13)
+  
+  // avatar1.addComponent(new utils.Delay(8000, () => {
+  //   avatar1.removeComponent(LerpData)
+  //   avatar1.addComponent(new LerpData())
+  //   avatar1.getComponent(LerpData).origin = new Vector3(12.5, -0.7, -13)
+  //   avatar1.getComponent(LerpData).target = new Vector3(3.5, -0.7, -13)
+  // }))
+  // engine.addEntity(avatar1)
+  
+  
+  
+  
+  //trying to make avatar dance
+  // let animator = new Animator
+  // const clipDance = new AnimationState(PredefinedEmote.HAMMER)
+  // animator.addClip(clipDance)
+  // avatar1.addComponent(animator)
+  // clipDance.play()
+  // clipDance.looping=true
+  // // avatar1.getComponent(Animator)
   
 
   // avatar1.addComponent(new Transform({predefined: PredefinedEmote.HAMMER}))
