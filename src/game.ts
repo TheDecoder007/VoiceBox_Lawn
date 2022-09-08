@@ -1662,7 +1662,7 @@ avatar1.addComponent(avatarShape1);
 
 avatar1.addComponent(new Transform({ position: new Vector3(3.5, -0.7, -13),
   rotation: new Quaternion(0,180,0), 
-  scale: new Vector3(2,2,2) }));
+  scale: new Vector3(1,1,1) }));
   hud.attachToEntity(avatar1) 
   avatar1.setParent(_scene)
 
