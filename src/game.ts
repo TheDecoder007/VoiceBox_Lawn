@@ -1261,18 +1261,6 @@ onCameraExit:()=> {
 }}))
 hud.attachToEntity(GreenTrigger)
 
-
-// let whiteSplat= new Entity('whiteSplat')   
-// whiteSplat.addComponent(new GLTFShape('models/birdSplat2.glb'))
-// whiteSplat.addComponent(new Transform({
-//   position: new Vector3(8, 1, -4),
-//   rotation: new Quaternion( 0, 0, 0),
-//   scale: new Vector3(1, 1, 1)
-// }))
-// whiteSplat.setParent(_scene)
-// hud.attachToEntity(whiteSplat)
-
-
 //CODE FOR MIRROR
 // const stand = new Entity();
 // stand.addComponent(new BoxShape());
@@ -1317,48 +1305,6 @@ hud.attachToEntity(GreenTrigger)
 //   avatarShape.eyeColor = new Color4(av.eyes.color.r, av.eyes.color.g, av.eyes.color.b, 1);
 //   avatarShape.hairColor = new Color4(av.hair.color.r, av.hair.color.g, av.hair.color.b, 1);
 //   avatarShape.wearables = av.wearables
-
-// })
-
-//MIRROR 2
-
-
-// const avatar2 = new Entity();
-// const avatarShape2 = new AvatarShape();
-
-
-// avatarShape2.bodyShape = "urn:decentraland:off-chain:base-avatars:BaseFemale";
-// avatarShape2.wearables = [
-//   "urn:decentraland:off-chain:base-avatars:f_sweater",
-//   "urn:decentraland:off-chain:base-avatars:f_jeans",
-//   "urn:decentraland:off-chain:base-avatars:bun_shoes",
-//   "urn:decentraland:off-chain:base-avatars:standard_hair",
-//   "urn:decentraland:off-chain:base-avatars:f_eyes_00",
-//   "urn:decentraland:off-chain:base-avatars:f_eyebrows_00",
-//   "urn:decentraland:off-chain:base-avatars:f_mouth_00",
-// ];
-// avatarShape2.skinColor = new Color4(0.94921875, 0.76171875, 0.6484375, 1);
-// avatarShape2.eyeColor = new Color4(0.23046875, 0.625, 0.3125, 1);
-// avatarShape2.hairColor = new Color4(0.234375, 0.12890625, 0.04296875, 1);
-// avatar2.addComponent(avatarShape2);
-// avatar2.addComponent(new Transform({ position: new Vector3(14.3,  0, -2.3),
-//   rotation: new Quaternion(0,180,0),
-//   scale: new Vector3(2,2,2) }));
-// engine.addEntity(avatar2);
-// if (!avatar2.hasComponent(Billboard)) avatar2.addComponent(billboard)
-// hud.attachToEntity(avatar2)
-
-
-
-// void getUserData().then(async a => {
-//   const res = await fetch(`https://peer.decentraland.org/lambdas/profiles/${a?.publicKey}`)
-//   const json = await res.json()
-//   const av = json.avatars[0].avatar
-//   avatarShape2.bodyShape = av.bodyShape
-//   avatarShape2.skinColor = new Color4(av.skin.color.r, av.skin.color.g, av.skin.color.b, 1);
-//   avatarShape2.eyeColor = new Color4(av.eyes.color.r, av.eyes.color.g, av.eyes.color.b, 1);
-//   avatarShape2.hairColor = new Color4(av.hair.color.r, av.hair.color.g, av.hair.color.b, 1);
-//   avatarShape2.wearables = av.wearables
 
 // })
 
@@ -1644,82 +1590,8 @@ engine.addSystem(new ProximitySystem())
 //   }  
 // }
 
-// let birdControl = new BirdController()
-
-// delay bird spawning to only start casting rays on the terrain it's collider is fully loaded
-// onSceneReadyObservable.add(()=>{
-//   birdControl.spawnBirds()  
-// })
 
 //END BIRD FLY END BIRD FLY
-
-
-//SMOKE
-// Add a smoke source that creates a smoke puff every 0.2 seconds
-// fantasyChest.addComponent(new SmokeSource(0.4))
-// engine.addEntity(fantasyChest)
-
-// Initiate systems
-// engine.addSystem(new ThrowSmoke())
-// engine.addSystem(new SmokeSystem())
-
-
-//ENEMY SPAWNER ENEMY SPAWNER
-
-//comment IN spawners.ts, enemy.ts, and code below
-
-// // Base
-// const base = new Entity()
-// base.addComponent(new GLTFShape('models/baseLight.glb'))
-// base.addComponent(
-//   new Transform({
-//     scale: new Vector3(2, 1, 2),
-    
-//   })
-//   )
-//   hud.attachToEntity(base)
-//   engine.addEntity(base)
-
-// // // Portals
-// const POSITION_Z = 30
-// const redPortal = new Entity()
-// redPortal.addComponent(new GLTFShape('models/redPortal.glb'))
-// redPortal.addComponent(
-//   new Transform({
-//     position: new Vector3(8.1, 10.8, 15.7),
-//     rotation: new Quaternion(345,0,0),
-//   scale: new Vector3(0.2, 0.2, 0.2)
-//   })
-// )
-// hud.attachToEntity(redPortal)
-// engine.addEntity(redPortal)
-
-// const greenPortal = new Entity()
-// greenPortal.addComponent(new GLTFShape('models/greenPortal.glb'))
-// greenPortal.addComponent(
-//   new Transform({
-//     position: new Vector3(16, 6, POSITION_Z)
-//   })
-// )
-// engine.addEntity(greenPortal)
-
-// const bluePortal = new Entity()
-// bluePortal.addComponent(new GLTFShape('models/bluePortal.glb'))
-// bluePortal.addComponent(
-//   new Transform({
-//     position: new Vector3(27, 6, POSITION_Z)
-//   })
-// )
-// engine.addEntity(bluePortal)
-
-// // Controls/Blaster
-// const blasterSound = new Sound(new AudioClip('sounds/blaster.mp3'), false)
-
-// Input.instance.subscribe('BUTTON_DOWN', ActionButton.POINTER, false, () => {
-//   blasterSound.getComponent(AudioSource).playOnce()
-// })
-
-//END ENEMY SPAWNER END ENEMY SPAWNER
 
 
 //CHANGE PLAYER TO POOP. 
@@ -1767,43 +1639,11 @@ hideAvatarsEntity.addComponent(
   )
 )
 
-// Check if player is moving
-// const currentPosition = new Vector3()
-
-// class CheckPlayerIsMovingSystem implements ISystem {
-//   update() {
-//     if (currentPosition.equals(Camera.instance.position)) {
-//       poop.playIdle()
-//     } else {
-//       currentPosition.copyFrom(Camera.instance.position)
-//       poop.playRunning()
-//     }
-//   }
-// }
-// engine.addSystem(new CheckPlayerIsMovingSystem())
-
-//Slicer
-
-// const Slicer = new Entity('Slicer')
-// engine.addEntity(Slicer)
-// Slicer.setParent(_scene)
-// const transform50 = new Transform({
-//   position: new Vector3(8, 0, -12),
-//   rotation: new Quaternion(0, 180, 0),
-//   scale: new Vector3(1,1,1)
-// })
-// Slicer.addComponentOrReplace(transform50)
-// const gltfshape30 = new GLTFShape("models/Slicer.glb")
-// gltfshape20.withCollisions = true
-// gltfshape20.isPointerBlocker = true
-// gltfshape20.visible = true
-// Slicer.addComponentOrReplace(gltfshape30)
-// hud.attachToEntity(Slicer)
 
 
 //avatar shape
 
-// const dsystem2 = new DanceSystem(PredefinedEmote.TIK)
+
 
 const avatar1 = new Entity("Avatar1");
 const avatarShape1 = new AvatarShape();
@@ -1843,7 +1683,7 @@ export class PathData {
   fraction: number = 0
   nextPathIndex: number = 1
 }
-
+ 
 export class PatrolPath implements ISystem {
   update(dt: number) {
     let transform = avatar1.getComponent(Transform)

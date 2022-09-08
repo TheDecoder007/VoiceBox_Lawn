@@ -49,8 +49,6 @@ function showThird(){
     thirdParent.getComponent(Transform).scale.setAll(1)
   sand.getComponent(Transform).scale = new Vector3(0.316,0.852,0.663)
 
-  
-  
   engine.addEntity(hideGround)
   engine.addEntity(hideInside)
   engine.removeEntity(hideThird)
@@ -60,9 +58,9 @@ function showThird(){
   // engine.addEntity(hideInside)
   movePlayerTo({x: 8, y:75.5, z:3})
   
-  onEnterSceneObservable.add(() => {
-    birdControl.spawnBirds()
-  })
+  // onEnterSceneObservable.add(() => {
+  //   birdControl.spawnBirds()
+  // })
   }
 
   let groundTrigger = new Entity('groundTrigger')

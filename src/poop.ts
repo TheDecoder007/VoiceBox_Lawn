@@ -13,13 +13,5 @@ export class Poop extends Entity {
         new AnimationState('Idle', { looping: true })
       )
     }
-    // Play running animation
-    // playRunning() {
-    //   this.getComponent(Animator).getClip('Running').play()
-    // }
-  
-    // // Play idle animation
-    // playIdle() {
-    //   this.getComponent(Animator).getClip('Idle').play()
-    // }  
+ 
 }

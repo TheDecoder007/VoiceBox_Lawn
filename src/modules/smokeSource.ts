@@ -105,16 +105,3 @@ export const smokeSpawner = {
   },
 }
 
-// let testPuff = new Entity()
-
-// testPuff.addComponent(new PlaneShape())
-// testPuff.addComponent(smokeMaterial)
-
-// const t = new Transform()
-// testPuff.addComponentOrReplace(t)
-//   t.scale.set(2, 2, 2)
-//   t.position.set(3, 1, 3)
-
-// testPuff.addComponent(billboard)
-
-// engine.addEntity(testPuff)
