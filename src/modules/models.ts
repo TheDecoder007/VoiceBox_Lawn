@@ -2,7 +2,7 @@ export let birdIdleShape = new GLTFShape('models/bird.glb')
 export let birdFlyShape = new GLTFShape('models/bird_fly.glb')
 import * as utils from '@dcl/ecs-scene-utils'
 
-export let glowingBird = new GLTFShape('models/birdSplat.glb')
+export let glowingBird = new GLTFShape('models/birdSplat2.glb')
 import { hud } from 'dcl-builder-hud'
 import { thirdFloor, thirdParent } from 'src/third'
 export {sand, sandShape}
